@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>PouchDB, the JavaScript Database that Syncs!</title>
+    <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <a class="logo" href="/pouchdb/">
+          <img class="logo-img" src="/pouchdb/static/img/logo-icon.png" alt="Logo">
+          <span class='logo-type'>PouchDB</span>
+        </a>
+
+        <ul class='nav nav-header nav-pills'>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Documentation</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/learn.html">Learn</a>
+          </li>
+          <li>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">Download</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </header>
+
+    <article>
+  <div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-3 col-md-2">
+
+          <ul class="nav nav-silent nav-sidebar">
+            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
+            <li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
+            <li><a href="/pouchdb/api.html">API</a></li>
+            <li><a href="/pouchdb/faq.html">FAQ</a></li>
+            <li><a href="/pouchdb/errors.html">Common Errors</a></li>
+            <li><a href="/pouchdb/external.html">External Projects</a></li>
+
+            <li><h3>API</h3></li>
+            <li><a href="api.html#create_database">Create database</a></li>
+            <li><a href="api.html#delete_database">Delete database</a></li>
+            <li><a href="api.html#create_document">Create/Update document</a></li>
+            <li><a href="api.html#fetch_document">Fetch document</a></li>
+            <li><a href="api.html#delete_document">Delete document</a></li>
+            <li><a href="api.html#batch_create">Batch Create</a></li>
+            <li><a href="api.html#batch_fetch">Batch Fetch</a></li>
+            <li><a href="api.html#changes">Changes</a></li>
+            <li><a href="api.html#replication">Replication</a></li>
+            <li><a href="api.html#sync">Sync</a></li>
+            <li><a href="api.html#save_attachment">Save attachment</a></li>
+            <li><a href="api.html#get_attachment">Get attachment</a></li>
+            <li><a href="api.html#delete_attachment">Delete attachment</a></li>
+            <li><a href="api.html#query_database">Query database</a></li>
+            <li><a href="api.html#database_information">Database Information</a></li>
+            <li><a href="api.html#compaction">Compaction</a></li>
+            <li><a href="api.html#revisions_diff">Revision diff</a></li>
+            <li><a href="api.html#list_databases">List databases</a></li>
+          </ul>
+
+        </div>
+
+        <div class="col-sm-9 col-md-10">
+          <h1>FAQ</h1>
+
+<h3>Can PouchDB sync with MySQL / my current non CouchDB database?</h3>
+
+<p>No, the data model of your application has a lot of impact on its ability to sync, relational data with the existence of transactions make this harder. It may be possible given some tradeoffs but right now we are focussing on making PouchDB &lt;-&gt; (PouchDB / CouchDB) sync as reliable and easy to use as possible.</p>
+
+<h3>What can PouchDB sync with?</h3>
+
+<p>There are a number of projects that implement a CouchDB like protocol and PouchDB should be able to replicate with them, they include:</p>
+
+<ul>
+<li><a href="https://github.com/nick-thompson/pouchdb-server">PouchDB-Server</a> - a HTTP api written on top of PouchDB</li>
+<li><a href="https://cloudant.com/">Cloudant</a> - A cluster aware fork of CouchDB</li>
+<li><a href="http://www.couchbase.com/communities/couchbase-sync-gateway">Couchbase Sync Gateway</a> - A sync gateway for Couchbase</li>
+</ul>
+
+<h3>The web is nice, but I want to build a native app?</h3>
+
+<p>PouchDB is one of multiple projects that implement the CouchDB protocol and these can all be used to sync the same set of data. For desktop applications you may want to look into embedding CouchDB (or <a href="https://github.com/refuge/rcouch">rcouch</a>), for mobile applications you can use PouchDB within <a href="http://cordova.apache.org/">Apache Cordova</a> or you can look at <a href="https://github.com/couchbase/couchbase-lite-ios">Couchbase lite for iOS</a> and <a href="https://github.com/couchbase/couchbase-lite-android">Android</a>.</p>
+
+<h3>Browsers have storage limitations, how much data can PouchDB store?</h3>
+
+<p>In Firefox PouchDB uses IndexedDB, this will ask the user if data can be stored the first it is attempted then every 50MB after, the amount that can be stored is not limited.</p>
+
+<p>Chrome calculates the amount of storage left available on the users hard drive and uses <a href="https://developers.google.com/chrome/whitepapers/storage#temporary">that to calculate a limit</a>.</p>
+
+<p>Mobile Safari on iOS has a hard 50MB limit, desktop Safari will prompt users wanting to store more than 5MB up to a limit of 500MB.</p>
+
+<p>Opera has no known limit.</p>
+
+<p>Internet Exporer 10 has a hard 250MB limit.</p>
+
+<h3>CouchDB Differences</h3>
+
+<p>PouchDB is also a CouchDB client and you should be able to switch between a local database or an online CouchDB instance changing any of your applications code, there are some minor differences to note:</p>
+
+<p><strong>View Collation</strong> - CouchDB uses ICU to order keys in a view query, in PouchDB they are ASCII ordered.</p>
+
+<p><strong>View Offset</strong> - CouchDB returns an <code>offset</code> property in the view results, PouchDB doesnt.</p>
+
+        <div>
+
+    </div>
+
+  </div>
+
+</article>
+
+
+    <footer>
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Learn</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="/pouchdb/getting-started.html">Getting Started</a></li>
+              <li><a href="/pouchdb/api.html">API Guide</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/wiki">Wiki</a></li>
+            </ul>
+          </div>
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Discuss</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
+              <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
+              <li><a href="http://twitter.com/pouchdb">Twitter</a></li>
+              <li><a href="http://stackoverflow.com/questions/tagged/pouchdb">StackOverflow</a></li>
+            </ul>
+          </div>
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Contribute</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/issues">Issues</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/LICENSE">Apache License</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </body>
+</html>

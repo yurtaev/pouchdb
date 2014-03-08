@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>PouchDB, the JavaScript Database that Syncs!</title>
+    <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="container">
+
+        <a class="logo" href="/pouchdb/">
+          <img class="logo-img" src="/pouchdb/static/img/logo-icon.png" alt="Logo">
+          <span class='logo-type'>PouchDB</span>
+        </a>
+
+        <ul class='nav nav-header nav-pills'>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Documentation</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/learn.html">Learn</a>
+          </li>
+          <li>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">Download</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </header>
+
+    <article>
+  <div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-3 col-md-2">
+
+          <ul class="nav nav-silent nav-sidebar">
+            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
+            <li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
+            <li><a href="/pouchdb/api.html">API</a></li>
+            <li><a href="/pouchdb/faq.html">FAQ</a></li>
+            <li><a href="/pouchdb/errors.html">Common Errors</a></li>
+            <li><a href="/pouchdb/external.html">External Projects</a></li>
+
+            <li><h3>API</h3></li>
+            <li><a href="api.html#create_database">Create database</a></li>
+            <li><a href="api.html#delete_database">Delete database</a></li>
+            <li><a href="api.html#create_document">Create/Update document</a></li>
+            <li><a href="api.html#fetch_document">Fetch document</a></li>
+            <li><a href="api.html#delete_document">Delete document</a></li>
+            <li><a href="api.html#batch_create">Batch Create</a></li>
+            <li><a href="api.html#batch_fetch">Batch Fetch</a></li>
+            <li><a href="api.html#changes">Changes</a></li>
+            <li><a href="api.html#replication">Replication</a></li>
+            <li><a href="api.html#sync">Sync</a></li>
+            <li><a href="api.html#save_attachment">Save attachment</a></li>
+            <li><a href="api.html#get_attachment">Get attachment</a></li>
+            <li><a href="api.html#delete_attachment">Delete attachment</a></li>
+            <li><a href="api.html#query_database">Query database</a></li>
+            <li><a href="api.html#database_information">Database Information</a></li>
+            <li><a href="api.html#compaction">Compaction</a></li>
+            <li><a href="api.html#revisions_diff">Revision diff</a></li>
+            <li><a href="api.html#list_databases">List databases</a></li>
+          </ul>
+
+        </div>
+
+        <div class="col-sm-9 col-md-10">
+          <h1>External Projects</h1>
+
+<p>A set of projects that either provide plugins or related tools for PouchDB.</p>
+
+<h3>PouchDB Server</h3>
+
+<p>A standalone CouchDB style REST interface server to PouchDB.</p>
+
+<p><a href="https://github.com/nick-thompson/pouchdb-server">Github</a></p>
+
+<h3>Express PouchDB</h3>
+
+<p>An express submodule with a CouchDB style REST interface to PouchDB.</p>
+
+<p><a href="https://github.com/nick-thompson/express-pouchdb">Github</a></p>
+
+<h3>PouchDB Spatial</h3>
+
+<p>Multidimensional and Spatial Queries with PouchDB.</p>
+
+<p><a href="https://github.com/pouchdb/geopouch">repo</a></p>
+
+<h3>GQL</h3>
+
+<p>Google Query Language(GQL) queries with PouchDB.</p>
+
+<p><a href="http://pouchdb.com/gql.html">Documentation</a>
+<a href="https://github.com/pouchdb/GQL">repo</a></p>
+
+<h3>Backbone PouchDB</h3>
+
+<p>Backbone PouchDB Sync Adapter.</p>
+
+<p><a href="https://github.com/jo/backbone-pouch">Github</a></p>
+
+<h3>Puton</h3>
+
+<p>A bookmarklet for inspecting PouchDB databases within the browser.</p>
+
+<p><a href="http://puton.jit.su/">Website</a>
+<a href="http://github.com/ymichael/puton">Github</a></p>
+
+<h3>PouchDroid</h3>
+
+<p>Android adapter with a native Java interface to PouchDB.</p>
+
+<p><a href="https://github.com/nolanlawson/PouchDroid/">Github</a></p>
+
+<h3>Revision Tree Visualizer</h3>
+
+<p>A tool drawing revision tree of a couchdb document. You can see what is a conflict, which revisions are deleted and which is winning.</p>
+
+<p><a href="http://neojski.github.io/visualizeRevTree">Website</a>
+<a href="https://github.com/neojski/visualizeRevTree">Github</a></p>
+
+        <div>
+
+    </div>
+
+  </div>
+
+</article>
+
+
+    <footer>
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Learn</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="/pouchdb/getting-started.html">Getting Started</a></li>
+              <li><a href="/pouchdb/api.html">API Guide</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/wiki">Wiki</a></li>
+            </ul>
+          </div>
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Discuss</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
+              <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
+              <li><a href="http://twitter.com/pouchdb">Twitter</a></li>
+              <li><a href="http://stackoverflow.com/questions/tagged/pouchdb">StackOverflow</a></li>
+            </ul>
+          </div>
+
+          <div class='col-xs-4 col-md-3'>
+            <h3>Contribute</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/issues">Issues</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/LICENSE">Apache License</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </body>
+</html>
