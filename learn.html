@@ -3,8 +3,22 @@
 
   <head>
     <meta charset="utf-8">
-    <title>PouchDB, the JavaScript Database that Syncs!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About PouchDB</title>
     <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
   <body>
@@ -14,107 +28,100 @@
       <div class="container">
 
         <a class="logo" href="/pouchdb/">
-          <img class="logo-img" src="/pouchdb/static/img/logo-icon.png" alt="Logo">
+          <div class="logo-img"></div>
           <span class='logo-type'>PouchDB</span>
         </a>
 
         <ul class='nav nav-header nav-pills'>
           <li>
-            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Documentation</a>
+            <a class='btn btn-link btn-lg' href="/pouchdb/blog.html">Blog</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Docs</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/pouchdb/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.1/pouchdb-2.0.1.min.js">Download</a>
           </li>
         </ul>
 
       </div>
 
     </header>
+    
+      <div class="page-head">
 
-    <article>
-  <div class="container">
+        <div class="container">
 
-    <div class="row">
-
-        <div class="col-sm-3 col-md-2">
-
-          <ul class="nav nav-silent nav-sidebar">
-            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
-            <li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
-            <li><a href="/pouchdb/api.html">API</a></li>
-            <li><a href="/pouchdb/faq.html">FAQ</a></li>
-            <li><a href="/pouchdb/errors.html">Common Errors</a></li>
-            <li><a href="/pouchdb/external.html">External Projects</a></li>
-
-            <li><h3>API</h3></li>
-            <li><a href="api.html#create_database">Create database</a></li>
-            <li><a href="api.html#delete_database">Delete database</a></li>
-            <li><a href="api.html#create_document">Create/Update document</a></li>
-            <li><a href="api.html#fetch_document">Fetch document</a></li>
-            <li><a href="api.html#delete_document">Delete document</a></li>
-            <li><a href="api.html#batch_create">Batch Create</a></li>
-            <li><a href="api.html#batch_fetch">Batch Fetch</a></li>
-            <li><a href="api.html#changes">Changes</a></li>
-            <li><a href="api.html#replication">Replication</a></li>
-            <li><a href="api.html#sync">Sync</a></li>
-            <li><a href="api.html#save_attachment">Save attachment</a></li>
-            <li><a href="api.html#get_attachment">Get attachment</a></li>
-            <li><a href="api.html#delete_attachment">Delete attachment</a></li>
-            <li><a href="api.html#query_database">Query database</a></li>
-            <li><a href="api.html#database_information">Database Information</a></li>
-            <li><a href="api.html#compaction">Compaction</a></li>
-            <li><a href="api.html#revisions_diff">Revision diff</a></li>
-            <li><a href="api.html#list_databases">List databases</a></li>
-          </ul>
+          <h1>About PouchDB</h1>
+          
 
         </div>
 
-        <div class="col-sm-9 col-md-10">
-          <h1>About PouchDB</h1>
+      </div>
+    
 
-<p>PouchDB was written to help web developers build applications that work offline as well as they do online. Applications save data locally, so the user can use all the features of an app even when they&#39;re offline. Plus, the data is synchronized between clients, so the user has up-to-date data wherever they go.</p>
+
+    <article>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+          <ul class="nav nav-silent nav-sidebar" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
+            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
+<li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
+<li><a href="/pouchdb/api.html">API</a></li>
+<li><a href="/pouchdb/faq.html">FAQ</a></li>
+<li><a href="/pouchdb/errors.html">Common Errors</a></li>
+<li><a href="/pouchdb/external.html">External Projects</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col-sm-9">
+          <p>PouchDB was written to help web developers build applications that work offline as well as they do online. Applications save data locally, so the user can use all the features of an app even when they&#39;re offline. Plus, the data is synchronized between clients, so the user has up-to-date data wherever they go.</p>
 
 <p>PouchDB is a free open-source project, written in JavaScript by these <a href="https://github.com/daleharvey/pouchdb/graphs/contributors">wonderful contributors</a> and inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a>. If you want to get involved then check out the <a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">contributing guide</a>.</p>
 
-<h1>Browser Support</h1>
+<h3>Browser Support</h3>
 
-<p>PouchDB uses various backends so it can work across various browsers and in Node.js. It uses IndexedDB in Firefox/Chrome/Opera, WebSQL in Safari, and LevelDB in Node.js. It is currently tested in:</p>
+<p>PouchDB uses various backends so it can work across different browsers and in Node.js. It uses IndexedDB in Firefox/Chrome/Opera/IE, WebSQL in Safari, and LevelDB in Node.js. It is currently tested in:</p>
 
 <ul>
 <li>Firefox 12+</li>
 <li>Chrome 19+</li>
 <li>Opera 12+</li>
 <li>Safari 5+</li>
+<li>Internet Explorer 10+</li>
 <li><a href="http://nodejs.org/">Node.js 0.10+</a></li>
 <li><a href="http://cordova.apache.org/">Apache Cordova</a></li>
-<li>Internet Explorer 10+</li>
 </ul>
 
-<p>If your application requires support for Internet Explorer below version 10, it is possible to use an online CouchDB as a fallback, however it will not work offline.</p>
+<p>For details on supported browsers, see <a href="http://caniuse.com/indexeddb">&quot;Can I use IndexedDB?&quot;</a> and <a href="http://caniuse.com/sql-storage">&quot;Can I use Web SQL Database?&quot;</a>.</p>
 
-<h1>Current Status</h1>
+<p>If your application requires support for Internet Explorer below version 10, it is possible to use an online CouchDB as a fallback, however it will not work offline. Also, because PouchDB requires an ES5 environment, you will need to include the <a href="https://github.com/es-shims/es5-shim">es5-shim</a> library. This also applies to other legacy browsers, such as Android &lt;4.0 and Opera Mini.</p>
 
-<p>PouchDB in the browser currently beta release software. It is extensively tested and the functionality implemented is known to be stable, however you may find bugs in lesser used parts of the API. The API is currently stable with no known changes and you will be able to upgrade PouchDB without losing data. We are currently working towards a stable release of PouchDB.</p>
+<h3>Current Status</h3>
+
+<p>PouchDB in the browser is currently beta release software. It is extensively tested and the functionality implemented is known to be stable, however you may find bugs in lesser-used parts of the API. The API is currently stable with no known changes and you will be able to upgrade PouchDB without losing data. We are currently working towards a stable release of PouchDB.</p>
 
 <p>PouchDB in Node.js is currently alpha and an upgrade to the library can break current databases. It is however possible to upgrade by replicating data across different versions to manually upgrade.</p>
 
-<h1>Installing</h1>
+<h3>Installing</h3>
 
-<p>PouchDB is designed to be a minimal library that is suitable for mobile devices, tablets, desktops &mdash; anything that runs Javascript. To start using PouchDB in your website, you simply <a href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">download</a> it and include it in your webpage.</p>
+<p>PouchDB is designed to be a minimal library that is suitable for mobile devices, tablets, desktops &mdash; anything that runs Javascript. To start using PouchDB in your website, you simply <a href="https://github.com/daleharvey/pouchdb/releases/download/2.0.1/pouchdb-2.0.1.min.js">download</a> it and include it in your webpage.</p>
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb-2.0.0.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb-2.0.1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>
 
-<h3>Downloads</h3>
+<h5>Downloads</h5>
 
-<p>Latest and greatest: <a href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">pouchdb-2.0.0.min.js</a></p>
+<p>Latest and greatest: <a href="https://github.com/daleharvey/pouchdb/releases/download/2.0.1/pouchdb-2.0.1.min.js">pouchdb-2.0.1.min.js</a></p>
 
 <p>For past releases and changelog, check out the <a href="https://github.com/daleharvey/pouchdb/releases">Github releases page</a>.</p>
 
-<h3>Node.js</h3>
+<h5>Node.js</h5>
 
 <p>If you are using Node.js then run</p>
 
@@ -123,9 +130,9 @@
 
 <p>For an HTTP API to PouchDB check out <a href="https://github.com/nick-thompson/pouchdb-server">PouchDB Server</a>.</p>
 
-<h1>Using PouchDB</h1>
+<h3>Using PouchDB</h3>
 
-<p>To get started using PouchDB check out our <a href="getting-started.html">Getting Started Tutorial</a> and the <a href="api.html">API Documentation</a>.</p>
+<p>To get started using PouchDB, check out our <a href="getting-started.html">Getting Started Tutorial</a> and the <a href="api.html">API Documentation</a>.</p>
 
         <div>
 
@@ -176,18 +183,7 @@
       </div>
 
     </footer>
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-42479701-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>

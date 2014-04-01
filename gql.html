@@ -3,8 +3,22 @@
 
   <head>
     <meta charset="utf-8">
-    <title>PouchDB, the JavaScript Database that Syncs!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GQL Documentation</title>
     <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
   <body>
@@ -14,68 +28,59 @@
       <div class="container">
 
         <a class="logo" href="/pouchdb/">
-          <img class="logo-img" src="/pouchdb/static/img/logo-icon.png" alt="Logo">
+          <div class="logo-img"></div>
           <span class='logo-type'>PouchDB</span>
         </a>
 
         <ul class='nav nav-header nav-pills'>
           <li>
-            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Documentation</a>
+            <a class='btn btn-link btn-lg' href="/pouchdb/blog.html">Blog</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Docs</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/pouchdb/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.1/pouchdb-2.0.1.min.js">Download</a>
           </li>
         </ul>
 
       </div>
 
     </header>
+    
+      <div class="page-head">
 
-    <article>
-  <div class="container">
+        <div class="container">
 
-    <div class="row">
-
-        <div class="col-sm-3 col-md-2">
-
-          <ul class="nav nav-silent nav-sidebar">
-            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
-            <li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
-            <li><a href="/pouchdb/api.html">API</a></li>
-            <li><a href="/pouchdb/faq.html">FAQ</a></li>
-            <li><a href="/pouchdb/errors.html">Common Errors</a></li>
-            <li><a href="/pouchdb/external.html">External Projects</a></li>
-
-            <li><h3>API</h3></li>
-            <li><a href="api.html#create_database">Create database</a></li>
-            <li><a href="api.html#delete_database">Delete database</a></li>
-            <li><a href="api.html#create_document">Create/Update document</a></li>
-            <li><a href="api.html#fetch_document">Fetch document</a></li>
-            <li><a href="api.html#delete_document">Delete document</a></li>
-            <li><a href="api.html#batch_create">Batch Create</a></li>
-            <li><a href="api.html#batch_fetch">Batch Fetch</a></li>
-            <li><a href="api.html#changes">Changes</a></li>
-            <li><a href="api.html#replication">Replication</a></li>
-            <li><a href="api.html#sync">Sync</a></li>
-            <li><a href="api.html#save_attachment">Save attachment</a></li>
-            <li><a href="api.html#get_attachment">Get attachment</a></li>
-            <li><a href="api.html#delete_attachment">Delete attachment</a></li>
-            <li><a href="api.html#query_database">Query database</a></li>
-            <li><a href="api.html#database_information">Database Information</a></li>
-            <li><a href="api.html#compaction">Compaction</a></li>
-            <li><a href="api.html#revisions_diff">Revision diff</a></li>
-            <li><a href="api.html#list_databases">List databases</a></li>
-          </ul>
+          <h1>GQL Documentation</h1>
+          
 
         </div>
 
-        <div class="col-sm-9 col-md-10">
-          <h1>GQL Documentation</h1>
+      </div>
+    
 
-<p>The Google Query Language (GQL) interface provides an alternative method for accessing data.
+
+    <article>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+          <ul class="nav nav-silent nav-sidebar" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
+            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
+<li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
+<li><a href="/pouchdb/api.html">API</a></li>
+<li><a href="/pouchdb/faq.html">FAQ</a></li>
+<li><a href="/pouchdb/errors.html">Common Errors</a></li>
+<li><a href="/pouchdb/external.html">External Projects</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col-sm-9">
+          <p>The Google Query Language (GQL) interface provides an alternative method for accessing data.
 The version of GQL implemented here is based on the Google Visualization API Query Language
 (https://developers.google.com/chart/interactive/docs/querylanguage).
 The syntax of GQL queries should be familiar to those who have used SQL,
@@ -386,18 +391,7 @@ where
       </div>
 
     </footer>
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-42479701-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>

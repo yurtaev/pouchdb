@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FAQ</title>
+    <title>Welcome to the PouchDB blog</title>
     <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -55,7 +55,7 @@
 
         <div class="container">
 
-          <h1>FAQ</h1>
+          <h1>Welcome to the PouchDB blog</h1>
           
 
         </div>
@@ -64,66 +64,61 @@
     
 
 
-    <article>
-  <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-          <ul class="nav nav-silent nav-sidebar" data-spy="affix" data-offset-top="250" data-offset-bottom="350">
-            <li><a href="/pouchdb/learn.html">About PouchDB</a></li>
-<li><a href="/pouchdb/getting-started.html">Get Started Guide</a></li>
-<li><a href="/pouchdb/api.html">API</a></li>
-<li><a href="/pouchdb/faq.html">FAQ</a></li>
-<li><a href="/pouchdb/errors.html">Common Errors</a></li>
-<li><a href="/pouchdb/external.html">External Projects</a></li>
+    <article class='container'>
+  <div class='row'>
+    <div class='col-md-offset-1 col-md-10'>
+      
 
-          </ul>
-        </div>
 
-        <div class="col-sm-9">
-          <h3>Can PouchDB sync with MySQL / my current non CouchDB database?</h3>
 
-<p>No, the data model of your application has a lot of impact on its ability to sync, relational data with the existence of transactions make this harder. It may be possible given some tradeoffs but right now we are focussing on making PouchDB &lt;-&gt; (PouchDB / CouchDB) sync as reliable and easy to use as possible.</p>
 
-<h3>What can PouchDB sync with?</h3>
+  
 
-<p>There are a number of projects that implement a CouchDB like protocol and PouchDB should be able to replicate with them, they include:</p>
+  
 
-<ul>
-<li><a href="https://github.com/nick-thompson/pouchdb-server">PouchDB-Server</a> - a HTTP api written on top of PouchDB</li>
-<li><a href="https://cloudant.com/">Cloudant</a> - A cluster aware fork of CouchDB</li>
-<li><a href="http://www.couchbase.com/communities/couchbase-sync-gateway">Couchbase Sync Gateway</a> - A sync gateway for Couchbase</li>
-</ul>
+  
+    
+      
+    
+    
+      
+    
+  
 
-<h3>The web is nice, but I want to build a native app?</h3>
+  
 
-<p>PouchDB is one of multiple projects that implement the CouchDB protocol and these can all be used to sync the same set of data. For desktop applications you may want to look into embedding CouchDB (or <a href="https://github.com/refuge/rcouch">rcouch</a>), for mobile applications you can use PouchDB within <a href="http://cordova.apache.org/">Apache Cordova</a> or you can look at <a href="https://github.com/couchbase/couchbase-lite-ios">Couchbase lite for iOS</a> and <a href="https://github.com/couchbase/couchbase-lite-android">Android</a>.</p>
 
-<h3>Browsers have storage limitations, how much data can PouchDB store?</h3>
 
-<p>In Firefox PouchDB uses IndexedDB, this will ask the user if data can be stored the first it is attempted then every 50MB after, the amount that can be stored is not limited.</p>
 
-<p>Chrome calculates the amount of storage left available on the users hard drive and uses <a href="https://developers.google.com/chrome/whitepapers/storage#temporary">that to calculate a limit</a>.</p>
+<div class="post">
+  <div class="media">
+    <a class="pull-left" href="#">
+    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/030451d8cfc268d666bae9a7fe8d10ec' alt='Dale Harvey'>
+    </a>
+    <div class="media-body">
+    <p>
+      <strong>By:</strong> <a href="https://twitter.com/daleharvey">Dale Harvey</a><br>
+      <strong>Published:</strong> 01 April 2014<br>
+      <p>Hello World! Welcome to the newly formed PouchDB blog. PouchDB has been an active community for over 2 years now, with almost everything being run via IRC and Github. As the project grows, we wanted a way to communicate with users about the current state of the PouchDB world.</p>
 
-<p>Mobile Safari on iOS has a hard 50MB limit, desktop Safari will prompt users wanting to store more than 5MB up to a limit of 500MB.</p>
-
-<p>Opera has no known limit.</p>
-
-<p>Internet Exporer 10 has a hard 250MB limit.</p>
-
-<h3>CouchDB Differences</h3>
-
-<p>PouchDB is also a CouchDB client and you should be able to switch between a local database or an online CouchDB instance changing any of your applications code, there are some minor differences to note:</p>
-
-<p><strong>View Collation</strong> - CouchDB uses ICU to order keys in a view query, in PouchDB they are ASCII ordered.</p>
-
-<p><strong>View Offset</strong> - CouchDB returns an <code>offset</code> property in the view results, PouchDB doesnt.</p>
-
-        <div>
-
+    </p>
     </div>
-
   </div>
+</div>
 
+
+      <p>Hello World! Welcome to the newly formed PouchDB blog. PouchDB has been an active community for over 2 years now, with almost everything being run via IRC and Github. As the project grows, we wanted a way to communicate with users about the current state of the PouchDB world.</p>
+
+<p>We will obviously be posting updates and releases notes for PouchDB releases, but as well as that, we will also be blogging about related projects and technologies within the PouchDB world, such as Service Workers, CouchDB, etc.</p>
+
+<p>As with the PouchDB source, we would love to invite everyone to contribute.  We have <a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md#writing-a-pouchdb-blog-post">documented the instructions</a>, so please get involved.</p>
+
+<p>Over the last 4 years PouchDB has had 89 <a href="https://github.com/daleharvey/pouchdb/graphs/contributors">awesome contributors</a>. I would like to give a shout-out to the people who worked together to get this site up and running in such a short time: <a href="https://twitter.com/NickColley">nickcolley</a>, <a href="https://twitter.com/misosoup">misosoup</a>, <a href="https://twitter.com/zaccolley">zaccolley</a>, <a href="https://twitter.com/nolanlawson">nolanlawson</a> and <a href="https://github.com/virgie">virgie</a> in particular.</p>
+
+<p>Happy Pouching.</p>
+
+        </div>
+  </div>
 </article>
 
 

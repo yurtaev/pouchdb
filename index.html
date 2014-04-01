@@ -3,8 +3,22 @@
 
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PouchDB, the JavaScript Database that Syncs!</title>
     <link rel="stylesheet" href="/pouchdb/static/css/pouchdb.css" />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
   <body>
@@ -14,25 +28,30 @@
       <div class="container">
 
         <a class="logo" href="/pouchdb/">
-          <img class="logo-img" src="/pouchdb/static/img/logo-icon.png" alt="Logo">
+          <div class="logo-img"></div>
           <span class='logo-type'>PouchDB</span>
         </a>
 
         <ul class='nav nav-header nav-pills'>
           <li>
-            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Documentation</a>
+            <a class='btn btn-link btn-lg' href="/pouchdb/blog.html">Blog</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/pouchdb/api.html">Docs</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/pouchdb/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.0/pouchdb-2.0.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.0.1/pouchdb-2.0.1.min.js">Download</a>
           </li>
         </ul>
 
       </div>
 
     </header>
+    
+
 
     <div class="ui-intro">
 
@@ -44,10 +63,10 @@
 
         <h1>The Database that Syncs!</h1>
 
-        <p>PouchDB is an open-source JavaScript Database inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a> that is designed to run well within the browser.</p>
+        <p>PouchDB is an open-source JavaScript database inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a> that is designed to run well within the browser.</p>
 
-        <p>PouchDB was created to help web developers build applications that work equally as well offline as they do online.<br>
-        It enables applications to store data locally while offline, and synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
+        <p>PouchDB was created to help web developers build applications that work as well offline as they do online.<br>
+        <p>It enables applications to store data locally while offline, then synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
 
         <a href="/pouchdb/learn.html" class="btn btn-primary btn-lg">Learn more</a>
 
@@ -61,7 +80,7 @@
 <span class="lineno"> 3</span>   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
 <span class="lineno"> 4</span>    <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
 <span class="lineno"> 5</span>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span>
-<span class="lineno"> 6</span>    <span class="nx">age</span><span class="o">:</span> <span class="mi">66</span>
+<span class="lineno"> 6</span>    <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span>
 <span class="lineno"> 7</span>   <span class="p">});</span>
 <span class="lineno"> 8</span> 
 <span class="lineno"> 9</span>   <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
@@ -91,30 +110,30 @@
 
       <div class='col-xs-6 col-md-3'>
 
-        <h3 class='brand-primary'>Cross Browser</h3>
+        <h3>Cross Browser</h3>
         <p>Works in Firefox, Chrome, Opera, Safari, IE and Node.js</p>
 
       </div>
 
       <div class='col-xs-6 col-md-3'>
 
-        <h3 class='brand-primary'>Lightweight</h3>
-        <p>PouchDB is just a script tag and 25KB(gzipped) away in the  browser, or <code>$ npm install pouchdb</code> away
-        in node.</p>
+        <h3>Lightweight</h3>
+        <p>PouchDB is just a script tag and 25KB (gzipped) away in the browser, or <code>$ npm install pouchdb</code> away
+        in Node.</p>
 
       </div>
 
       <div class='col-xs-6 col-md-3'>
 
-        <h3 class='brand-primary'>Easy to Learn</h3>
-        <p>Requires some programming knowledge, however PouchDB is a piece of piss to learn.</p>
+        <h3>Easy to Learn</h3>
+        <p>Requires some programming knowledge, however PouchDB is a piece of cake to learn.</p>
 
       </div>
 
       <div class='col-xs-6 col-md-3'>
 
-        <h3 class='brand-primary'>Open Source</h3>
-        <p>Everything is developed out in the open on Github, contributers always welcome!</p>
+        <h3>Open Source</h3>
+        <p>Everything is developed out in the open on Github, contributors always welcome!</p>
 
       </div>
 
@@ -165,18 +184,7 @@
       </div>
 
     </footer>
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-42479701-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>
