@@ -2276,6 +2276,7 @@ address {
   position: fixed;
 }
 .affix {
+  padding: 1em 0;
   position: static;
 }
 @media (min-width: 768px) and (min-height: 475px) {
