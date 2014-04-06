@@ -1263,7 +1263,7 @@ adapters.forEach(function (adapter) {
         }, time);
       });
     }
-    it('CRUD events are handled correclty', function (done) {
+    it.skip('CRUD events are handled correclty', function (done) {
       var db = new PouchDB(dbs.name);
       var changes = db.changes({
         live: true
