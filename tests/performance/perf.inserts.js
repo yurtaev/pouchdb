@@ -4,6 +4,7 @@ var PouchDB = require('../..');
 var Reporter = require('./perf.reporter');
 var reporter = new Reporter();
 var test = require('tape');
+var randomizer = Math.random();
 
 var testContext = {};
 
@@ -106,7 +107,7 @@ function runTests(testName, callback) {
       var setupObj;
 
       t.test('setup', function (t) {
-        new testContext.PouchDB('test').then(function (d) {
+        new testContext.PouchDB('test_' + randomizer).then(function (d) {
           db = d;
           testCase.setup(db, function (err, res) {
             setupObj = res;
@@ -175,7 +176,8 @@ if (!window.location.hash) {
 var timestamp = window.location.hash.substring(1);
 
 function runTestsForCommit() {
-  var pouchdbBuilds = new PouchDB('http://localhost:2020/pouchdb_builds');
+  var buildsUrl = require('./constants').buildsUrl;
+  var pouchdbBuilds = new PouchDB(buildsUrl);
 
   var opts = {descending : true, limit : 2};
   if (timestamp !== 'latest') {
