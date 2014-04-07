@@ -25,9 +25,9 @@ for (var counter = 0; counter < 10000; counter++) {
 
 var tapeLock = true;
 
-function runTests(commitId, callback) {
+function runTests(commit, callback) {
 
-  reporter.setCommitId(commitId, timestamp);
+  reporter.setCommit(commit, timestamp);
 
   var testCases = [
     {
@@ -103,7 +103,7 @@ function runTests(commitId, callback) {
   ];
 
   testCases.forEach(function (testCase, i) {
-    test('benchmarking ' + commitId, function (t) {
+    test('benchmarking ' + commit.id, function (t) {
 
       var db;
       var setupObj;
@@ -119,7 +119,7 @@ function runTests(commitId, callback) {
         });
       });
 
-      var testCaseName = testCase.name + (commitId ? (' for ' + commitId): '');
+      var testCaseName = testCase.name + (commit ? (' for ' + commit.id): '');
       t.test(testCaseName, function (t) {
         t.plan(testCase.assertions);
         var num = 0;
@@ -202,7 +202,11 @@ function runTestsForCommit() {
       if (typeof global.PouchDB === 'function') {
         testContext.PouchDB = global.PouchDB;
         clearInterval(callbackTimer);
-        runTests(commitId, function () {
+        var commit = {
+          id : commitId,
+          ts : trueTimestamp
+        };
+        runTests(commit, function () {
           var url = document.location.toString().replace(/\#.*$/, '#' + trueTimestamp);
           reporter.log('To re-run tests: ' + '<a href="' + url + '">' + url + '</a>');
           reporter = new Reporter();

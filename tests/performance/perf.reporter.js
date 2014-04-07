@@ -66,11 +66,8 @@ Reporter.prototype.complete = function () {
   log('\nTests Complete!\n\n');
 };
 
-Reporter.prototype.setCommitId = function (commitId, timestamp) {
-  this.commit = {
-    id : commitId,
-    timestamp : parseInt(timestamp, 10)
-  };
+Reporter.prototype.setCommit = function (commit, timestamp) {
+  this.commit = commit;
 };
 
 module.exports = Reporter;
