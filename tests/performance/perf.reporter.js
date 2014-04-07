@@ -1,7 +1,7 @@
 'use strict';
 
 var PouchDB = require('../..');
-var session = Math.round(Math.random() * 1000000);
+var session = new Date().toJSON + '-' + Math.round(Math.random() * 1000000);
 var pre = document && document.getElementById('output');
 
 var ua = new window.UAParser();
@@ -52,8 +52,7 @@ Reporter.prototype.complete = function () {
   var url = require('./constants').reportsUrl;
   new PouchDB(url).then(function (db) {
     var date = new Date();
-    return db.put({
-      _id : date.toJSON() + '-' + Math.random(),
+    return db.post({
       date : date.toJSON(),
       ts : date.getTime(),
       userAgent : userAgent,
