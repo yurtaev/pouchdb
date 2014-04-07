@@ -25,7 +25,9 @@ for (var counter = 0; counter < 10000; counter++) {
 
 var tapeLock = true;
 
-function runTests(testName, callback) {
+function runTests(commitId, callback) {
+
+  reporter.setCommitId(commitId, timestamp);
 
   var testCases = [
     {
@@ -101,7 +103,7 @@ function runTests(testName, callback) {
   ];
 
   testCases.forEach(function (testCase, i) {
-    test('benchmarking ' + testName, function (t) {
+    test('benchmarking ' + commitId, function (t) {
 
       var db;
       var setupObj;
@@ -117,7 +119,7 @@ function runTests(testName, callback) {
         });
       });
 
-      var testCaseName = testCase.name + (testName ? (' for ' + testName): '');
+      var testCaseName = testCase.name + (commitId ? (' for ' + commitId): '');
       t.test(testCaseName, function (t) {
         t.plan(testCase.assertions);
         var num = 0;

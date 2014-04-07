@@ -1,7 +1,7 @@
 'use strict';
 
 var PouchDB = require('../..');
-var session = new Date().toJSON + '-' + Math.round(Math.random() * 1000000);
+var session = new Date().toJSON() + '-' + Math.round(Math.random() * 1000000);
 var pre = document && document.getElementById('output');
 
 var ua = new window.UAParser();
@@ -57,12 +57,20 @@ Reporter.prototype.complete = function () {
       ts : date.getTime(),
       userAgent : userAgent,
       results : self.results,
-      session : session
+      session : session,
+      commit : self.commit
     });
   }).catch(function (err) {
     console.log(err);
   });
   log('\nTests Complete!\n\n');
+};
+
+Reporter.prototype.setCommitId = function (commitId, timestamp) {
+  this.commit = {
+    id : commitId,
+    timestamp : parseInt(timestamp, 10)
+  };
 };
 
 module.exports = Reporter;
