@@ -1,6 +1,7 @@
 'use strict';
 
 var PouchDB = require('../..');
+var session = Math.round(Math.random() * 1000000);
 var pre = document && document.getElementById('output');
 
 var ua = new window.UAParser();
@@ -56,7 +57,8 @@ Reporter.prototype.complete = function () {
       date : date.toJSON(),
       ts : date.getTime(),
       userAgent : userAgent,
-      results : self.results
+      results : self.results,
+      session : session
     });
   }).catch(function (err) {
     console.log(err);
