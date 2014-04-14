@@ -19,7 +19,8 @@
   "dependencies": {
     "level-js": "^2.1.2",
     "lie": "^2.6.0",
-    "localstorage-down": "^0.4.2"
+    "localstorage-down": "^0.4.2",
+    "memdown": "~0.7.0"
   },
   "devDependencies": {
     "browserify": "^3.38.1",

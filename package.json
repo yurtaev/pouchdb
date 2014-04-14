@@ -52,8 +52,7 @@
     "glob": "~3.2.9",
     "watch-glob": "~0.1.1",
     "mkdirp": "~0.3.5",
-    "exec-sync": "~0.1.6",
-    "memdown": "~0.7.0"
+    "exec-sync": "~0.1.6"
   },
   "scripts": {
     "build-js": "browserify . -s PouchDB > dist/pouchdb-nightly.js",
