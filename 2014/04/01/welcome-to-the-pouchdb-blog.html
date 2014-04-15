@@ -21,9 +21,13 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sidebar">
 
     <header>
+
+      <a href="https://github.com/pouchdb/pouchdb" target="_blank">
+         <div class="ribbon">GitHub</div>
+      </a>
 
       <div class="container">
 
@@ -37,7 +41,7 @@
             <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
           </li>
           <li>
-            <a class='btn btn-link btn-lg' href="/api.html">Docs</a>
+            <a class='btn btn-link btn-lg' href="/api.html">API</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
@@ -104,11 +108,11 @@
       <strong>By:</strong> <a href="https://twitter.com/daleharvey">Dale Harvey</a><br>
       <strong>Published:</strong> 01 April 2014<br>
       
+      
     </p>
     </div>
   </div>
 </div>
-
 
       <p>Hello World! Welcome to the newly formed PouchDB blog. PouchDB has been an active community for over 2 years now, with almost everything being run via IRC and Github. As the project grows, we wanted a way to communicate with users about the current state of the PouchDB world.</p>
 
@@ -125,14 +129,62 @@
 </article>
 
 
+    <div class="icons">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://twitter.com/pouchdb'>
+              <div class="icon icon-twitter"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://www.browserstack.com/'>
+              <div class="icon icon-browserstack"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://github.com/pouchdb/pouchdb'>
+              <div class="icon icon-github"></div>
+            </a>
+            </div>
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://travis-ci.org/pouchdb/pouchdb'>
+              <div class="icon icon-travis"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://couchdb.apache.org/'>
+              <div class="icon icon-couchdb"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://saucelabs.com'>
+              <div class="icon icon-saucelabs"></div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     <footer>
 
       <div class="container">
 
         <div class="row">
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Learn</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Learn</h3>
             <ul class='nav nav-silent'>
               <li><a href="/getting-started.html">Getting Started</a></li>
               <li><a href="/api.html">API Guide</a></li>
@@ -140,8 +192,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Discuss</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Discuss</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
               <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
@@ -150,8 +202,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Contribute</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Contribute</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
               <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>

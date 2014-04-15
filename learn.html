@@ -21,9 +21,13 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sidebar">
 
     <header>
+
+      <a href="https://github.com/pouchdb/pouchdb" target="_blank">
+         <div class="ribbon">GitHub</div>
+      </a>
 
       <div class="container">
 
@@ -37,7 +41,7 @@
             <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
           </li>
           <li>
-            <a class='btn btn-link btn-lg' href="/api.html">Docs</a>
+            <a class='btn btn-link btn-lg' href="/api.html">API</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
@@ -67,7 +71,7 @@
     <article>
   <div class="container">
     <div class="row">
-        <div class="col-sm-3">
+        <div id="sidebar" class="col-sm-3">
           <div data-spy="affix" data-offset-top="250" data-offset-bottom="200">
             <ul class="nav nav-silent nav-sidebar">
               <li><a href="/learn.html">About PouchDB</a></li>
@@ -88,27 +92,18 @@
 
 <h3>Browser Support</h3>
 
-<p>PouchDB uses various backends so it can work across different browsers and in Node.js. It uses IndexedDB in Firefox/Chrome/Opera/IE, WebSQL in Safari, and LevelDB in Node.js. It is currently tested in:</p>
+<p>PouchDB uses various backends so it can work across different browsers and in Node.js. It uses IndexedDB in Firefox/Chrome/Opera/IE, WebSQL in Safari, and LevelDB in Node.js. It is currently tested and fully supported in:</p>
 
 <ul>
-<li>Firefox 12+</li>
-<li>Chrome 19+</li>
-<li>Opera 12+</li>
-<li>Safari 5+</li>
-<li>Internet Explorer 10+</li>
-<li><a href="http://nodejs.org/">Node.js 0.10+</a></li>
-<li><a href="http://cordova.apache.org/">Apache Cordova</a></li>
+<li>Firefox latest stable (v28)</li>
+<li>Chrome latest stable (v34)</li>
+<li>Desktop Safari latest stable (v7)</li>
+<li><a href="http://nodejs.org/">Node.js</a></li>
 </ul>
 
-<p>For details on supported browsers, see <a href="http://caniuse.com/indexeddb">&quot;Can I use IndexedDB?&quot;</a> and <a href="http://caniuse.com/sql-storage">&quot;Can I use Web SQL Database?&quot;</a>.</p>
+<p>PouchDB is experimental on Internet Explorer 10+, Opera and various mobile browsers and environments including <a href="http://cordova.apache.org/">Apache Cordova</a>. It is known to work but you may run into issues, as we resolve these issues we will update the fully supported list.</p>
 
-<p>If your application requires support for Internet Explorer below version 10, it is possible to use an online CouchDB as a fallback, however it will not work offline. Also, because PouchDB requires an ES5 environment, you will need to include the <a href="https://github.com/es-shims/es5-shim">es5-shim</a> library. This also applies to other legacy browsers, such as Android &lt;4.0 and Opera Mini.</p>
-
-<h3>Current Status</h3>
-
-<p>PouchDB in the browser is currently beta release software. It is extensively tested and the functionality implemented is known to be stable, however you may find bugs in lesser-used parts of the API. The API is currently stable with no known changes and you will be able to upgrade PouchDB without losing data. We are currently working towards a stable release of PouchDB.</p>
-
-<p>PouchDB in Node.js is currently alpha and an upgrade to the library can break current databases. It is however possible to upgrade by replicating data across different versions to manually upgrade.</p>
+<p>PouchDB requires an ES5 environment, if your browser does not support this (IE &lt; 9, Android &lt; 4.0, Opera Mini) you will need to include the <a href="https://github.com/es-shims/es5-shim">es5-shim</a> library.</p>
 
 <h3>Installing</h3>
 
@@ -145,14 +140,62 @@
 </article>
 
 
+    <div class="icons">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://twitter.com/pouchdb'>
+              <div class="icon icon-twitter"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://www.browserstack.com/'>
+              <div class="icon icon-browserstack"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://github.com/pouchdb/pouchdb'>
+              <div class="icon icon-github"></div>
+            </a>
+            </div>
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://travis-ci.org/pouchdb/pouchdb'>
+              <div class="icon icon-travis"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://couchdb.apache.org/'>
+              <div class="icon icon-couchdb"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://saucelabs.com'>
+              <div class="icon icon-saucelabs"></div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     <footer>
 
       <div class="container">
 
         <div class="row">
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Learn</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Learn</h3>
             <ul class='nav nav-silent'>
               <li><a href="/getting-started.html">Getting Started</a></li>
               <li><a href="/api.html">API Guide</a></li>
@@ -160,8 +203,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Discuss</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Discuss</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
               <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
@@ -170,8 +213,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Contribute</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Contribute</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
               <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>

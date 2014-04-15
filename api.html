@@ -21,9 +21,13 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sidebar">
 
     <header>
+
+      <a href="https://github.com/pouchdb/pouchdb" target="_blank">
+         <div class="ribbon">GitHub</div>
+      </a>
 
       <div class="container">
 
@@ -37,7 +41,7 @@
             <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
           </li>
           <li>
-            <a class='btn btn-link btn-lg' href="/api.html">Docs</a>
+            <a class='btn btn-link btn-lg' href="/api.html">API</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
@@ -67,28 +71,28 @@
     <article>
   <div class="container">
     <div class="row">
-        <div class="col-sm-3">
+        <div id="sidebar" class="col-sm-3">
           <div data-spy="affix" data-offset-top="250" data-offset-bottom="200">
             <ul class="nav nav-silent nav-sidebar">
-              <li><a href="api.html#create_database">Create database</a></li>
-<li><a href="api.html#delete_database">Delete database</a></li>
-<li><a href="api.html#create_document">Create/update doc</a></li>
-<li><a href="api.html#fetch_document">Fetch doc</a></li>
-<li><a href="api.html#delete_document">Delete doc</a></li>
-<li><a href="api.html#batch_create">Batch create</a></li>
-<li><a href="api.html#batch_fetch">Batch fetch</a></li>
-<li><a href="api.html#changes">Changes</a></li>
-<li><a href="api.html#replication">Replication</a></li>
-<li><a href="api.html#sync">Sync</a></li>
-<li><a href="api.html#save_attachment">Save attachment</a></li>
-<li><a href="api.html#get_attachment">Get attachment</a></li>
-<li><a href="api.html#delete_attachment">Delete attachment</a></li>
-<li><a href="api.html#query_database">Query database</a></li>
-<li><a href="api.html#database_information">Database info</a></li>
-<li><a href="api.html#compaction">Compaction</a></li>
-<li><a href="api.html#revisions_diff">Revision diff</a></li>
-<li><a href="api.html#events">Events</a></li>
-<li><a href="api.html#plugins">Plugins</a></li>
+              <li><a href="#create_database">Create database</a></li>
+<li><a href="#delete_database">Delete database</a></li>
+<li><a href="#create_document">Create/update doc</a></li>
+<li><a href="#fetch_document">Fetch doc</a></li>
+<li><a href="#delete_document">Delete doc</a></li>
+<li><a href="#batch_create">Batch create</a></li>
+<li><a href="#batch_fetch">Batch fetch</a></li>
+<li><a href="#changes">Changes</a></li>
+<li><a href="#replication">Replication</a></li>
+<li><a href="#sync">Sync</a></li>
+<li><a href="#save_attachment">Save attachment</a></li>
+<li><a href="#get_attachment">Get attachment</a></li>
+<li><a href="#delete_attachment">Delete attachment</a></li>
+<li><a href="#query_database">Query database</a></li>
+<li><a href="#database_information">Database info</a></li>
+<li><a href="#compaction">Compaction</a></li>
+<li><a href="#revisions_diff">Revision diff</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#plugins">Plugins</a></li>
 
             </ul>
           </div>
@@ -99,7 +103,7 @@
 
 <p>Additionally, any method that only returns a single thing (e.g. <code>db.get</code>) also returns a <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">promise</a>. Promises come from the minimal library <a href="https://github.com/calvinmetcalf/lie">lie</a> in the browser, and the feature-rich <a href="https://github.com/petkaantonov/bluebird">Bluebird</a> in Node.</p>
 
-<p><a class='h2 anchor' href='#create_database' name='create_database'>Create a database</a></p>
+<div id='create_database'><a class='h2 anchor' href='#create_database' name='create_database'>Create a database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">([</span><span class="nx">name</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
@@ -140,7 +144,7 @@
 <div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span> <span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)});</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#delete_database' name='delete_database'>Delete a database</a></p>
+<div id='delete_database'><a class='h2 anchor' href='#delete_database' name='delete_database'>Delete a database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">destroy</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -159,7 +163,7 @@
 <div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">destroy</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#create_document' name='create_document'>Create / update a document</a></p>
+<div id='create_document'><a class='h2 anchor' href='#create_document' name='create_document'>Create / update a document</a></div>
 
 <h3>Using db.put()</h3>
 
@@ -246,7 +250,7 @@
 
 <p><strong>Put vs. post</strong>: The basic rule of thumb is: put new documents with an <code>_id</code>, post new documents without an <code>_id</code>.</p>
 
-<p><a class='h2 anchor' href='#fetch_document' name='fetch_document'>Fetch a document</a></p>
+<div id='fetch_document'><a class='h2 anchor' href='#fetch_document' name='fetch_document'>Fetch a document</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">docid</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -286,7 +290,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#delete_document' name='delete_document'>Delete a document</a></p>
+<div id='delete_document'><a class='h2 anchor' href='#delete_document' name='delete_document'>Delete a document</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -318,7 +322,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#batch_create' name='batch_create'>Create a batch of documents</a></p>
+<div id='batch_create'><a class='h2 anchor' href='#batch_create' name='batch_create'>Create a batch of documents</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">(</span><span class="nx">docs</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -351,7 +355,7 @@
 <span class="p">]</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#batch_fetch' name='batch_fetch'>Fetch a batch of documents</a></p>
+<div id='batch_fetch'><a class='h2 anchor' href='#batch_fetch' name='batch_fetch'>Fetch a batch of documents</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -369,9 +373,11 @@
 <li><code>options.conflicts</code>: Include conflict information in the <code>_conflicts</code> field of a doc.</li>
 <li><code>options.attachments</code>: Include attachment data.</li>
 </ul></li>
-<li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get documents with keys in a certain range (inclusive/inclusive).</li>
+<li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get documents with IDs in a certain range (inclusive/inclusive).</li>
+<li><code>options.limit</code>: Maximum number of documents to return.</li>
+<li><code>options.skip</code>: Number of docs to skip before returning (warning: poor performance on IndexedDB/LevelDB!).</li>
 <li><code>options.descending</code>: Reverse the order of the output documents.</li>
-<li><code>options.key</code>: Only return rows matching this string key.</li>
+<li><code>options.key</code>: Only return documents with IDs matching this string key.</li>
 <li><code>options.keys</code>: Array of string keys to fetch in a single shot.
 
 <ul>
@@ -409,7 +415,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#changes' name='changes'>Listen to database changes</a></p>
+<div id='changes'><a class='h2 anchor' href='#changes' name='changes'>Listen to database changes</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
 </code></pre></div>
@@ -502,7 +508,7 @@ It returns an object with one method <code>cancel</code>, which you call if you 
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#replication' name='replication'>Replicate a database</a></p>
+<div id='replication'><a class='h2 anchor' href='#replication' name='replication'>Replicate a database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
@@ -557,7 +563,7 @@ It returns an object with one method <code>cancel</code>, which you call if you 
 
 <p>Note that the response for server replications (via <code>options.server</code>) is slightly different. See the <a href="http://wiki.apache.org/couchdb/Replication">CouchDB replication documentation</a> for details.</p>
 
-<p><a class='h2 anchor' href='#sync' name='sync'>Sync a database</a></p>
+<div id='sync'><a class='h2 anchor' href='#sync' name='sync'>Sync a database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
@@ -583,7 +589,7 @@ It returns an object with one method <code>cancel</code>, which you call if you 
 
 <p>For any further details, please further to <a href="api.html#replication">Replication</a>.</p>
 
-<p><a class='h2 anchor' href='#save_attachment' name='save_attachment'>Save an attachment</a></p>
+<div id='save_attachment'><a class='h2 anchor' href='#save_attachment' name='save_attachment'>Save an attachment</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">putAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">]);</span>
 </code></pre></div>
@@ -605,17 +611,12 @@ It returns an object with one method <code>cancel</code>, which you call if you 
 <span class="p">}</span>
 </code></pre></div>
 
-<p>PouchDB also offers a <code>createBlob</code> function, which will work around browser inconsistencies:</p>
-
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">createBlob</span><span class="p">([</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">]);</span>
-</code></pre></div>
-
-<p>Within Node, you must use a <code>Buffer</code>:</p>
+<p>Within Node, you must use a <code>Buffer</code> instead of a <code>Blob</code>:</p>
 
 <div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">);</span>
 </code></pre></div>
 
-<p>For details, see the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">Mozilla docs on <code>Blob</code></a> or the <a href="http://nodejs.org/api/buffer.html">Node docs on <code>Buffer</code></a>.</p>
+<p>For details, see the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">Mozilla docs on <code>Blob</code></a> or the <a href="http://nodejs.org/api/buffer.html">Node docs on <code>Buffer</code></a>.  If you need a shim for older browsers that don&#39;t support the <code>Blob</code> constructor, you can use <a href="https://gist.github.com/nolanlawson/10340255">this one</a>.</p>
 
 <h3>Save an inline attachment</h3>
 
@@ -637,7 +638,7 @@ It returns an object with one method <code>cancel</code>, which you call if you 
 <p>See <a href="http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments">Inline Attachments</a>
 on the CouchDB wiki for details.</p>
 
-<p><a class='h2 anchor' href='#get_attachment' name='get_attachment'>Get an attachment</a></p>
+<div id='get_attachment'><a class='h2 anchor' href='#get_attachment' name='get_attachment'>Get an attachment</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">getAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -655,7 +656,7 @@ on the CouchDB wiki for details.</p>
 
 <p>You can specify <code>attachments: true</code> to most read operations. The attachment data will then be included inlined in the resulting list of docs.</p>
 
-<p><a class='h2 anchor' href='#delete_attachment' name='delete_attachment'>Delete an attachment</a></p>
+<div id='delete_attachment'><a class='h2 anchor' href='#delete_attachment' name='delete_attachment'>Delete an attachment</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">removeAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -678,23 +679,32 @@ on the CouchDB wiki for details.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#query_database' name='query_database'>Query the database</a></p>
+<div id='query_database'><a class='h2 anchor' href='#query_database' name='query_database'>Query the database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">fun</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
 
-<p>Retrieve a view, which allows you to perform more complex queries on PouchDB. The <a href="http://docs.couchdb.org/en/latest/couchapp/views/intro.html">CouchDB documentation for map reduce</a> applies to PouchDB.</p>
+<p>Retrieves a view, which allows you to perform more complex queries on PouchDB. The <a href="http://docs.couchdb.org/en/latest/couchapp/views/intro.html">CouchDB documentation for map/reduce</a> applies to PouchDB.</p>
+
+<p>Since views perform a full scan of all documents, this method may be slow, unless you first save your view in a design document.</p>
 
 <h3>Options</h3>
 
 <p>All options default to <code>false</code> unless otherwise specified.</p>
 
 <ul>
-<li><code>fun</code>: Name of an existing view, the map function itself, or a full CouchDB-style mapreduce object: <code>{map : ..., reduce: ...}</code>.</li>
+<li><code>fun</code>: Map/reduce function, which can be one of the following: 
+
+<ul>
+<li>A map function by itself (no reduce).</li>
+<li>A full CouchDB-style map/reduce object: <code>{map : ..., reduce: ...}</code>.</li>
+<li>The name of a view in an existing design document (e.g. <code>&#39;myview&#39;</code> or <code>&#39;mydesigndoc/myview&#39;</code>).</li>
+</ul></li>
 <li><code>options.reduce</code>: Reduce function, or the string name of a built-in function: <code>&#39;_sum&#39;</code>, <code>&#39;_count&#39;</code>, or <code>&#39;_stats&#39;</code>.  Defaults to <code>false</code> (no reduce).
 
 <ul>
 <li>Tip: if you&#39;re not using a built-in, <a href="http://youtu.be/BKQ9kXKoHS8?t=865s">you&#39;re probably doing it wrong</a>.</li>
+<li>On local databases, <code>rereduce</code> will always be <code>false</code> (since it&#39;s single-node).</li>
 </ul></li>
 <li><code>options.include_docs</code>: Include the document in each row in the <code>doc</code> field.
 
@@ -702,19 +712,31 @@ on the CouchDB wiki for details.</p>
 <li><code>options.conflicts</code>: Include conflicts in the <code>_conflicts</code> field of a doc.</li>
 <li><code>options.attachments</code>: Include attachment data.</li>
 </ul></li>
-<li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get documents with keys in a certain range (inclusive/inclusive).</li>
-<li><code>options.descending</code>: Reverse the order of the output documents.</li>
-<li><code>options.key</code>: Only return rows matching this string key.</li>
-<li><code>options.keys</code>: Array of string keys to fetch in a single shot.
+<li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get rows with keys in a certain range (inclusive/inclusive).</li>
+<li><code>options.limit</code>: Maximum number of rows to return.</li>
+<li><code>options.skip</code>: Number of rows to skip before returning (warning: poor performance on IndexedDB/LevelDB!).</li>
+<li><code>options.descending</code>: Reverse the order of the output rows.</li>
+<li><code>options.key</code>: Only return rows matching this key.</li>
+<li><code>options.keys</code>: Array of keys to fetch in a single shot.
 
 <ul>
 <li>Neither <code>startkey</code> nor <code>endkey</code> can be specified with this option.</li>
 <li>The rows are returned in the same order as the supplied <code>keys</code> array.</li>
 <li>The row for a deleted document will have the revision ID of the deletion, and an extra key <code>&quot;deleted&quot;:true</code> in the <code>value</code> property.</li>
 <li>The row for a nonexistent document will just contain an <code>&quot;error&quot;</code> property with the value <code>&quot;not_found&quot;</code>.</li>
-<li>For details, see the <a href="http://wiki.apache.org/couchdb/HTTP_view_API#Querying_Options">CouchDB query options documentation</a>.</li>
+</ul></li>
+<li><code>options.group</code>: True if you want the reduce function to group results by keys, rather than returning a single result. Defaults to <code>false</code>. </li>
+<li><code>options.group_level</code>: Number of elements in a key to group by, assuming the keys are arrays. Defaults to the full length of the array.</li>
+<li><code>options.stale</code>: One of <code>&#39;ok&#39;</code> or <code>&#39;update_after&#39;</code>.  Only applies to saved views. Can be one of:
+
+<ul>
+<li>unspecified (default): Returns the latest results, waiting for the view to build if necessary.</li>
+<li><code>&#39;ok&#39;</code>: Returns results immediately, even if they&#39;re out-of-date.</li>
+<li><code>&#39;update_after&#39;</code>: Returns results immediately, but kicks off a build afterwards.</li>
 </ul></li>
 </ul>
+
+<p>For details, see the <a href="http://wiki.apache.org/couchdb/HTTP_view_API#Querying_Options">CouchDB query options documentation</a>.</p>
 
 <h4>Example Usage:</h4>
 
@@ -730,6 +752,7 @@ on the CouchDB wiki for details.</p>
 <h4>Example Response:</h4>
 
 <div class="highlight"><pre><code class="js"><span class="p">{</span>
+  <span class="s2">&quot;offset&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[{</span>
     <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;0B3358C1-BA4B-4186-8795-9024203EB7DD&quot;</span><span class="p">,</span>
     <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;Cony Island Baby&quot;</span><span class="p">,</span>
@@ -746,11 +769,124 @@ on the CouchDB wiki for details.</p>
     <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;mydoc&quot;</span><span class="p">,</span>
     <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;Rock and Roll Heart&quot;</span><span class="p">,</span>
     <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kc">null</span>
-  <span class="p">}]</span>
+  <span class="p">}],</span>
+  <span class="s2">&quot;total_rows&quot;</span> <span class="o">:</span> <span class="mi">4</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>If u pass a function to <code>db.query</code> and give it the <code>emit</code> function as the second argument, then you can use a closure. (Otherwise we have to use <code>eval()</code> to bind <code>emit</code>.)</p>
+<h4>Complex keys</h4>
+
+<p>You can also use <a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Complex_Keys">complex keys</a> for fancy ordering:</p>
+
+<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// sort by last name, first name, and age</span>
+  <span class="nx">emit</span><span class="p">([</span><span class="nx">doc</span><span class="p">.</span><span class="nx">lastName</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">age</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span>
+</code></pre></div>
+
+<h4>Example Response:</h4>
+
+<div class="highlight"><pre><code class="js"><span class="p">{</span>
+    <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;bowie&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Bowie&quot;</span><span class="p">,</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="mi">67</span><span class="p">]</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;dylan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Dylan&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">72</span><span class="p">]</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;younger_dylan&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Dylan&quot;</span><span class="p">,</span> <span class="s2">&quot;Jakob&quot;</span><span class="p">,</span> <span class="mi">44</span><span class="p">]</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;hank_the_third&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Williams&quot;</span><span class="p">,</span> <span class="s2">&quot;Hank&quot;</span><span class="p">,</span> <span class="mi">41</span><span class="p">]</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;hank&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Williams&quot;</span><span class="p">,</span> <span class="s2">&quot;Hank&quot;</span><span class="p">,</span> <span class="mi">91</span><span class="p">]</span>
+      <span class="p">}],</span>
+    <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Tips:</strong> </p>
+
+<ul>
+<li>CouchDB sorts objects last, so <code>{startkey: [&#39;Williams&#39;], endkey: [&#39;Williams&#39;, {}]}</code> would return all people with the last name <code>&#39;Williams&#39;</code>.</li>
+<li><code>group_level</code> can be very helpful when working with complex keys.  In the example above, you can use <code>{group_level: 1}</code> or group by last name, or <code>{group_level: 2}</code> to group by last and first name. </li>
+</ul>
+
+<h4>Linked documents</h4>
+
+<p>PouchDB fully supports <a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Linked_documents">linked documents</a>. Use them to join two types of documents together, by simply adding an <code>_id</code> to the emitted value:</p>
+
+<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// join artist data to albums</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;album&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">artistId</span><span class="p">,</span> <span class="nx">albumYear</span> <span class="o">:</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">year</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="p">{</span><span class="nx">include_docs</span> <span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span>
+</code></pre></div>
+
+<h4>Example response:</h4>
+
+<div class="highlight"><pre><code class="js"><span class="p">{</span>
+    <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;doc&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;bowie&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-fdb234b78904a5c8293f2acf4be70d44&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span>
+                <span class="s2">&quot;firstName&quot;</span><span class="o">:</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;lastName&quot;</span><span class="o">:</span> <span class="s2">&quot;Bowie&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_hunkydory&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;Hunky Dory&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_hunkydory&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;albumYear&quot;</span><span class="o">:</span> <span class="mi">1971</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;doc&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;bowie&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-fdb234b78904a5c8293f2acf4be70d44&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span>
+                <span class="s2">&quot;firstName&quot;</span><span class="o">:</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;lastName&quot;</span><span class="o">:</span> <span class="s2">&quot;Bowie&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_low&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_low&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;albumYear&quot;</span><span class="o">:</span> <span class="mi">1977</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;doc&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;bowie&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-fdb234b78904a5c8293f2acf4be70d44&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span>
+                <span class="s2">&quot;firstName&quot;</span><span class="o">:</span> <span class="s2">&quot;David&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;lastName&quot;</span><span class="o">:</span> <span class="s2">&quot;Bowie&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_spaceoddity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key&quot;</span><span class="o">:</span> <span class="s2">&quot;Space Oddity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;album_spaceoddity&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;albumYear&quot;</span><span class="o">:</span> <span class="mi">1969</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>Closures</h4>
+
+<p>If you pass a function to <code>db.query</code> and give it the <code>emit</code> function as the second argument, then you can use a closure. (Otherwise we have to use <code>eval()</code> to bind <code>emit</code>.)</p>
 
 <div class="highlight"><pre><code class="js"><span class="c1">// BAD! will throw error</span>
 <span class="kd">var</span> <span class="nx">myId</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
@@ -779,16 +915,9 @@ on the CouchDB wiki for details.</p>
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
 
-<p><strong>Notes:</strong></p>
+<p>Note that closures are only supported by local databases with temporary views.</p>
 
-<ol>
-<li>Local databases do not currently support view caching; everything is a live view.</li>
-<li><a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Linked_documents">Linked documents</a> (aka joins) are supported.<br></li>
-<li><a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Complex_Keys">Complex keys</a> are supported.  Use them for fancy ordering (e.g. <code>[firstName, lastName, isFemale]</code>).</li>
-<li>Closures are only supported by local databases. CouchDB still requires self-contained map/reduce functions.</li>
-</ol>
-
-<p><a class='h2 anchor' href='#database_information' name='database_information'>Get database information</a></p>
+<div id='database_information'><a class='h2 anchor' href='#database_information' name='database_information'>Get database information</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span>
 </code></pre></div>
@@ -809,7 +938,7 @@ on the CouchDB wiki for details.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#compaction' name='compaction'>Compact the database</a></p>
+<div id='compaction'><a class='h2 anchor' href='#compaction' name='compaction'>Compact the database</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">compact</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -820,7 +949,7 @@ on the CouchDB wiki for details.</p>
 <li><code>options.interval</code>: Number of milliseconds Pouch waits before asking again if compaction is already done. Only for http adapter.</li>
 </ul>
 
-<p><a class='h2 anchor' href='#revisions_diff' name='revisions_diff'>Document revisions diff</a></p>
+<div id='revisions_diff'><a class='h2 anchor' href='#revisions_diff' name='revisions_diff'>Document revisions diff</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">revsDiff</span><span class="p">(</span><span class="nx">diff</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
@@ -847,7 +976,7 @@ to revisions stored in the database. Primarily used in replication.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#events' name='events'>Events</a></p>
+<div id='events'><a class='h2 anchor' href='#events' name='events'>Events</a></div>
 
 <p>PouchDB is an <a href="http://nodejs.org/api/events.html#events_class_events_eventemitter">event emiter</a> and will emit a <code>&#39;created&#39;</code> event when a database is created. A <code>&#39;destroy&#39;</code> event is emited when a database is destroyed.</p>
 
@@ -859,7 +988,7 @@ to revisions stored in the database. Primarily used in replication.</p>
 <span class="p">});</span>
 </code></pre></div>
 
-<p><a class='h2 anchor' href='#plugins' name='plugins'>Plugins</a></p>
+<div id='plugins'><a class='h2 anchor' href='#plugins' name='plugins'>Plugins</a></div>
 
 <p>Writing a plugin is easy! The API is:</p>
 
@@ -892,14 +1021,62 @@ to revisions stored in the database. Primarily used in replication.</p>
 </article>
 
 
+    <div class="icons">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://twitter.com/pouchdb'>
+              <div class="icon icon-twitter"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://www.browserstack.com/'>
+              <div class="icon icon-browserstack"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://github.com/pouchdb/pouchdb'>
+              <div class="icon icon-github"></div>
+            </a>
+            </div>
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://travis-ci.org/pouchdb/pouchdb'>
+              <div class="icon icon-travis"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://couchdb.apache.org/'>
+              <div class="icon icon-couchdb"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://saucelabs.com'>
+              <div class="icon icon-saucelabs"></div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     <footer>
 
       <div class="container">
 
         <div class="row">
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Learn</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Learn</h3>
             <ul class='nav nav-silent'>
               <li><a href="/getting-started.html">Getting Started</a></li>
               <li><a href="/api.html">API Guide</a></li>
@@ -907,8 +1084,8 @@ to revisions stored in the database. Primarily used in replication.</p>
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Discuss</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Discuss</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
               <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
@@ -917,8 +1094,8 @@ to revisions stored in the database. Primarily used in replication.</p>
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Contribute</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Contribute</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
               <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>

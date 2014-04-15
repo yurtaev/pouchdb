@@ -21,9 +21,13 @@
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#sidebar">
 
     <header>
+
+      <a href="https://github.com/pouchdb/pouchdb" target="_blank">
+         <div class="ribbon">GitHub</div>
+      </a>
 
       <div class="container">
 
@@ -37,7 +41,7 @@
             <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
           </li>
           <li>
-            <a class='btn btn-link btn-lg' href="/api.html">Docs</a>
+            <a class='btn btn-link btn-lg' href="/api.html">API</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
@@ -53,7 +57,7 @@
     
 
 
-    <div class="ui-intro">
+    <div class="intro">
 
   <div class="container">
 
@@ -75,22 +79,22 @@
       <div class='col-sm-6'>
 
   
-<div class="highlight"><pre><code class="js"><span class="lineno"> 1</span>   <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
-<span class="lineno"> 2</span> 
-<span class="lineno"> 3</span>   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
-<span class="lineno"> 4</span>    <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
-<span class="lineno"> 5</span>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span>
-<span class="lineno"> 6</span>    <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span>
-<span class="lineno"> 7</span>   <span class="p">});</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span>   <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
-<span class="lineno">10</span>     <span class="nx">onChange</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno">11</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ch-Ch-Changes&#39;</span><span class="p">);</span>
-<span class="lineno">12</span>     <span class="p">}</span>
-<span class="lineno">13</span>   <span class="p">});</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>   <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span>
-<span class="lineno">16</span>   
+<div class="highlight"><pre><code class="js">  <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+
+  <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
+   <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
+   <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span>
+   <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span>
+  <span class="p">});</span>
+
+  <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
+    <span class="nx">onChange</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ch-Ch-Changes&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span>
+  
 </code></pre></div>
 
 
@@ -102,20 +106,25 @@
 
 </div>
 
-<div class="ui-infoblocks">
+<div class="infoblocks">
 
   <div class="container">
 
     <div class='row'>
 
-      <div class='col-xs-6 col-md-3'>
+
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-node"></div>
 
         <h3>Cross Browser</h3>
         <p>Works in Firefox, Chrome, Opera, Safari, IE and Node.js</p>
 
       </div>
 
-      <div class='col-xs-6 col-md-3'>
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-light"></div>
 
         <h3>Lightweight</h3>
         <p>PouchDB is just a script tag and 25KB (gzipped) away in the browser, or <code>$ npm install pouchdb</code> away
@@ -123,14 +132,18 @@
 
       </div>
 
-      <div class='col-xs-6 col-md-3'>
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-learn"></div>
 
         <h3>Easy to Learn</h3>
         <p>Requires some programming knowledge, however PouchDB is a piece of cake to learn.</p>
 
       </div>
 
-      <div class='col-xs-6 col-md-3'>
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-open"></div>
 
         <h3>Open Source</h3>
         <p>Everything is developed out in the open on Github, contributors always welcome!</p>
@@ -138,11 +151,180 @@
       </div>
 
     </div>
-
   </div>
 
 </div>
 
+<div class="blog">
+
+  <div class="container">
+
+    <h3>Latest</h3>
+
+        <div class="row">
+
+
+
+<div class="col-md-6">
+
+
+  <p><a class='h4' href='/2014/04/14/pagination-strategies-with-pouchdb.html'>Pagination strategies with PouchDB</a></p>
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+    
+    
+      
+    
+  
+
+  
+
+  
+
+
+
+
+<div class="post">
+  <div class="media">
+    <a class="pull-left" href="#">
+    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/c436dec61b906e27c963518d0ef1d972' alt='Nolan Lawson'>
+    </a>
+    <div class="media-body">
+    <p>
+      <strong>By:</strong> <a href="https://twitter.com/nolanlawson">Nolan Lawson</a><br>
+      <strong>Published:</strong> 14 April 2014<br>
+      
+        PouchDB, like CouchDB, was designed to store large amounts of data. However, once you're dealing with hundreds, thousands, or even millions of documents in a single database&hellip;
+      
+              
+        <a href='/2014/04/14/pagination-strategies-with-pouchdb.html'>[...]</a>
+      
+    </p>
+    </div>
+  </div>
+</div>
+
+<p></div></p>
+
+<div class="col-md-6">
+
+
+  <p><a class='h4' href='/2014/04/01/welcome-to-the-pouchdb-blog.html'>Welcome to the PouchDB blog</a></p>
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    
+      
+    
+    
+      
+    
+  
+
+  
+
+
+
+
+<div class="post">
+  <div class="media">
+    <a class="pull-left" href="#">
+    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/030451d8cfc268d666bae9a7fe8d10ec' alt='Dale Harvey'>
+    </a>
+    <div class="media-body">
+    <p>
+      <strong>By:</strong> <a href="https://twitter.com/daleharvey">Dale Harvey</a><br>
+      <strong>Published:</strong> 01 April 2014<br>
+      
+        <p>Hello World! Welcome to the newly formed PouchDB blog. PouchDB has been an active community for over 2 years now, with almost everything being run via IRC and Github. As...
+      
+              
+        <a href='/2014/04/01/welcome-to-the-pouchdb-blog.html'>[...]</a>
+      
+    </p>
+    </div>
+  </div>
+</div>
+
+<p></div></p>
+
+<p></div></p>
+
+<p><a class="btn btn-primary btn-lg" href="/blog.html">View more</a></p>
+
+<p></div></p>
+
+<p></div></p>
+
+
+    <div class="icons">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://twitter.com/pouchdb'>
+              <div class="icon icon-twitter"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://www.browserstack.com/'>
+              <div class="icon icon-browserstack"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://github.com/pouchdb/pouchdb'>
+              <div class="icon icon-github"></div>
+            </a>
+            </div>
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://travis-ci.org/pouchdb/pouchdb'>
+              <div class="icon icon-travis"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://couchdb.apache.org/'>
+              <div class="icon icon-couchdb"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://saucelabs.com'>
+              <div class="icon icon-saucelabs"></div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
     <footer>
 
@@ -150,8 +332,8 @@
 
         <div class="row">
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Learn</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Learn</h3>
             <ul class='nav nav-silent'>
               <li><a href="/getting-started.html">Getting Started</a></li>
               <li><a href="/api.html">API Guide</a></li>
@@ -159,8 +341,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Discuss</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Discuss</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
               <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
@@ -169,8 +351,8 @@
             </ul>
           </div>
 
-          <div class='col-xs-4 col-md-3'>
-            <h3>Contribute</h3>
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Contribute</h3>
             <ul class='nav nav-silent'>
               <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
               <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>
