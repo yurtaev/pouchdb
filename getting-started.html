@@ -47,7 +47,7 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.1.0/pouchdb-2.1.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.0/pouchdb-2.2.0.min.js">Download</a>
           </li>
         </ul>
 
@@ -108,7 +108,7 @@
 
 <p>Open <code>index.html</code> and include PouchDB in the app by adding a script tag:</p>
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdn.jsdelivr.net/pouchdb/2.1.0/pouchdb.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdn.jsdelivr.net/pouchdb/2.2.0/pouchdb.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/base.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div>
@@ -171,9 +171,8 @@
 <span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
     <span class="nx">since</span><span class="o">:</span> <span class="nx">info</span><span class="p">.</span><span class="nx">update_seq</span><span class="p">,</span>
-    <span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">onChange</span><span class="o">:</span> <span class="nx">showTodos</span>
-  <span class="p">});</span>
+    <span class="nx">live</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">showTodos</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// We have to create a new todo document and enter it in the database</span>
@@ -253,13 +252,13 @@
 
 <div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">sync</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">syncDom</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-sync-state&#39;</span><span class="p">,</span> <span class="s1">&#39;syncing&#39;</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">complete</span><span class="o">:</span> <span class="nx">syncError</span><span class="p">};</span>
-  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
-  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">};</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">syncError</span><span class="p">);</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">syncError</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><code>db.replicate()</code> tells PouchDB to transfer all the documents <code>to</code> or <code>from</code> the <code>remoteCouch</code>. This can either be a string identifier or a PouchDB object. We call this twice: once to receive remote updates, and once to push local changes. Again, the <code>live</code> flag is used to tell PouchDB to carry on doing this indefinitely. The <code>complete</code> callback will be called whenever this finishes. For live replication, this will mean an error has occured, like losing your connection.</p>
+<p><code>db.replicate()</code> tells PouchDB to transfer all the documents <code>to</code> or <code>from</code> the <code>remoteCouch</code>. This can either be a string identifier or a PouchDB object. We call this twice: once to receive remote updates, and once to push local changes. Again, the <code>live</code> flag is used to tell PouchDB to carry on doing this indefinitely. The callback will be called whenever this finishes. For live replication, this will mean an error has occured, like losing your connection or you canceled the replication.</p>
 
 <p>You should be able to open <a href="http://127.0.0.1:8000">the todo app</a> in another browser and see that the two lists stay in sync with any changes you make to them. You may also want to look at your CouchDB&#39;s Futon administration page and see the populated database.</p>
 

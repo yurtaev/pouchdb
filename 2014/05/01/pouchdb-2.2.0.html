@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PouchDB, the JavaScript Database that Syncs!</title>
+    <title>PouchDB 2.2.0</title>
     <link rel="stylesheet" href="/static/css/pouchdb.css" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -55,172 +55,24 @@
 
     </header>
     
+      <div class="page-head">
 
+        <div class="container">
 
-    <div class="intro">
+          <h1>PouchDB 2.2.0</h1>
+          
 
-  <div class="container">
-
-    <div class="row">
-
-      <div class='col-sm-6'>
-
-        <h1>The Database that Syncs!</h1>
-
-        <p>PouchDB is an open-source JavaScript database inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a> that is designed to run well within the browser.</p>
-
-        <p>PouchDB was created to help web developers build applications that work as well offline as they do online.<br>
-        <p>It enables applications to store data locally while offline, then synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
-
-        <a href="/learn.html" class="btn btn-primary btn-lg">Learn more</a>
+        </div>
 
       </div>
-
-      <div class='col-sm-6'>
-
-  
-<div class="highlight"><pre><code class="js">  <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
-
-  <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
-   <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
-   <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span>
-   <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span>
-  <span class="p">});</span>
-
-  <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ch-Ch-Changes&#39;</span><span class="p">);</span>
-  <span class="p">});</span>
-
-  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span>
-  
-</code></pre></div>
-
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div class="infoblocks">
-
-  <div class="container">
-
-    <div class='row'>
-
-
-      <div class='block col-sm-6 col-md-3'>
-
-        <div class="icon icon-node"></div>
-
-        <h3>Cross Browser</h3>
-        <p>Works in Firefox, Chrome, Opera, Safari, IE and Node.js</p>
-
-      </div>
-
-      <div class='block col-sm-6 col-md-3'>
-
-        <div class="icon icon-light"></div>
-
-        <h3>Lightweight</h3>
-        <p>PouchDB is just a script tag and 34KB (gzipped) away in the browser, or <code>$ npm install pouchdb</code> away
-        in Node.</p>
-
-      </div>
-
-      <div class='block col-sm-6 col-md-3'>
-
-        <div class="icon icon-learn"></div>
-
-        <h3>Easy to Learn</h3>
-        <p>Requires some programming knowledge, however PouchDB is a piece of cake to learn.</p>
-
-      </div>
-
-      <div class='block col-sm-6 col-md-3'>
-
-        <div class="icon icon-open"></div>
-
-        <h3>Open Source</h3>
-        <p>Everything is developed out in the open on Github, contributors always welcome!</p>
-
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="blog">
-
-  <div class="container">
-
-    <h3>Latest</h3>
-
-        <div class="row">
-
-
-
-<div class="col-md-6">
-
-
-  <p><a class='h4' href='/2014/05/01/secondary-indexes-have-landed-in-pouchdb.html'>Secondary indexes have landed in PouchDB</a></p>
-
-
-
-
-
-
-
-
-  
-
-  
     
+
+
+    <article class='container'>
+  <div class='row'>
+    <div class='col-md-offset-1 col-md-10'>
       
-    
-    
-      
-    
   
-
-  
-
-  
-
-
-
-
-<div class="post">
-  <div class="media">
-    <a class="pull-left" href="#">
-    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/c436dec61b906e27c963518d0ef1d972' alt='Nolan Lawson'>
-    </a>
-    <div class="media-body">
-    <p>
-      <strong>By:</strong> <a href="https://twitter.com/nolanlawson">Nolan Lawson</a><br>
-      <strong>Published:</strong> 01 May 2014<br>
-      
-        <p>With the release of PouchDB 2.2.0, we&#39;re happy to introduce a feature that&#39;s been cooking on the slow simmer for some time: secondary indexes, a.k.a. persistent map/reduce.</p>
-
-      
-              
-        <a href='/2014/05/01/secondary-indexes-have-landed-in-pouchdb.html'>[...]</a>
-      
-    </p>
-    </div>
-  </div>
-</div>
-
-<p></div></p>
-
-<div class="col-md-6">
-
-
-  <p><a class='h4' href='/2014/05/01/pouchdb-2.2.0.html'>PouchDB 2.2.0</a></p>
-
 
 
 
@@ -256,25 +108,42 @@
       <strong>By:</strong> <a href="https://twitter.com/daleharvey">Dale Harvey</a><br>
       <strong>Published:</strong> 01 May 2014<br>
       
-        <p><a href="https://github.com/daleharvey/pouchdb/releases/tag/2.2.0">PouchDB 2.2.0</a> is now released! Please <a href="https://github.com/daleharvey/pouchdb/issues">file issues</a> or <a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md#get-in-touch">tell us what you think</a>. We would also like to give a huge thanks to our <a href="https://github.com/daleharvey/pouchdb/graphs/contributors?from=2014-04-01&amp;to=2014-05-01">new...
-      
-              
-        <a href='/2014/05/01/pouchdb-2.2.0.html'>[...]</a>
       
     </p>
     </div>
   </div>
 </div>
 
-<p></div></p>
+      <p><a href="https://github.com/daleharvey/pouchdb/releases/tag/2.2.0">PouchDB 2.2.0</a> is now released! Please <a href="https://github.com/daleharvey/pouchdb/issues">file issues</a> or <a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md#get-in-touch">tell us what you think</a>. We would also like to give a huge thanks to our <a href="https://github.com/daleharvey/pouchdb/graphs/contributors?from=2014-04-01&amp;to=2014-05-01">new and existing contributors</a>.</p>
+
+<div class="alert alert-warning">
+
+
+<div class="alert-text">
+We have removed the ES5 shims from PouchDB. If you require support for older browsers, it can be included from <a href='https://github.com/es-shims/es5-shim'>https://github.com/es-shims/es5-shim</a>.
+</div>
 
 <p></div></p>
 
-<p><a class="btn btn-primary btn-lg" href="/blog.html">View more</a></p>
+<h3>Major Changes:</h3>
 
-<p></div></p>
+<ul>
+<li>Fix replication for large databases (<a href="https://github.com/pouchdb/pouchdb/issues/1954">#1954</a>)</li>
+<li>Persistent map/reduce (<a href="https://github.com/pouchdb/pouchdb/issues/1658">#1658</a>)</li>
+<li>Fix experimental <code>.sync()</code> API (<a href="https://github.com/pouchdb/pouchdb/issues/1696">#1696</a>)</li>
+<li><code>.replication()</code> API switched to an <code>EventEmitter</code> (<a href="https://github.com/pouchdb/pouchdb/issues/1916">#1916</a>)</li>
+<li><code>.changes()</code> API switched to an <code>EventEmitter</code> (<a href="http://github.com/daleharvey/pouchdb/issues/1768">#1768</a>)</li>
+<li>Experimental LevelDB-based LocalStorage adapter (<a href="http://github.com/daleharvey/pouchdb/issues/44">#44</a>)</li>
+<li>Performance improvements (<a href="http://github.com/daleharvey/pouchdb/issues/1869">#1869</a>, <a href="http://github.com/daleharvey/pouchdb/issues/1871">#1871</a>, <a href="https://github.com/pouchdb/pouchdb/pull/1889">#1889</a>, <a href="https://github.com/pouchdb/pouchdb/pull/1897">#1897</a>, <a href="https://github.com/pouchdb/pouchdb/issues/1990">#1990</a>)</li>
+<li>Remove ES5 shims (<a href="http://github.com/daleharvey/pouchdb/issues/1753">#1753</a>)</li>
+<li>Performance tests (<a href="http://github.com/daleharvey/pouchdb/issues/113">#113</a>)</li>
+</ul>
 
-<p></div></p>
+<h6><a href="https://github.com/daleharvey/pouchdb/compare/2.1.0...2.2.0">Complete list of changes</a></h6>
+
+        </div>
+  </div>
+</article>
 
 
     <div class="icons">
