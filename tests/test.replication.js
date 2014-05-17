@@ -112,6 +112,21 @@ adapters.forEach(function (adapters) {
       });
     });
 
+    it('Test basic push replication take 3', function (done) {
+      var db = new PouchDB(dbs.name);
+      db.put({_id: 'whatever'}, {}).then(function () {
+        db.replicate.to(dbs.remote).on('error', function (err) {
+          should.not.exist(err);
+        }).on('complete', function () {
+          var remote = new PouchDB(dbs.remote);
+          remote.info().then(function (info) {
+            info.doc_count.should.equal(1);
+            done();
+          }).catch(done);
+        });
+      }).catch(done);
+    });
+
     it('Test basic push replication sequence tracking', function (done) {
       var db = new PouchDB(dbs.name);
       var doc1 = {_id: 'adoc', foo: 'bar'};
