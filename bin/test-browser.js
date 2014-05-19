@@ -12,6 +12,8 @@ var request = require('request').defaults({json: true});
 var devserver = require('./dev-server.js');
 
 var SELENIUM_PATH = '../vendor/selenium-server-standalone-2.38.0.jar';
+var SELENDROID_PATH =
+    '../vendor/selendroid-standalone-0.10.0-with-dependencies.jar';
 var SELENIUM_HUB = 'http://localhost:4444/wd/hub/status';
 
 var testTimeout = 30 * 60 * 1000;
@@ -29,7 +31,7 @@ var client = {
   platform: tmp[3] || null
 };
 
-var testRoot = 'http://127.0.0.1:8000/tests/';
+var testRoot = 'http://10.0.2.2:8000/tests/';
 var testUrl = testRoot +
   (process.env.PERF ? 'performance/test.html' : 'test.html');
 var qs = {};
@@ -111,7 +113,13 @@ function testComplete(result) {
 function startSelenium(callback) {
 
   // Start selenium
-  spawn('java', ['-jar', path.resolve(__dirname, SELENIUM_PATH)], {});
+  if (client.browser === 'android') {
+    spawn('java', ['-jar', path.resolve(__dirname, SELENDROID_PATH),
+        '-verbose'], {});
+  } else {
+    spawn('java', ['-jar', path.resolve(__dirname, SELENIUM_PATH)], {});
+  }
+
 
   var retries = 0;
   var started = function () {
