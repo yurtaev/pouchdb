@@ -47,7 +47,7 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.0/pouchdb-2.2.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.2/pouchdb-2.2.2.min.js">Download</a>
           </li>
         </ul>
 
@@ -88,6 +88,7 @@
 <li><a href="#get_attachment">Get attachment</a></li>
 <li><a href="#delete_attachment">Delete attachment</a></li>
 <li><a href="#query_database">Query database</a></li>
+<li><a href="#view_cleanup">View cleanup</a></li>
 <li><a href="#database_information">Database info</a></li>
 <li><a href="#compaction">Compaction</a></li>
 <li><a href="#revisions_diff">Revision diff</a></li>
@@ -423,6 +424,7 @@
 <li><code>options.attachments</code>: Include attachment data.</li>
 </ul></li>
 <li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get documents with IDs in a certain range (inclusive/inclusive).</li>
+<li><code>options.inclusive_end</code>: Include documents having an ID equal to the given <code>options.endkey</code>. Default: <code>true</code>.</li>
 <li><code>options.limit</code>: Maximum number of documents to return.</li>
 <li><code>options.skip</code>: Number of docs to skip before returning (warning: poor performance on IndexedDB/LevelDB!).</li>
 <li><code>options.descending</code>: Reverse the order of the output documents.</li>
@@ -488,7 +490,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 </ul></li>
 <li><code>options.descending</code>: Reverse the order of the output documents.</li>
 <li><code>options.filter</code>: Reference a filter function from a design document to selectively get updates.</li>
-<li><code>options.since</code>: Start the results from the change immediately after the given sequence number, you can also pass &#39;latest&#39; if you want only new changes.</li>
+<li><code>options.since</code>: Start the results from the change immediately after the given sequence number, you can also pass &#39;now&#39; if you want only new changes.</li>
 <li><code>options.live</code>: Use <em>longpoll</em> feed. </li>
 <li><code>options.limit</code>: Limit the number of results to this number.</li>
 <li><code>options.style</code>: Specifies how many revisions are returned in the changes array. The default, main<em>only, will only return the current &quot;winning&quot; revision; all</em>docs will return all leaf revisions (including conflicts and deleted former conflicts).</li>
@@ -560,7 +562,12 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <span class="p">}</span>
 </code></pre></div>
 
-<p><strong>Note:</strong> The <code>changes()</code> method was not an event emitter before PouchDB 2.2.0, and instead of the <code>&#39;change&#39;</code> and <code>&#39;complete&#39;</code> events it took <code>complete</code> and <code>onChange</code> function options. This is deprecated and could be removed in PouchDB version 3.</p>
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>The <code>changes()</code> method was not an event emitter before PouchDB 2.2.0, and instead of the <code>&#39;change&#39;</code> and <code>&#39;complete&#39;</code> events it took <code>complete</code> and <code>onChange</code> function options. This is deprecated and could be removed in PouchDB version 3.</li>
+<li>The <code>&#39;since&#39;</code>option formally took &#39;latest&#39; but has been changed to &#39;now&#39; to keep consistency with CouchDB, &#39;latest&#39; is deprecated but will still work to ensure backwards compatibility.</li>
+</ul>
 
 <div id='replication'><a class='h2 anchor' href='#replication' name='replication'>Replicate a database</a></div>
 
@@ -590,8 +597,13 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <h4>Example Usage:</h4>
 
 <div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">onComplete</span><span class="p">);</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle change</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle complete</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle error</span>
+  <span class="p">});</span>
 </code></pre></div>
 
 <p>There are also shorthands for replication given existing PouchDB objects. These behave the same as <code>PouchDB.replicate()</code>:</p>
@@ -603,14 +615,31 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <h4>Example Response:</h4>
 
+<p>Example response in the <code>&#39;change&#39;</code> listener:</p>
+
 <div class="highlight"><pre><code class="js"><span class="p">{</span>
-  <span class="s1">&#39;ok&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s1">&#39;docs_read&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s1">&#39;docs_written&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s1">&#39;start_time&#39;</span><span class="o">:</span> <span class="s2">&quot;Sun Sep 23 2012 08:14:45 GMT-0500 (CDT)&quot;</span><span class="p">,</span>
-  <span class="s1">&#39;end_time&#39;</span><span class="o">:</span> <span class="s2">&quot;Sun Sep 23 2012 08:14:45 GMT-0500 (CDT)&quot;</span><span class="p">,</span>
-  <span class="s1">&#39;status&#39;</span><span class="o">:</span> <span class="s1">&#39;complete&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;errors&#39;</span><span class="o">:</span> <span class="p">[]</span>
+  <span class="s2">&quot;doc_write_failures&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
+  <span class="s2">&quot;docs_read&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
+  <span class="s2">&quot;docs_written&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
+  <span class="s2">&quot;errors&quot;</span><span class="o">:</span> <span class="p">[],</span> 
+  <span class="s2">&quot;last_seq&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
+  <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> 
+  <span class="s2">&quot;start_time&quot;</span><span class="o">:</span> <span class="s2">&quot;Fri May 16 2014 18:23:12 GMT-0700 (PDT)&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Example response in the <code>&#39;complete&#39;</code> listener:</p>
+
+<div class="highlight"><pre><code class="js"><span class="p">{</span>
+  <span class="s2">&quot;doc_write_failures&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
+  <span class="s2">&quot;docs_read&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
+  <span class="s2">&quot;docs_written&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
+  <span class="s2">&quot;end_time&quot;</span><span class="o">:</span> <span class="s2">&quot;Fri May 16 2014 18:26:00 GMT-0700 (PDT)&quot;</span><span class="p">,</span> 
+  <span class="s2">&quot;errors&quot;</span><span class="o">:</span> <span class="p">[],</span> 
+  <span class="s2">&quot;last_seq&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
+  <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> 
+  <span class="s2">&quot;start_time&quot;</span><span class="o">:</span> <span class="s2">&quot;Fri May 16 2014 18:26:00 GMT-0700 (PDT)&quot;</span><span class="p">,</span> 
+  <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="s2">&quot;complete&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -637,7 +666,8 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">onComplete</span><span class="p">);</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">onComplete</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
 </code></pre></div>
 
 <p>There is also a shorthand for syncing given existing PouchDB objects. This behaves the same as <code>PouchDB.sync()</code>:</p>
@@ -771,6 +801,7 @@ on the CouchDB wiki for details.</p>
 <li><code>options.attachments</code>: Include attachment data.</li>
 </ul></li>
 <li><code>options.startkey</code> &amp; <code>options.endkey</code>: Get rows with keys in a certain range (inclusive/inclusive).</li>
+<li><code>options.inclusive_end</code>: Include rows having a key equal to the given <code>options.endkey</code>. Default: <code>true</code>.</li>
 <li><code>options.limit</code>: Maximum number of rows to return.</li>
 <li><code>options.skip</code>: Number of rows to skip before returning (warning: poor performance on IndexedDB/LevelDB!).</li>
 <li><code>options.descending</code>: Reverse the order of the output rows.</li>
@@ -977,6 +1008,29 @@ on the CouchDB wiki for details.</p>
 
 <p>Note that closures are only supported by local databases with temporary views.</p>
 
+<div id='view_cleanup'><a class='h2 anchor' href='#view_cleanup' name='view_cleanup'>View cleanup</a></div>
+
+<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
+</code></pre></div>
+
+<p>Cleans up any stale map/reduce indexes.</p>
+
+<p>As design docs are deleted or modified, their associated index files (in CouchDB) or companion databases (in local PouchDBs) continue to take up space on disk. <code>viewCleanup()</code> removes these unnecessary index files.</p>
+
+<p>See <a href="http://couchdb.readthedocs.org/en/latest/maintenance/compaction.html#views-cleanup">the CouchDB documentation on view cleanup</a> for details.</p>
+
+<h4>Example Usage:</h4>
+
+<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
+</code></pre></div>
+
+<h4>Example Response:</h4>
+
+<div class="highlight"><pre><code class="js"><span class="p">{</span>
+  <span class="s2">&quot;ok&quot;</span> <span class="o">:</span> <span class="s2">&quot;true&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <div id='database_information'><a class='h2 anchor' href='#database_information' name='database_information'>Get database information</a></div>
 
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span>
@@ -1058,6 +1112,8 @@ to revisions stored in the database. Primarily used in replication.</p>
 </code></pre></div>
 
 <p>This will add the function as a method of all databases with the given method name.  It will always be called in context, so that <code>this</code> always refers to the database object.</p>
+
+<p>We also offer a <a href="https://github.com/pouchdb/plugin-seed">PouchDB Plugin Seed project</a>, which is the fastest way to get started writing, building and testing your very own plugin.</p>
 
 <h4>Example Usage:</h4>
 

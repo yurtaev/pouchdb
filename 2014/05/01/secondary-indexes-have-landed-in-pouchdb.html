@@ -47,7 +47,7 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.0/pouchdb-2.2.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.2/pouchdb-2.2.2.min.js">Download</a>
           </li>
         </ul>
 
@@ -333,7 +333,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
     <span class="nx">views</span><span class="o">:</span> <span class="p">{</span>
     <span class="p">}</span>
   <span class="p">};</span>
-  <span class="nx">ddoc</span><span class="p">.</span><span class="nx">views</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">mapFunction</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="nx">ddoc</span><span class="p">.</span><span class="nx">views</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">map</span><span class="o">:</span> <span class="nx">mapFunction</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="p">};</span>
   <span class="k">return</span> <span class="nx">ddoc</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -441,7 +441,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;artist_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;artist__&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>Want to list all the albums?  Try:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;albums_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;albums__&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album__&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>How about all albums by David Bowie?  Wham bam, thank you ma&#39;am:</p>
 <div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie__&#39;</span><span class="p">});</span>

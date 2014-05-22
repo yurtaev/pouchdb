@@ -47,7 +47,7 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.0/pouchdb-2.2.0.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.2/pouchdb-2.2.2.min.js">Download</a>
           </li>
         </ul>
 
@@ -86,7 +86,12 @@
         </div>
 
         <div class="col-sm-9">
-          <h3>PouchDB is throwing <code>InvalidStateError</code></h3>
+          <h3>PouchDB throws 404 (Object Not Found) for &#39;_local&#39; document</h3>
+
+<p>Don&#39;t worry, nothing is amiss, this is expected behaviour:
+During PouchDB&#39;s initial replication PouchDB will check for a checkpoint, if it doesn&#39;t exist a 404 will be returned and a checkpoint will subsequently be written.</p>
+
+<h3>PouchDB is throwing <code>InvalidStateError</code></h3>
 
 <p>Are you in private browsing mode? IndexedDB is <a href="https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB">disabled in private browsing mode</a> in Firefox.</p>
 
