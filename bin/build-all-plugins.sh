@@ -1,19 +1,16 @@
 #!/bin/sh
 
-LEVEL_BACKEND=pouchdb-memory \
-  OUTPUT_FILENAME=pouchdb.memory.js \
-  ./bin/build-plugin.sh
-
-LEVEL_BACKEND=pouchdb-localstorage \
-  OUTPUT_FILENAME=pouchdb.localstorage.js \
-  ./bin/build-plugin.sh
-
-LEVEL_BACKEND=pouchdb-idb-alt \
-  OUTPUT_FILENAME=pouchdb.idb-alt.js \
-  ./bin/build-plugin.sh
+plugins="memory localstorage idb-alt"
 
 UGLIFY=./node_modules/uglify-js/bin/uglifyjs
+BROWSERIFY=./node_modules/.bin/browserify
 
-$UGLIFY dist/pouchdb.memory.js -mc > dist/pouchdb.memory.min.js
-$UGLIFY dist/pouchdb.localstorage.js -mc > dist/pouchdb.localstorage.min.js
-$UGLIFY dist/pouchdb.idb-alt.js -mc > dist/pouchdb.idb-alt.min.js
+for plugin in $plugins; do
+  $BROWSERIFY lib/plugins/index.js \
+    -r pouchdb-${plugin}:adapter-plugin \
+    -o ./dist/pouchdb.${plugin}.js
+
+  $UGLIFY dist/pouchdb.${plugin}.js \
+    -mc > dist/pouchdb.${plugin}.min.js
+
+done
