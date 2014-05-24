@@ -11,7 +11,5 @@ if [ -z "$OUTPUT_FILENAME" ]; then
 fi
 
 ./node_modules/.bin/browserify lib/plugins/index.js \
-    -r $LEVEL_BACKEND:leveldown \
-    -r ./lib/plugins/migrate-browser.js:../deps/migrate \
-    -r ./lib/plugins/migrate-browser.js:../adapters/../deps/migrate \
+    -r $LEVEL_BACKEND:adapter-plugin \
     -o ./dist/$OUTPUT_FILENAME
