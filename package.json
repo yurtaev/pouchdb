@@ -85,7 +85,6 @@
     "./lib/deps/ajax.js": "./lib/deps/ajax-browser.js",
     "./lib/version.js": "./lib/version-browser.js",
     "./lib/adapters/preferredAdapters.js": "./lib/adapters/preferredAdapters-browser.js",
-    "./lib/deps/migrate.js": "./lib/deps/migrate-browser.js",
     "bluebird": "lie"
   },
   "browserify": {
