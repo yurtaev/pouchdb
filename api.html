@@ -47,7 +47,7 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.2/pouchdb-2.2.2.min.js">Download</a>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js">Download</a>
           </li>
         </ul>
 
@@ -576,7 +576,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <p>Replicate data from <code>source</code> to <code>target</code>.  Both the <code>source</code> and <code>target</code> can be a PouchDB instance or a string representing a CouchDB database url or the name a local PouchDB database. If <code>options.live</code> is <code>true</code>, then this will track future changes and also replicate them automatically.</p>
 
-<p>Replication is an event emiter like changes and emits the <code>complete</code>, <code>change</code>, and <code>error</code> events.</p>
+<p>Replication is an event emiter like <code>changes()</code> and emits the <code>&#39;complete&#39;</code>, <code>&#39;uptodate&#39;</code>, <code>&#39;change&#39;</code> and <code>&#39;error&#39;</code> events.</p>
 
 <h3>Options</h3>
 
@@ -601,6 +601,8 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
     <span class="c1">// handle change</span>
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle complete</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;uptodate&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle up-to-date</span>
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle error</span>
   <span class="p">});</span>
@@ -612,6 +614,13 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <span class="c1">// or</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
 </code></pre></div>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+<li>The <code>&#39;complete&#39;</code> event only fires when you aren&#39;t doing live replication, or when live replication fails.</li>
+<li>The <code>&#39;uptodate&#39;</code> event fires during live replication, when the target database is up-to-date and just idling, waiting for new changes.</li>
+</ul>
 
 <h4>Example Response:</h4>
 
@@ -1051,6 +1060,14 @@ on the CouchDB wiki for details.</p>
   <span class="s2">&quot;update_seq&quot;</span><span class="o">:</span> <span class="mi">5</span>
 <span class="p">}</span>
 </code></pre></div>
+
+<p><strong>Response object:</strong></p>
+
+<ul>
+<li><code>db_name</code> is the name of the database you gave when you called <code>new PouchDB()</code>, and also the unique identifier for the database.</li>
+<li><code>doc_count</code> is the total number of non-deleted documents in the database.</li>
+<li><code>update_seq</code> is the sequence number of the database.  It starts at 0 and gets incremented every time a document is added or modified.</li>
+</ul>
 
 <div id='compaction'><a class='h2 anchor' href='#compaction' name='compaction'>Compact the database</a></div>
 
