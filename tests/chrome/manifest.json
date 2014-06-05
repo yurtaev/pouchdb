@@ -1,0 +1,11 @@
+{
+  "name": "PouchDB Test Suite",
+  "description": "PouchDB Test Suite as a Chrome Packaged App.",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["app.js"]
+    }
+  }
+}

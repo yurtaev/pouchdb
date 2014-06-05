@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <title>Mocha</title>
     <link rel="stylesheet" type="text/css" href="../node_modules/mocha/mocha.css">
+    <style>
+      html, body {
+        overflow-y: visible;
+      }
+    </style>
   </head>
   <body>
     <div id="mocha"></div>
@@ -15,13 +20,7 @@
     </script>
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
-    <script>
-      mocha.setup({
-        timeout:100000,
-        ui: 'bdd'
-      });
-      var should = chai.should();
-    </script>
+    <script src="mocha-setup.js"></script>
     <script src='deps/pouchdb-1.1.0-postfixed.js'></script>
     <script src='deps/pouchdb-2.0.0-postfixed.js'></script>
     <script src='deps/pouchdb-2.2.0-postfixed.js'></script>

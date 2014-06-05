@@ -11,4 +11,5 @@ bower_components
 .idea/
 tests/performance/bundle.js
 tests/cordova/www
+tests/chrome/www
 phantomjsdriver.log
