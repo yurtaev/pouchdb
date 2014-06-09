@@ -79,7 +79,7 @@
       <div class='col-sm-6'>
 
   
-<div class="highlight"><pre><code class="js">  <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
 
   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
    <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
@@ -91,9 +91,7 @@
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ch-Ch-Changes&#39;</span><span class="p">);</span>
   <span class="p">});</span>
 
-  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span>
-  
-</code></pre></div>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span></code></pre></div>
 
 
       </div>

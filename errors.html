@@ -122,6 +122,10 @@ During PouchDB&#39;s initial replication PouchDB will check for a checkpoint, if
 
 <p>Safari requires users to confirm that they want to allow an app to store data locally (&quot;Allow this website to use space on your disk?&quot;).  If PouchDB is loaded in an <code>iframe</code> or some other unusual way, the dialog might not be shown, and the database will silently fail.</p>
 
+<h3>window.localStorage is not available (Chrome apps)</h3>
+
+<p>In Chrome apps, you&#39;ll see the warning &quot;window.localStorage is not available in packaged apps. Use chrome.storage.local instead.&quot;  This is harmless; since PouchDB doesn&#39;t use localStorage if it&#39;s not available.</p>
+
         <div>
 
     </div>

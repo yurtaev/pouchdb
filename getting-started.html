@@ -94,8 +94,7 @@
 <p>We will start with a template of the project where all the data related functions have been replaced with empty stubs. Download and unzip <a href="/static/assets/pouchdb-getting-started-todo.zip">pouchdb-getting-started-todo.zip</a>. When dealing with XHR and IndexedDB you are better off running web pages from a server as opposed to a filesystem. To do this you can run:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>pouchdb-getting-started-todo
-<span class="nv">$ </span>python -m SimpleHTTPServer
-</code></pre></div>
+<span class="nv">$ </span>python -m SimpleHTTPServer</code></pre></div>
 
 <p>Then visit <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>. If you see the following screenshot, you are good to go:</p>
 
@@ -111,8 +110,7 @@
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//cdn.jsdelivr.net/pouchdb/2.2.3/pouchdb.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/base.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/app.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
 
 <p>PouchDB is now installed in your app and ready to use! (In production, you should use a local copy of the script.)</p>
 
@@ -123,8 +121,7 @@
 <div class="highlight"><pre><code class="js"><span class="c1">// EDITING STARTS HERE (you dont need to edit anything above this line)</span>
 
 <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;todos&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">remoteCouch</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</code></pre></div>
+<span class="kd">var</span> <span class="nx">remoteCouch</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span></code></pre></div>
 
 <p>You don&#39;t need to create a schema for the database. After giving it a name, you can immediately start writing objects to it.</p>
 
@@ -143,8 +140,7 @@
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Successfully posted a todo!&#39;</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>In PouchDB each document is required to have a unique <code>_id</code>. Any subsequent writes to a document with the same <code>_id</code> will be considered updates. Here we are using a date string as an <code>_id</code>. For our use case, it will be unique, and it can also be used to sort items in the database. You can use <code>db.post()</code> if you want random ids. The <code>_id</code> is the only thing required when creating a new document. The rest of the object you can create as you like.</p>
 
@@ -158,8 +154,7 @@
   <span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">include_docs</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">descending</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">redrawTodosUI</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">rows</span><span class="p">);</span>
   <span class="p">});</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>Once you have included this code, you should be able to refresh the page to see any todos you have entered.</p>
 
@@ -177,8 +172,7 @@
 <span class="p">});</span>
 
 <span class="c1">// We have to create a new todo document and enter it in the database</span>
-<span class="kd">function</span> <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
-</code></pre></div>
+<span class="kd">function</span> <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span></code></pre></div>
 
 <p>So every time an update happens to the database, we redraw the UI to show the new data. The <code>live</code> flag means this function will continue to run indefinitely. Now try entering a new todo and it should appear immediately.</p>
 
@@ -189,8 +183,7 @@
 <div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">checkboxChanged</span><span class="p">(</span><span class="nx">todo</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">todo</span><span class="p">.</span><span class="nx">completed</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">checked</span><span class="p">;</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>This is similiar to creating a document, however the document must also contain a <code>_rev</code> field (in addition to <code>_id</code>), otherwise the write will be rejected. This ensures that you dont accidently overwrite changes to a document.</p>
 
@@ -202,8 +195,7 @@
 
 <div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">deleteButtonPressed</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>Similiar to editing a document, both the <code>_id</code> and <code>_rev</code> properties are required. You may notice that we are passing around the full object that we previously read from the database. You can of course manually construct the object, like: <code>{_id: todo._id, _rev: todo._rev}</code>, but passing around the existing object is usually more convenient and less error prone.</p>
 
@@ -219,8 +211,7 @@
     <span class="nx">todo</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">trimmedText</span><span class="p">;</span>
     <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <h3>Installing CouchDB</h3>
 
@@ -236,8 +227,7 @@
 <span class="nv">$ </span>curl -X PUT <span class="nv">$HOST</span>/_config/cors/credentials -d <span class="s1">&#39;&quot;true&quot;&#39;</span>
 <span class="nv">$ </span>curl -X PUT <span class="nv">$HOST</span>/_config/cors/methods -d <span class="s1">&#39;&quot;GET, PUT, POST, HEAD, DELETE&quot;&#39;</span>
 <span class="nv">$ </span>curl -X PUT <span class="nv">$HOST</span>/_config/cors/headers -d <span class="se">\</span>
-  <span class="s1">&#39;&quot;accept, authorization, content-type, origin&quot;&#39;</span>
-</code></pre></div>
+  <span class="s1">&#39;&quot;accept, authorization, content-type, origin&quot;&#39;</span></code></pre></div>
 
 <h3>Implement basic two way sync</h3>
 
@@ -246,8 +236,7 @@
 <div class="highlight"><pre><code class="js"><span class="c1">// EDITING STARTS HERE (you dont need to edit anything above this line)</span>
 
 <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;todos&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">remoteCouch</span> <span class="o">=</span> <span class="s1">&#39;http://user:pass@mname.iriscouch.com/todos&#39;</span><span class="p">;</span>
-</code></pre></div>
+<span class="kd">var</span> <span class="nx">remoteCouch</span> <span class="o">=</span> <span class="s1">&#39;http://user:pass@mname.iriscouch.com/todos&#39;</span><span class="p">;</span></code></pre></div>
 
 <p>Then we can implement the sync function like so:</p>
 
@@ -256,8 +245,7 @@
   <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">};</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">syncError</span><span class="p">);</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteCouch</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">syncError</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p><code>db.replicate()</code> tells PouchDB to transfer all the documents <code>to</code> or <code>from</code> the <code>remoteCouch</code>. This can either be a string identifier or a PouchDB object. We call this twice: once to receive remote updates, and once to push local changes. Again, the <code>live</code> flag is used to tell PouchDB to carry on doing this indefinitely. The callback will be called whenever this finishes. For live replication, this will mean an error has occured, like losing your connection or you canceled the replication.</p>
 
