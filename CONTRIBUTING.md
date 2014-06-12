@@ -142,6 +142,12 @@ You can also debug with Weinre by doing:
 
 The `ES5_SHIM=true` option is also available for Cordova.
 
+### node-webkit tests
+
+You can also run the tests as a node-webkit app.  You'll still need to have `npm run dev` running in the background.  The command is:
+
+    $ NODE_WEBKIT=/path/to/node-webkit npm run node-webkit
+
 ### Testing against PouchDB server
 
 [pouchdb-server](https://github.com/nick-thompson/pouchdb-server) is a project that uses [express-pouchdb](https://github.com/nick-thompson/express-pouchdb) to run a CouchDB-compliant server backed by PouchDB.

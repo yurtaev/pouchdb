@@ -1,0 +1,4 @@
+{
+  "name": "PouchDB tests in node-webkit",
+  "main": "./www/tests/test.html"
+}
