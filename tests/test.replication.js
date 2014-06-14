@@ -93,10 +93,10 @@ adapters.forEach(function (adapters) {
             db.allDocs(function (err, result) {
               result.rows.length.should.equal(docs.length);
               db.info(function (err, info) {
-                info.update_seq.should.be.above(2, 'update_seq local');
+                info.update_seq.should.equal(3, 'update_seq local');
                 info.doc_count.should.equal(3, 'doc_count local');
                 remote.info(function (err, info) {
-                  info.update_seq.should.be.above(2, 'update_seq remote');
+                  info.update_seq.should.equal(3, 'update_seq remote');
                   info.doc_count.should.equal(3, 'doc_count remote');
                   done();
                 });
@@ -268,9 +268,13 @@ adapters.forEach(function (adapters) {
                 result.ok.should.equal(true);
                 result.docs_written.should.equal(1);
                 db.info(function (err, info) {
-                  info.update_seq.should.equal(2);
+                  info.update_seq.should.equal(2, 'local update seq');
                   info.doc_count.should.equal(1);
-                  done();
+                  remote.info(function (err, info) {
+                    info.update_seq.should.equal(3, 'remote update seq');
+                    info.doc_count.should.equal(1);
+                    done();
+                  });
                 });
               });
             });
@@ -918,7 +922,7 @@ adapters.forEach(function (adapters) {
           result.docs_written.should.equal(3);
           result.docs_read.should.equal(3);
           db.info(function (err, info) {
-            info.update_seq.should.be.above(0);
+            info.update_seq.should.equal(1);
             info.doc_count.should.equal(1);
             done();
           });

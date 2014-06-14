@@ -235,7 +235,10 @@ adapters.forEach(function (adapter) {
           should.not.exist(err);
           db.get('foo', function (err, res) {
             res._rev.should.equal('1-x');
-            done();
+            db.info(function (err, info) {
+              info.update_seq.should.equal(1);
+              done();
+            });
           });
         });
       });
