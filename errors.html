@@ -87,7 +87,27 @@
         </div>
 
         <div class="col-sm-9">
-          <h3>PouchDB throws 404 (Object Not Found) for &#39;_local&#39; document</h3>
+          <h3>No &#39;Access-Control-Allow-Origin&#39; header</h3>
+
+<p>If you see the error:</p>
+
+<blockquote>
+<p>XMLHttpRequest cannot load [...]
+No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource.
+Origin [...] is therefore not allowed access.</p>
+</blockquote>
+
+<p>it&#39;s because you need to enable <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> on CouchDB/IrisCouch/whatever you&#39;re using. Otherwise, your scripts can only access the server database if they&#39;re served from the same domain.</p>
+
+<p>To enable CORS, just run the following commands on a command prompt (Mac/Linux) and substitute your user name, password, and the URL of your database:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">HOST=http://adminname:password@localhost:5984 # or whatever you got
+
+curl -X POST $HOST/_config/httpd/enable_cors -d &#39;&quot;true&quot;&#39;
+curl -X PUT $HOST/_config/cors/origins -d &#39;&quot;*&quot;&#39;
+curl -X PUT $HOST/_config/cors/methods -d &#39;&quot;GET, PUT, POST, HEAD, DELETE&quot;&#39;
+curl -X PUT $HOST/_config/cors/headers -d &#39;&quot;accept, content-type, origin&quot;&#39;
+</code></pre></div>
+<h3>PouchDB throws 404 (Object Not Found) for &#39;_local&#39; document</h3>
 
 <p>Don&#39;t worry, nothing is amiss, this is expected behaviour:
 During PouchDB&#39;s initial replication PouchDB will check for a checkpoint, if it doesn&#39;t exist a 404 will be returned and a checkpoint will subsequently be written.</p>
