@@ -170,6 +170,7 @@
 
 <div class="alert-text">
 
+
 <strong>Potential gotcha!</strong> Somewhat unintuitively, <code>allDocs()</code> doesn't return the full document data by default.  It only returns the document <code>id</code> and revision hash <code>rev</code>, unless you pass in the option <code>{include_docs : true}</code>.
 
 </div>
@@ -299,6 +300,7 @@
 
 <div class="alert-text">
 
+
 <strong>Aside</strong>: To be fair, WebSQL and CouchDB (since <a href='https://issues.apache
 .org/jira/browse/COUCHDB-977'>version 1.1.1</a>) do not
 suffer from this problem, due to their ability to efficiently count SQLite rows/B-tree offsets.
@@ -397,6 +399,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 
 
 <div class="alert-text">
+
 
 <strong>Note:</strong> If you're worried about ID collisions, you could also use <code>new Date().toJSON() + Math.random()</code>.
 
@@ -497,7 +500,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 
     </div>
 
-    <footer>
+    <footer class="footer">
 
       <div class="container">
 

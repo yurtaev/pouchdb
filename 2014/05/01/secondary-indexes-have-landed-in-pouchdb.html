@@ -139,6 +139,7 @@
 
 <div class="alert-text">
 
+
 The <code>emit</code> pattern is part of the standard <a href='http://couchdb.readthedocs.org/en/latest/couchapp/views/intro.html'>CouchDB map/reduce API</a>.  What the function basically says is, "for each document, emit <code>doc.name</code> as a key."
 
 </div>
@@ -225,6 +226,7 @@ The <code>emit</code> pattern is part of the standard <a href='http://couchdb.re
 
 <div class="alert-text">
 
+
 The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</code>/<code>endkey</code>/<code>key</code>/<code>keys</code>/<code>skip</code>/<code>limit</code>/<code>descending</code> &ndash; are exactly the same as with <code>allDocs()</code>. For a beginner's guide to pagination, read <a href='http://pouchdb.com/2014/04/14/pagination-strategies-with-pouchdb.html'>Pagination strategies with PouchDB</a>.
 
 </div>
@@ -280,6 +282,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 
 <div class="alert-text">
 
+
 <strong>Why design docs?</strong> <a href='http://guide.couchdb.org/draft/design.html'>Design documents</a> are special meta-documents that CouchDB uses for things like indexes, security, and schema validation (think: "designing" your database).  They are stored, updated, and deleted exactly like normal documents, but their <code>_id</code>s are prefixed with the reserved string <code>'_design/'</code>.  They also show up in <code>allDocs()</code> queries, but you can filter them out by using <code>{startkey: '_design0'}</code>.
 
 </div>
@@ -320,6 +323,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 
 <div class="alert-text">
 
+
 Technically, a design doc can contain multiple views, but there's really no advantage to this. Plus, it can even cause performance problems in CouchDB, since all the indexes are written to a single file. So we recommend that you create one view per design doc, and use the same name for both, in order to make things simpler.
 
 </div>
@@ -358,6 +362,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 
 
 <div class="alert-text">
+
 
 <strong>Performance tip</strong>: Technically, the view will not be built up on disk until the first time you <code>query()</code> it.  So a good trick is to always call <code>query(viewName, {stale: 'update_after'})</code> after creating a view, to ensure that it starts building in the background.  You can also use <code>{stale: 'ok'}</code> to avoid waiting for the most up-to-date results. In the future, we may add an API for auto-updating.
 
@@ -458,6 +463,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 
 <div class="alert-text">
 
+
 <strong>Performance tip</strong>: if you're just using the randomly-generated doc IDs, then you're not only missing out on an opportunity to get a free index &ndash; you're also incurring the overhead of building an index you're never going to use. So use and abuse your doc IDs!
 
 </div>
@@ -483,6 +489,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 
 
 <div class="alert-text">
+
 
 If the <code>null</code> field is meaningful for some reason, though, you can emit it and look it up later using <code>query(viewName, {key: null})</code>.  Any <code>undefined</code> fields are treated as <code>null</code>.
 
@@ -604,7 +611,7 @@ If the <code>null</code> field is meaningful for some reason, though, you can em
 
     </div>
 
-    <footer>
+    <footer class="footer">
 
       <div class="container">
 

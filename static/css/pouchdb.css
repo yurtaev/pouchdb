@@ -812,13 +812,20 @@ hr {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+blockquote {
+  font-size: 1.1em;
+  border-left-color: #ddf3e7;
+}
+blockquote cite {
+  font-size: 1.2em;
+}
 p:empty {
   display: none;
 }
 .intro,
 .infoblocks,
 .icons,
-footer {
+.footer {
   padding: 20px 0 30px;
 }
 .page-head {
@@ -830,7 +837,7 @@ article {
 .page-head,
 .intro,
 .blog,
-footer {
+.footer {
   background-color: #eeeeee;
 }
 .intro .highlight {
