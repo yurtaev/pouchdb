@@ -72,7 +72,7 @@
   <div class="container">
     <div class="row">
         <div id="sidebar" class="col-sm-3">
-          <div data-spy="affix" data-offset-top="250" data-offset-bottom="200">
+          <div data-spy="affix" data-offset-top="214" data-offset-bottom="450">
             <ul class="nav nav-silent nav-sidebar">
               <li><a href="/learn.html">About PouchDB</a></li>
 <li><a href="/getting-started.html">Get Started Guide</a></li>
@@ -100,7 +100,7 @@ Origin [...] is therefore not allowed access.</p>
 <p>it&#39;s because you need to enable <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> on CouchDB/IrisCouch/whatever you&#39;re using. Otherwise, your scripts can only access the server database if they&#39;re served from the same domain.</p>
 
 <p>To enable CORS, just run the following commands on a command prompt (Mac/Linux) and substitute your user name, password, and the URL of your database:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">HOST=http://adminname:password@localhost:5984 # or whatever you got
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HOST=http://adminname:password@localhost:5984 # or whatever you got
 
 curl -X POST $HOST/_config/httpd/enable_cors -d &#39;&quot;true&quot;&#39;
 curl -X PUT $HOST/_config/cors/origins -d &#39;&quot;*&quot;&#39;

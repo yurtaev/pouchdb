@@ -131,12 +131,12 @@
 <h3>2. Don&#39;t emit(doc.foo, doc)</h3>
 
 <p>Don&#39;t do:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">doc</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Do:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">foo</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -151,7 +151,7 @@
 <h3>3. Don&#39;t emit(doc.foo, 1) and then _sum</h3>
 
 <p>Similar to the above, don&#39;t do:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="p">{</span>
   <span class="nx">map</span><span class="o">:</span> 
     <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">foo</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
@@ -160,7 +160,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>Do:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="p">{</span>
   <span class="nx">map</span><span class="o">:</span> 
     <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">foo</span><span class="p">);</span>
@@ -207,7 +207,7 @@ You are taking this thing which is meant to sort and organize data, and you're g
 <p>I already wrote <a href="http://pouchdb.com/2014/05/01/secondary-indexes-have-landed-in-pouchdb.html">a blog post about this</a>, but basically, if you don&#39;t want bad performance from your secondary indexes, the best strategy is to avoid secondary indexes altogether. The primary index should be sufficient for sorting and searching in nearly all of your applications, or at least for the hot-path code.</p>
 
 <p>Also, if you really want to get fancy with your doc IDs, you can use <a href="https://github.com/pouchdb/collate/">PouchDB Collate</a> to serialize arbitrary data into strings that are sorted according to <a href="https://wiki.apache.org/couchdb/View_collation">CouchDB collation ordering</a>.  This allows you to index on arrays, objects, numbers &ndash; whatever you want:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouchCollate</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pouchdb-collate&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouchCollate</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pouchdb-collate&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">myDoc</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">firstName</span><span class="o">:</span> <span class="s1">&#39;Scrooge&#39;</span><span class="p">,</span>
   <span class="nx">lastName</span><span class="o">:</span> <span class="s1">&#39;McDuck&#39;</span><span class="p">,</span>
@@ -219,12 +219,12 @@ You are taking this thing which is meant to sort and organize data, and you're g
   <span class="p">[</span><span class="nx">myDoc</span><span class="p">.</span><span class="nx">age</span><span class="p">,</span> <span class="nx">myDoc</span><span class="p">.</span><span class="nx">male</span><span class="p">,</span> <span class="nx">mydoc</span><span class="p">.</span><span class="nx">lastName</span><span class="p">,</span> <span class="nx">mydoc</span><span class="p">.</span><span class="nx">firstName</span><span class="p">]);</span>
 </code></pre></div>
 <p>In the above example, the doc ID will be a crazy string, which will sort correctly in both CouchDB and PouchDB:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s1">&#39;5323256.70000000000000017764\u000021\u00004McDuck\u00004Scrooge\u0000\u0000&#39;</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="s1">&#39;5323256.70000000000000017764\u000021\u00004McDuck\u00004Scrooge\u0000\u0000&#39;</span>
 </code></pre></div>
 <p>This is actually what persistent map/reduce uses under the hood!</p>
 
 <p>And for cases where you only need to build complex IDs out of strings, there is also the fantastic <a href="https://github.com/jo/docuri">DocURI</a> project, which can build a more human-readable ID like this:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s1">&#39;movie/blade-runner/gallery-image/12/medium&#39;</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="s1">&#39;movie/blade-runner/gallery-image/12/medium&#39;</span>
 </code></pre></div>
 <p>Choose whichever one fits your app better, or just concatenate the strings yourself.</p>
 
@@ -233,7 +233,7 @@ You are taking this thing which is meant to sort and organize data, and you're g
 <p>Our performance tests have shown it again and again: Web SQL is faster than IndexedDB. It&#39;s hard to tell if that&#39;s due to our implementation or the browser vendors&#39;, but in any case, if you feel the need for speed, then you&#39;ll want to prefer Web SQL to IndexedDB.</p>
 
 <p>So now that Android 4.4, iOS 8, and Safari 8 support IndexedDB in addition to Web SQL, it&#39;s more important than ever to consider using Web SQL instead of IndexedDB &ndash; at least, in apps where performance matters.  To do so, the code is simply:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">pouch</span><span class="p">.</span><span class="nx">adapter</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// websql not supported by this browser</span>
   <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">);</span>
 <span class="p">}</span>
@@ -257,7 +257,7 @@ You are taking this thing which is meant to sort and organize data, and you're g
 <p>On the other hand, the <code>query()</code> options like <code>startkey</code>, <code>endkey</code>, <code>key</code>, and <code>keys</code> have been optimized to hell, and they leverage the native indexes in the database to deliver the maximum possible performance.</p>
 
 <p>So if you find yourself writing something like this, you&#39;re doing it wrong:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getPostsSince</span><span class="p">(</span><span class="nx">when</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getPostsSince</span><span class="p">(</span><span class="nx">when</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span>
     <span class="nx">map</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="nx">emit</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">&gt;</span> <span class="nx">when</span><span class="p">)</span> <span class="p">{</span>
@@ -288,7 +288,7 @@ You are taking this thing which is meant to sort and organize data, and you're g
 <p>Each of those <code>db.query()</code> calls represents a separate <em>temporary index</em>. I.e., all your docs are read in, run through the map function, spit out to an index, queried, and then the whole thing is thrown away.  For every query!  This code is based on a real question I got from a developer on Twitter (sorry to pick on ya), and he described it as &quot;crazy slow.&quot; No kidding.</p>
 
 <p>Since all of these map/reduce functions key off of <code>doc.timestamp</code>, a better approach (which I recommended to him) would be:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ddoc</span> <span class="o">=</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="s1">&#39;by_timestamp&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ddoc</span> <span class="o">=</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="s1">&#39;by_timestamp&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">ddoc</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="cm">/* etc. */</span><span class="p">});</span>
@@ -300,7 +300,7 @@ You are taking this thing which is meant to sort and organize data, and you're g
   <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;by_timestamp&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="nx">when</span><span class="p">});</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">getPostsBetween</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;by_timestamp&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="nx">when</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="nx">endTime</span><span class="p">});</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;by_timestamp&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="nx">startTime</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="nx">endTime</span><span class="p">});</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>(That <code>createDesignDoc()</code> helper function comes from <a href="http://pouchdb.com/2014/05/01/secondary-indexes-have-landed-in-pouchdb.html">this blost post</a>.)</p>
@@ -320,14 +320,14 @@ You are taking this thing which is meant to sort and organize data, and you're g
 <p>One common question is: How do I debug my database?  Well, that&#39;s easy: just replicate to CouchDB! Then you can browse your data in CouchDB&#39;s handy Futon interface.</p>
 
 <p>In your code or in the browser console, just run:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
 </code></pre></div>
 <p>Then open up <a href="http://localhost:5984/_utils">http://localhost:5984/_utils</a>. Or if you want to try the new Fauxton API in CouchDB 1.5: <a href="http://localhost:5984/_utils/fauxton/">http://localhost:5984/_utils/fauxton/</a>. You&#39;ll get a nice interface that looks like this:</p>
 
 <p><img src='/static/img/fauxton.png' title='Fauxton UI in PouchDB Server' alt='Fauxton UI in PouchDB Server' style='width:100%'/></p>
 
 <p>And if you don&#39;t feel like installing CouchDB, you can install <a href="https://github.com/pouchdb/pouchdb-server">PouchDB Server</a> instead:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ npm install -g pouchdb-server
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$ npm install -g pouchdb-server
 $ pouchdb-server -p 5984
 </code></pre></div>
 <p>Then open up <a href="http://localhost:5984/_utils">http://localhost:5984/_utils</a>.</p>

@@ -72,7 +72,7 @@
   <div class="container">
     <div class="row">
         <div id="sidebar" class="col-sm-3">
-          <div data-spy="affix" data-offset-top="250" data-offset-bottom="200">
+          <div data-spy="affix" data-offset-top="214" data-offset-bottom="450">
             <ul class="nav nav-silent nav-sidebar">
               <li><a href="/learn.html">About PouchDB</a></li>
 <li><a href="/getting-started.html">Get Started Guide</a></li>
@@ -123,11 +123,11 @@ Note that only identifiers and string literals are case-sensitive.</p>
 </ul>
 
 <h2>Perform a Query</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql(query, [options], [callback])
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql(query, [options], [callback])
 </code></pre></div>
 <p>Although only the query is mandatory, the callback is required to access the query result.
 Currently no query options are implemented.</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">var pouchdb;
+<div class="highlight"><pre><code class="text language-text" data-lang="text">var pouchdb;
 PouchDB(&#39;idb://test&#39;, function(err, db) {
    pouchdb = db;
   // Use pouchdb to call further functions
@@ -139,7 +139,7 @@ PouchDB(&#39;idb://test&#39;, function(err, db) {
 })
 </code></pre></div>
 <h2>Select</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;`name!`, price-discount, upper(vendor)&quot;}, callback)
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;`name!`, price-discount, upper(vendor)&quot;}, callback)
 </code></pre></div>
 <p>Select returns an object for each document in the database (unless limited by another clause).
 Each of these objects will be populated with the properties specified in the select clause.
@@ -147,15 +147,15 @@ Arithmetic operators, aggregation functions, and scalar functions are all fair g
 Properties that are missing from an object in the database are assigned null.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{name!: &quot;pencil&quot;, price: 2, discount: 0.7, vendor: &quot;store1&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{name!: &quot;pencil&quot;, price: 2, discount: 0.7, vendor: &quot;store1&quot;},
 {name!: &quot;pen&quot;, price:3, discount: 2, vendor: &quot;store2&quot;}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{name!: &quot;pen&quot;, price - discount: 1, upper(vendor): &quot;STORE2&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{name!: &quot;pen&quot;, price - discount: 1, upper(vendor): &quot;STORE2&quot;},
 {name!: &quot;pencil&quot;, price - discount: 1.3, upper(vendor): &quot;STORE1&quot;}
 </code></pre></div>
 <h2>Where</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;*&quot;, where: &quot;type=&#39;Fire&#39; and name is not null&quot;}, callback)
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;*&quot;, where: &quot;type=&#39;Fire&#39; and name is not null&quot;}, callback)
 </code></pre></div>
 <p>Where allows filtering of the objects that are passed to the select clause.  In this way, unwanted documents
 can be excluded from the query result.  The where clause is composed of conditions which are joined by the
@@ -166,12 +166,12 @@ logical operators AND and OR.  An additional operator, NOT, provides negation.</
 something is null IS NULL is used.  To check if something is not null, IS NOT NULL is used.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{name: &quot;charmander&quot;, type: &quot;Fire&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{name: &quot;charmander&quot;, type: &quot;Fire&quot;},
 {type: &quot;Fire&quot;, attack:&quot;tail whip&quot;},
 {name: &quot;charizard&quot;, type: &quot;Fire&quot;, attack:&quot;slash&quot;}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{_id: &quot;0D715E2C-CEDD-46B4-A060-9C9C290BEBE8&quot;, _rev: &quot;1-71d1e0f8ab00cf432306890a4116602b&quot;,
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{_id: &quot;0D715E2C-CEDD-46B4-A060-9C9C290BEBE8&quot;, _rev: &quot;1-71d1e0f8ab00cf432306890a4116602b&quot;,
 attack: &quot;slash&quot;, name: &quot;charizard&quot;, type: &quot;Fire&quot;},
 {_id: &quot;3153F94B-0568-4D4C-BFA1-83EDF6185915&quot; _rev: &quot;1-d24f7405c5a63943391eaff9a260139c&quot;,
 name: &quot;charmander&quot;, type: &quot;Fire&quot;}
@@ -180,7 +180,7 @@ name: &quot;charmander&quot;, type: &quot;Fire&quot;}
 desired fields explicitly.</p>
 
 <h2>Group By</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;max(charizard), charmeleon&quot;, groupBy: &quot;charmeleon&quot;}, callback)
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;max(charizard), charmeleon&quot;, groupBy: &quot;charmeleon&quot;}, callback)
 </code></pre></div>
 <p>Group by creates one object for each unique combination of values in the group by clause. For the query above,
 if every document in the database had the value &quot;Level 22&quot; for the property &quot;charmeleon&quot;, only a single
@@ -191,16 +191,16 @@ aggregation function or present in the group by clause.  Otherwise, the composit
 clause could have multiple values for some identifiers.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter:true},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter:true},
 {charizard: 40, charmeleon: 2, charmander: 50},
 {charizard: 7, charmeleon: 20, charmander: 15}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charmeleon: 2, max(charizard): 50}
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charmeleon: 2, max(charizard): 50}
 {charmeleon: 20, max(charizard): 7}
 </code></pre></div>
 <h2>Pivot</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text"> db.gql({select: &quot;max(charizard)&quot;, pivot: &quot;charmeleon&quot;}, callback)
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> db.gql({select: &quot;max(charizard)&quot;, pivot: &quot;charmeleon&quot;}, callback)
 </code></pre></div>
 <p>Pivot is essentially group by for properties.  Each distinct value in the pivot clause gets its own property.
 Unless used with group by, the result will have only a single document.</p>
@@ -212,15 +212,15 @@ clause may not be used in the group by clause.</p>
 <p>Note that using pivot will generate novel property names.  See below for an example.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50, charmeleon: &quot;hello&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50, charmeleon: &quot;hello&quot;},
 {charizard: 40, charmeleon: &quot;hello&quot;},
 {charizard: 7, charmeleon: &quot;world&quot;, charmander: 15}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{&#39;hello max(charizard)&#39;: 50, &#39;world max(charizard)&#39;: 7}
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{&#39;hello max(charizard)&#39;: 50, &#39;world max(charizard)&#39;: 7}
 </code></pre></div>
 <h2>Label</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text"> db.gql({select: &#39;upper(dept), charizard&#39;,
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> db.gql({select: &#39;upper(dept), charizard&#39;,
  label: &quot;upper(dept) &#39;Department&#39;, charizard &#39;Maximum Charizard!&#39;&quot;}, callback)
 </code></pre></div>
 <p>Label is used to transform cryptic identifiers into something that can be displayed directly to the end user.
@@ -229,13 +229,13 @@ clause is composed of any number of statement label pairs, where the statement c
 the select clause and the label is a string literal.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50, dept: &quot;eng&quot;, lunch:&quot;2&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50, dept: &quot;eng&quot;, lunch:&quot;2&quot;},
 {charizard: 40, lunch: &quot;1&quot;, dept: &quot;market&quot;},·
 {charizard: 99, dept: &quot;eng&quot;, lunch: 1},
 {charizard: 7, dept: &quot;eng&quot;, lunch: 2}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{Department: &quot;ENG&quot;, Maximum Charizard!: 7},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{Department: &quot;ENG&quot;, Maximum Charizard!: 7},
 {Department: &quot;ENG&quot;, Maximum Charizard!: 99},
 {Department: &quot;MARKET&quot;, Maximum Charizard!: 40},
 {Department: &quot;ENG&quot;, Maximum Charizard!: 50}
@@ -245,7 +245,7 @@ the select clause and the label is a string literal.</p>
 <p>GQL contains a number of operators and functions that can operate on retrived documents.</p>
 
 <h3>Aggregation Functions</h3>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;max(charizard), min(charizard), average(charizard), count(charizard), sum(charizard)&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;max(charizard), min(charizard), average(charizard), count(charizard), sum(charizard)&quot;},
 callback)
 </code></pre></div>
 <p>The currently supported aggregation functions are avg, count, max, min, and sum.  Each of these takes a single
@@ -255,31 +255,31 @@ Aggregation functions operate on entire identifiers, returning only a single pro
 may only appear in the select and label clauses.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50},
 {charizard: 40},
 {charizard: 7}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{average(charizard): 32.333333333333336, count(charizard): 3, max(charizard): 50,
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{average(charizard): 32.333333333333336, count(charizard): 3, max(charizard): 50,
 min(charizard): 7, sum(charizard): 97}
 </code></pre></div>
 <h3>Scalar Functions</h3>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;`name!`, price-discount, upper(vendor)&quot;}, callback)
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;`name!`, price-discount, upper(vendor)&quot;}, callback)
 </code></pre></div>
 <p>Currently only two scalar functions are supported, upper and lower.  These change the characters in their inputs
 to uppercase and lowercase respectively.  Unlike aggregator functions, scalar functions take only a single
 identifier as their input.  Scalar functions may only appear in the select and label clauses.</p>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{name!: &quot;pencil&quot;, price: 2, discount: 0.7, vender: &quot;store1&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{name!: &quot;pencil&quot;, price: 2, discount: 0.7, vender: &quot;store1&quot;},
 {name!: &quot;pen&quot;, price:3, discount: 2, vendor: &quot;store2&quot;}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{name!: &quot;pen&quot;, price - discount: 1, upper(vendor): &quot;STORE2&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{name!: &quot;pen&quot;, price - discount: 1, upper(vendor): &quot;STORE2&quot;},
 {name!: &quot;pencil&quot;, price - discount: 1.3, upper(vendor): &quot;STORE1&quot;}
 </code></pre></div>
 <h3>Arithmetic Operators</h3>
-<div class="highlight"><pre><code class="language-text" data-lang="text">db.gql({select: &quot;*&quot;, where: &quot;charizard &lt;=charmander * charmeleon + 2 and (charmander - 7 !=  24/3)&quot;},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">db.gql({select: &quot;*&quot;, where: &quot;charizard &lt;=charmander * charmeleon + 2 and (charmander - 7 !=  24/3)&quot;},
 callback)
 </code></pre></div>
 <p>Arithmetic operators are used to perform basic math on the values from documents.  Their arguments must be
@@ -294,12 +294,12 @@ implicitly upcast to floats if necessary. The supported arithmetic operators are
 </ul>
 
 <p>With these documents in the database</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter:true},
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter:true},
 {charizard: 40, charmeleon: .5, charmander: 50},
 {charizard: 7, charmeleon: 20, charmander: 15}
 </code></pre></div>
 <p>The above query will return</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter: true}
+<div class="highlight"><pre><code class="text language-text" data-lang="text">{charizard: 50, charmander: 24, charmeleon: 2, haunter: true}
 </code></pre></div>
 <h2>Miscellaneous</h2>
 
@@ -326,7 +326,7 @@ by backquotes (`identifier`).</p>
 
 <p>This is the current list of reserved words.  Because the GQL implementation is currently under development,
 this list is likely to grow over time.</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">and
+<div class="highlight"><pre><code class="text language-text" data-lang="text">and
 asc
 by
 date
