@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="/static/css/pouchdb.css" />
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-42479701-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
+  </head>
+
+  <body data-spy="scroll" data-target="#sidebar">
+
+    <header>
+
+      <a href="https://github.com/pouchdb/pouchdb" target="_blank">
+         <div class="ribbon">GitHub</div>
+      </a>
+
+      <div class="container">
+
+        <a class="logo" href="/">
+          <div class="logo-img"></div>
+          <span class='logo-type'>PouchDB</span>
+        </a>
+
+        <ul class='nav nav-header nav-pills'>
+          <li>
+            <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/api.html">API</a>
+          </li>
+          <li>
+            <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
+          </li>
+          <li>
+            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js">Download</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </header>
+    
+      <div class="page-head">
+
+        <div class="container">
+
+          <h1>FAQ</h1>
+          
+
+        </div>
+
+      </div>
+    
+
+
+    <article>
+  <div class="container">
+    <div class="row">
+        <div id="sidebar" class="col-sm-3">
+          <div data-spy="affix" data-offset-top="214" data-offset-bottom="450">
+            <ul class="nav nav-silent nav-sidebar">
+              <li><a href="/learn.html">About PouchDB</a></li>
+<li><a href="/getting-started.html">Get Started Guide</a></li>
+<li><a href="/api.html">API</a></li>
+<li><a href="/adapters.html">Adapters</a></li>
+<li><a href="/faq.html">FAQ</a></li>
+<li><a href="/errors.html">Common Errors</a></li>
+<li><a href="/external.html">External Projects</a></li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-sm-9">
+          <h3>Can PouchDB sync with MySQL / my current non CouchDB database?</h3>
+
+<p>No, the data model of your application has a lot of impact on its ability to sync, relational data with the existence of transactions make this harder. It may be possible given some tradeoffs but right now we are focussing on making PouchDB &lt;-&gt; (PouchDB / CouchDB) sync as reliable and easy to use as possible.</p>
+
+<h3>What can PouchDB sync with?</h3>
+
+<p>There are a number of projects that implement a CouchDB like protocol and PouchDB should be able to replicate with them, they include:</p>
+
+<ul>
+<li><a href="https://github.com/nick-thompson/pouchdb-server">PouchDB-Server</a> - a HTTP api written on top of PouchDB</li>
+<li><a href="https://cloudant.com/">Cloudant</a> - A cluster aware fork of CouchDB</li>
+<li><a href="http://www.couchbase.com/communities/couchbase-sync-gateway">Couchbase Sync Gateway</a> - A sync gateway for Couchbase</li>
+</ul>
+
+<h3>The web is nice, but I want to build a native app?</h3>
+
+<p>PouchDB is one of multiple projects that implement the CouchDB protocol and these can all be used to sync the same set of data. For desktop applications you may want to look into embedding CouchDB (or <a href="https://github.com/refuge/rcouch">rcouch</a>), for mobile applications you can use PouchDB within <a href="http://cordova.apache.org/">Apache Cordova</a> or you can look at <a href="https://github.com/couchbase/couchbase-lite-ios">Couchbase lite for iOS</a> and <a href="https://github.com/couchbase/couchbase-lite-android">Android</a>.</p>
+
+<h3>Browsers have storage limitations, how much data can PouchDB store?</h3>
+
+<p>In Firefox PouchDB uses IndexedDB, this will ask the user if data can be stored the first it is attempted then every 50MB after, the amount that can be stored is not limited.</p>
+
+<p>Chrome calculates the amount of storage left available on the users hard drive and uses <a href="https://developers.google.com/chrome/whitepapers/storage#temporary">that to calculate a limit</a>.</p>
+
+<p>Mobile Safari on iOS has a hard 50MB limit, desktop Safari will prompt users wanting to store more than 5MB up to a limit of 500MB.</p>
+
+<p>Opera has no known limit.</p>
+
+<p>Internet Exporer 10 has a hard 250MB limit.</p>
+
+<h3>CouchDB Differences</h3>
+
+<p>PouchDB is also a CouchDB client and you should be able to switch between a local database or an online CouchDB instance without changing any of your applications code, there are some minor differences to note:</p>
+
+<p><strong>View Collation</strong> - CouchDB uses ICU to order keys in a view query, in PouchDB they are ASCII ordered.</p>
+
+<p><strong>View Offset</strong> - CouchDB returns an <code>offset</code> property in the view results, PouchDB doesn&#39;t.</p>
+
+        <div>
+
+    </div>
+
+  </div>
+
+</article>
+
+
+    <div class="icons">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://twitter.com/pouchdb'>
+              <div class="icon icon-twitter"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://www.browserstack.com/'>
+              <div class="icon icon-browserstack"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://github.com/pouchdb/pouchdb'>
+              <div class="icon icon-github"></div>
+            </a>
+            </div>
+
+          <div class='col-xs-4 col-md-offset-0 col-md-2'>
+            <a href='https://travis-ci.org/pouchdb/pouchdb'>
+              <div class="icon icon-travis"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='http://couchdb.apache.org/'>
+              <div class="icon icon-couchdb"></div>
+            </a>
+          </div>
+
+          <div class='col-xs-4 col-md-2'>
+            <a href='https://saucelabs.com'>
+              <div class="icon icon-saucelabs"></div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer class="footer">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Learn</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="/getting-started.html">Getting Started</a></li>
+              <li><a href="/api.html">API Guide</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/wiki">Wiki</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Discuss</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://groups.google.com/forum/#!forum/pouchdb">Mailing List</a></li>
+              <li><a href="irc://freenode.net/#pouchdb">IRC</a></li>
+              <li><a href="http://twitter.com/pouchdb">Twitter</a></li>
+              <li><a href="http://stackoverflow.com/questions/tagged/pouchdb">StackOverflow</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-3'>
+            <h3 class="nav-head">Contribute</h3>
+            <ul class='nav nav-silent'>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb">Source</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/issues">Issues</a></li>
+              <li><a href="https://github.com/daleharvey/pouchdb/blob/master/LICENSE">Apache License</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
