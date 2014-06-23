@@ -353,9 +353,13 @@ var testDir;
 if (typeof module !== 'undefined' && module.exports) {
   global.PouchDB = require('../lib');
   if (process && process.env && process.env.LEVEL_ADAPTER) {
-    global.PouchDB = global.PouchDB.defaults({
+    var defaults = {
       db: require(process.env.LEVEL_ADAPTER)
-    });
+    };
+    if (process.env.LEVEL_PREFIX) {
+      defaults.prefix = process.env.LEVEL_PREFIX;
+    }
+    global.PouchDB = global.PouchDB.defaults(defaults);
   }
   if (typeof process !== 'undefined') {
     testDir = process.env.TESTS_DIR ? process.env.TESTS_DIR : './tmp';
