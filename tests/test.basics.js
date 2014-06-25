@@ -653,6 +653,31 @@ adapters.forEach(function (adapter) {
       }, done);
     });
 
+
+    it('db.get by id in a promisy way', function () {
+      var getID = function (result) {
+        return result.id;
+      };
+
+      var db = new PouchDB('test');
+      return db.post({things: [1, 2, 3]})
+        .then(getID)
+        .then(db.get);
+    });
+
+    it('db.get by id in a promisy way part 2', function () {
+      var getID = function (result) {
+        return result.id;
+      };
+
+      var db = new PouchDB('test');
+      return db.post({things: [1, 2, 3]})
+        .then(getID)
+        .then(function (id) {
+          return db.get(id);
+        });
+    });
+
     it('putting returns {ok: true}', function () {
       // in couch, it's {ok: true} and in cloudant it's {},
       // but the http adapter smooths this out
