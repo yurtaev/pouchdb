@@ -38,7 +38,7 @@
 
         <ul class='nav nav-header nav-pills'>
           <li>
-            <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
+            <a class='btn btn-link btn-lg' href="/blog/">Blog</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/api.html">API</a>
@@ -47,7 +47,12 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js">Download</a>
+            <a
+                class='btn btn-primary btn-lg'
+                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+            >
+                Download <strong>v2.2.3</strong>
+            </a>
           </li>
         </ul>
 
@@ -104,9 +109,25 @@ Origin [...] is therefore not allowed access.</p>
 
 curl -X POST $HOST/_config/httpd/enable_cors -d &#39;&quot;true&quot;&#39;
 curl -X PUT $HOST/_config/cors/origins -d &#39;&quot;*&quot;&#39;
+curl -X PUT $HOST/_config/cors/credentials -d &#39;&quot;true&quot;&#39;
 curl -X PUT $HOST/_config/cors/methods -d &#39;&quot;GET, PUT, POST, HEAD, DELETE&quot;&#39;
 curl -X PUT $HOST/_config/cors/headers -d &#39;&quot;accept, content-type, origin&quot;&#39;
 </code></pre></div>
+<h3>iOS/Safari: &quot;there was not enough remaining storage space&quot;</h3>
+
+<p>On iOS and Safari, if you expect your app to use more than 5MB of space, you will need to request the space up-front from the user.  In certain versions, notably Safari/iOS 7, you can never request more than what the user originally grants you.</p>
+
+<p><img src="static/img/safari_popup.png" alt="Safari storage quota popup"></p>
+
+<p>To get around this, when you create your PouchDB, use the <code>opts.size</code> option for the expected <em>maximum</em> size of the database in MB.  Valid increments are 10, 50, 100, 500, and 1000.  For instance, if you request 50, then Safari will show a popup saying &quot;allow 50MB?&quot; but if you request 51, then Safari will show a popup saying &quot;allow 100MB?&quot;.</p>
+
+<p>If you don&#39;t use the <code>size</code> option, then you&#39;ll be able to use up to 5MB without any popup, but then once you use more, there will be a popup asking for 10.</p>
+<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">size</span><span class="o">:</span> <span class="mi">10</span><span class="p">});</span> <span class="c1">// request 10 MB with a popup</span>
+<span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">size</span><span class="o">:</span> <span class="mi">50</span><span class="p">});</span> <span class="c1">// request 50 MB with a popup</span>
+<span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">);</span> <span class="c1">// implicitly request 5 MB, no popup until you exceed 5MB</span>
+</code></pre></div>
+<p>This does not affect any backend other than Web SQL. Chrome, Android, and Opera do not show the popup. On PhoneGap/Cordova apps, you can also use the <a href="https://github.com/lite4cordova/Cordova-SQLitePlugin">SQLite plugin</a> to get around this problem. Here&#39;s <a href="http://www.html5rocks.com/en/tutorials/offline/quota-research">more information about storage quotas</a> and <a href="https://github.com/pouchdb/pouchdb/issues/2347">details on the Safari/iOS 7 bug</a>.</p>
+
 <h3>PouchDB throws 404 (Object Not Found) for &#39;_local&#39; document</h3>
 
 <p>Don&#39;t worry, nothing is amiss, this is expected behaviour:

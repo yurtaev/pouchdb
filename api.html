@@ -38,7 +38,7 @@
 
         <ul class='nav nav-header nav-pills'>
           <li>
-            <a class='btn btn-link btn-lg' href="/blog.html">Blog</a>
+            <a class='btn btn-link btn-lg' href="/blog/">Blog</a>
           </li>
           <li>
             <a class='btn btn-link btn-lg' href="/api.html">API</a>
@@ -47,7 +47,12 @@
             <a class='btn btn-link btn-lg' href="/learn.html">Learn</a>
           </li>
           <li>
-            <a class='btn btn-primary btn-lg' href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js">Download</a>
+            <a
+                class='btn btn-primary btn-lg'
+                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+            >
+                Download <strong>v2.2.3</strong>
+            </a>
           </li>
         </ul>
 
@@ -93,6 +98,7 @@
 <li><a href="#compaction">Compaction</a></li>
 <li><a href="#revisions_diff">Revision diff</a></li>
 <li><a href="#events">Events</a></li>
+<li><a href="#defaults">Default settings</a></li>
 <li><a href="#plugins">Plugins</a></li>
 
             </ul>
@@ -116,8 +122,12 @@
 <ul>
 <li><code>options.name</code>: You can omit the <code>name</code> argument and specify it via <code>options</code> instead. Note that the name is required.</li>
 <li><code>options.auto_compaction</code>: This turns on auto compaction (experimental). Defaults to <code>false</code>.</li>
-<li><code>options.cache</code>: Appends a random string to the end of all HTTP GET requests to avoid them being cached on IE. Set this to <code>true</code> to prevent this happening (can also be set per request). Defaults to <code>false</code>.</li>
 <li><code>options.adapter</code>: One of <code>&#39;idb&#39;</code>, <code>&#39;leveldb&#39;</code>, <code>&#39;websql&#39;</code>, or <code>&#39;http&#39;</code>. If unspecified, PouchDB will infer this automatically, preferring IndexedDB to WebSQL in browsers that support both (i.e. Chrome, Opera and Android 4.4+).</li>
+<li><code>options.ajax</code>: An object of options to be sent to the ajax requester. In Node they are sent verbatim to <a href="https://github.com/mikeal/request">request</a> with the exception of:
+
+<ul>
+<li><code>options.ajax.cache</code>: Appends a random string to the end of all HTTP GET requests to avoid them being cached on IE. Set this to <code>true</code> to prevent this happening.</li>
+</ul></li>
 </ul>
 
 <p><strong>Notes:</strong> </p>
@@ -126,6 +136,7 @@
 <li>In IndexedDB and WebSQL, PouchDB will use <code>_pouch_</code> to prefix the internal database names. Do not manually create databases with the same prefix.</li>
 <li>When acting as a client on Node, any other options given will be passed to <a href="https://github.com/mikeal/request">request</a>.</li>
 <li>When using the <code>&#39;leveldb&#39;</code> adapter (the default on Node), any other options given will be passed to <a href="https://github.com/rvagg/node-levelup">levelup</a>. The storage layer of leveldb can be replaced by passing a level backend factory (such as <a href="https://github.com/rvagg/memdown">MemDOWN</a>) as <code>options.db</code>. The rest of the supported options are <a href="https://github.com/rvagg/node-levelup/#options">documented here</a>.</li>
+<li>When using the <code>&#39;websql&#39;</code> adapter, you can use <code>options.size</code> to request more than 5MB up-front, in order to avoid errors caused by reaching the storage limit on iOS/Safari. Details <a href="errors.html">here</a>.</li>
 </ol>
 
 <h4>Example Usage:</h4>
@@ -271,7 +282,7 @@
 <li><code>options.conflicts</code>: If specified, conflicting leaf revisions will be attached in <code>_conflicts</code> array.</li>
 <li><code>options.attachments</code>: Include attachment data.</li>
 <li><code>options.local_seq</code>: Include sequence number of the revision in the database.</li>
-<li><code>options.ajax</code>: An object of options to be sent to the ajax requester. In Node they are sent ver batim to <a href="https://github.com/mikeal/request">request</a> with the exception of:
+<li><code>options.ajax</code>: An object of options to be sent to the ajax requester. In Node they are sent verbatim to <a href="https://github.com/mikeal/request">request</a> with the exception of:
 
 <ul>
 <li><code>options.ajax.cache</code>: Appends a random string to the end of all HTTP GET requests to avoid them being cached on IE. Set this to <code>true</code> to prevent this happening.</li>
@@ -336,9 +347,11 @@
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">(</span><span class="nx">docs</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
 
-<p>Create, update or delete multiple documents. The <code>docs</code> argument is an array of documents, or an object with property <code>docs</code> which is the array of documents.</p>
+<p>Create, update or delete multiple documents. The <code>docs</code> argument is an array of documents.</p>
 
 <p>If you omit an <code>_id</code> parameter on a given document, the database will create a new document and assign the ID for you. To update a document, you must include both an <code>_id</code> parameter and a <code>_rev</code> parameter, which should match the ID and revision of the document on which to base your updates. Finally, to delete a document, include a <code>_deleted</code> parameter with the value <code>true</code>.</p>
+
+<p><strong>Note</strong>: Previously <code>bulkDocs()</code> took an object with a key <code>docs</code> holding the array of documents. This is deprecated, but still works.</p>
 
 <h4>Example Usage:</h4>
 
@@ -404,7 +417,7 @@
 <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 </code></pre></div>
 
-<p><strong>Note:</strong> You can also specify a <code>new_edits</code> property on the <code>docs</code> object that when set to <code>false</code> allows you to post and overwrite <a href="http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Posting_Existing_Revisions">existing documents</a>. Normally only the replication algorithm needs to do this.</p>
+<p><strong>Note:</strong> You can also specify a <code>new_edits</code> property on the options object that when set to <code>false</code> allows you to post and overwrite <a href="http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Posting_Existing_Revisions">existing documents</a>. Normally only the replication algorithm needs to do this.</p>
 
 <div id='batch_fetch'><a class='h2 anchor' href='#batch_fetch' name='batch_fetch'>Fetch a batch of documents</a></div>
 
@@ -492,11 +505,12 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <li><code>options.descending</code>: Reverse the order of the output documents.</li>
 <li><code>options.filter</code>: Reference a filter function from a design document to selectively get updates.</li>
 <li><code>options.since</code>: Start the results from the change immediately after the given sequence number, you can also pass &#39;now&#39; if you want only new changes.</li>
-<li><code>options.live</code>: Use <em>longpoll</em> feed. </li>
+<li><code>options.live</code>: Uses the  <code>_longpoll_</code> feed. </li>
 <li><code>options.limit</code>: Limit the number of results to this number.</li>
-<li><code>options.style</code>: Specifies how many revisions are returned in the changes array. The default, main<em>only, will only return the current &quot;winning&quot; revision; all</em>docs will return all leaf revisions (including conflicts and deleted former conflicts).</li>
+<li><code>options.style</code>: Specifies how many revisions are returned in the changes array. The default, <code>&#39;main_only&#39;</code>, will only return the current &quot;winning&quot; revision; <code>&#39;all_docs&#39;</code> will return all leaf revisions (including conflicts and deleted former conflicts).</li>
 <li><code>options.view</code>: Specify a view function to act as a filter. Documents counted as &quot;passed&quot; for a view filter if a map function emits at least one record for them.</li>
 <li><code>options.returnDocs</code>: Is available for non http databases and defaults to true, passing <code>false</code> prevents the changes feed from keeping all the documents in memory, in other words complete always has an empty results array, and the <code>change</code> event is the only way to get the event. Useful for large change sets where otherwise you would run out of memory.</li>
+<li><code>options.batch_size</code>: Only available for http databases, this configures how many changes to fetch at a time. Increasing this can reduce the number of requests made. Default is 25.</li>
 </ul>
 
 <h4>Example Usage:</h4>
@@ -506,7 +520,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
   <span class="nx">live</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">change</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 
-<span class="nx">changes</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+<span class="nx">changes</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
 </code></pre></div>
 
 <h4>Example Response:</h4>
@@ -566,6 +580,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <p><strong>Note:</strong></p>
 
 <ul>
+<li>The <code>&#39;complete&#39;</code> event only fires when you aren&#39;t doing live changes. With live changes, use the <code>&#39;uptodate&#39;</code> event instead.</li>
 <li>The <code>changes()</code> method was not an event emitter before PouchDB 2.2.0, and instead of the <code>&#39;change&#39;</code> and <code>&#39;complete&#39;</code> events it took <code>complete</code> and <code>onChange</code> function options. This is deprecated and could be removed in PouchDB version 3.</li>
 <li>The <code>&#39;since&#39;</code>option formally took &#39;latest&#39; but has been changed to &#39;now&#39; to keep consistency with CouchDB, &#39;latest&#39; is deprecated but will still work to ensure backwards compatibility.</li>
 </ul>
@@ -575,7 +590,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
 
-<p>Replicate data from <code>source</code> to <code>target</code>.  Both the <code>source</code> and <code>target</code> can be a PouchDB instance or a string representing a CouchDB database url or the name a local PouchDB database. If <code>options.live</code> is <code>true</code>, then this will track future changes and also replicate them automatically.</p>
+<p>Replicate data from <code>source</code> to <code>target</code>.  Both the <code>source</code> and <code>target</code> can be a PouchDB instance or a string representing a CouchDB database URL or the name of a local PouchDB database. If <code>options.live</code> is <code>true</code>, then this will track future changes and also replicate them automatically. This method returns an object with the method <code>cancel()</code>, which you call if you want to cancel live replication.</p>
 
 <p>Replication is an event emiter like <code>changes()</code> and emits the <code>&#39;complete&#39;</code>, <code>&#39;uptodate&#39;</code>, <code>&#39;change&#39;</code> and <code>&#39;error&#39;</code> events.</p>
 
@@ -589,7 +604,6 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <li><code>options.doc_ids</code>: Only replicate docs with these ids.</li>
 <li><code>options.live</code>: If <code>true</code>, starts subscribing to future changes in the <code>source</code> database and continue replicating them.</li>
 <li><code>options.since</code>: Replicate changes after the given sequence number.</li>
-<li><code>options.server</code>: Initialize the replication on the server. The response is the CouchDB <code>POST _replicate</code> response and is different from the PouchDB replication response. Also, <code>options.onChange</code> is not supported on server replications.</li>
 <li><code>options.create_target</code>: Create target database if it does not exist. Only for server replications.</li>
 <li><code>options.batch_size</code>: Number of documents to process at a time. Defaults to 100. This affects the number of docs held in memory and the number sent at a time to the target server. You may need to adjust downward if targeting devices with low amounts of memory (e.g. phones) or if the documents are large in size (e.g. with attachments). If your documents are small in size, then increasing this number will probably speed replication up.</li>
 <li><code>options.batches_limit</code>: Number of batches to process at a time. Defaults to 10. This (along wtih <code>batch_size</code>) controls how many docs are kept in memory at a time, so the maximum docs in memory at once would equal <code>batch_size</code> &times; <code>batches_limit</code>.</li>
@@ -597,7 +611,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">replication</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle change</span>
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
@@ -607,6 +621,8 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle error</span>
   <span class="p">});</span>
+  
+<span class="nx">replication</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
 </code></pre></div>
 
 <p>There are also shorthands for replication given existing PouchDB objects. These behave the same as <code>PouchDB.replicate()</code>:</p>
@@ -666,18 +682,37 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 <div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
 
-<p>Sync data from <code>src</code> to <code>target</code> and <code>target</code> to <code>src</code>. This is a convience method for bidirectional data replication.</p>
+<p>Sync data from <code>src</code> to <code>target</code> and <code>target</code> to <code>src</code>. This is a convenience method for bidirectional data replication.</p>
+
+<p>In other words, this code:</p>
+
+<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span>
+<span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;mydb&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>is equivalent to this code:</p>
+
+<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span>
+</code></pre></div>
 
 <h3>Options</h3>
 
-<p>Please refer to <a href="api.html#replication">Replication</a> for documention on options, as sync is just a convience method that entails bidirectional replication.</p>
+<p>Please refer to <a href="api.html#replication">Replication</a> for documentation on options, as <code>sync()</code> is just a convenience method that entails bidirectional replication.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">onComplete</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">onError</span><span class="p">);</span>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle change</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle complete</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;uptodate&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle up-to-date</span>
+  <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle error</span>
+  <span class="p">});</span>
+  
+<span class="nx">sync</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
 </code></pre></div>
 
 <p>There is also a shorthand for syncing given existing PouchDB objects. This behaves the same as <code>PouchDB.sync()</code>:</p>
@@ -1075,10 +1110,12 @@ on the CouchDB wiki for details.</p>
 <div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">compact</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
 </code></pre></div>
 
-<p>Runs compaction of the database. Fires callback when compaction is done. If you use the http adapter and have specified a callback, Pouch will ping the remote database in regular intervals unless the compaction is finished.</p>
+<p>Triggers a compaction operation for <code>db</code> on the remote host. This reduces the database&#39;s size by removing unused and old data. If a <code>callback</code> function is specified, Pouch checks compaction status at regular intervals and fires the callback upon completion. Consult the <a href="http://couchdb.readthedocs.org/en/latest/maintenance/compaction.html">compaction section of CouchDB&#39;s maintenance documentation</a> for more detail about database compaction.</p>
+
+<p><strong>Note:</strong> This method is only available when using the http adapter.</p>
 
 <ul>
-<li><code>options.interval</code>: Number of milliseconds Pouch waits before asking again if compaction is already done. Only for http adapter.</li>
+<li><code>options.interval</code>: Number of milliseconds Pouch waits before asking again if compaction is already done. Defaults to 200.</li>
 </ul>
 
 <div id='revisions_diff'><a class='h2 anchor' href='#revisions_diff' name='revisions_diff'>Document revisions diff</a></div>
@@ -1119,6 +1156,39 @@ to revisions stored in the database. Primarily used in replication.</p>
   <span class="c1">// called whenver a db is destroyed.</span>
 <span class="p">});</span>
 </code></pre></div>
+
+<div id='defaults'><a class='h2 anchor' href='#defaults' name='defaults'>Default settings</a></div>
+
+<p>If you find yourself using the same constructor options repeatedly,
+you can simplify your code with <code>PouchDB.defaults()</code>:</p>
+
+<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
+  <span class="nx">option1</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span>
+  <span class="nx">option2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>The returned object is a constructor function that works the same as <code>PouchDB</code>, except that whenever you invoke it (e.g. with <code>new</code>), the given options will be passed in by default.</p>
+
+<h4>Example Usage:</h4>
+
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">MyMemPouch</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
+  <span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="c1">// MemDOWN-backed Pouch (in Node)</span>
+<span class="kd">var</span> <span class="nx">MyMemPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMemPouch</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">MyPrefixedPouch</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
+  <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;/path/to/my/db/&#39;</span>
+<span class="p">});</span>
+<span class="c1">// db will be named &#39;/path/to/my/db/dbname&#39;, useful for LevelDB</span>
+<span class="kd">var</span> <span class="nx">myPrefixedPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPrefixedPouch</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Note the special constructor option <code>prefix</code>, which appends a prefix to the database name
+and can be helpful for URL-based or file-based LevelDOWN path names.</p>
+
+<p>All <a href="#create_database">constructor options</a> are supported. Default options can still be overriden individually.</p>
 
 <div id='plugins'><a class='h2 anchor' href='#plugins' name='plugins'>Plugins</a></div>
 
