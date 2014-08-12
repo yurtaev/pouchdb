@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -124,30 +124,14 @@
 <h2>A basic example</h2>
 
 <p>Let&#39;s pretend we&#39;re storing 20 documents in PouchDB:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">docs</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc01&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;uno&#39;</span><span class="p">},</span>        <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc02&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;dos&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc03&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;tres&#39;</span><span class="p">},</span>       <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc04&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;cuatro&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc05&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;cinco&#39;</span><span class="p">},</span>      <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc06&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;seis&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc07&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;siete&#39;</span><span class="p">},</span>      <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc08&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;ocho&#39;</span><span class="p">},</span> 
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc09&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;nueve&#39;</span><span class="p">},</span>      <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;diez&#39;</span><span class="p">},</span>  
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc11&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;once&#39;</span><span class="p">},</span>       <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc12&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;doce&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc13&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;trece&#39;</span><span class="p">},</span>      <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc14&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;catorce&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc15&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;quince&#39;</span><span class="p">},</span>     <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc16&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;dieciseis&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc17&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;diecisiete&#39;</span><span class="p">},</span> <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc18&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;dieciocho&#39;</span><span class="p">},</span>
-  <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc19&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;diecinueve&#39;</span><span class="p">},</span> <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="s1">&#39;doc20&#39;</span><span class="p">,</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;veinte&#39;</span><span class="p">},</span>
-<span class="p">];</span>
-<span class="nx">pouch</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">({</span><span class="nx">docs</span> <span class="o">:</span> <span class="nx">docs</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// handle err or response</span>
-<span class="p">});</span>
-</code></pre></div>
+
 <p>Now, the simplest kind of Pouch query, called <a href="http://pouchdb.com/api.html#batch_fetch"><code>allDocs()</code></a>, doesn&#39;t do any pagination by default.  As the name implies, it just returns all the docs:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// handle err or response</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>Here&#39;s the response:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[</span>
@@ -183,7 +167,7 @@
 <p></div></p>
 
 <p>All 20 documents are returned, no pagination involved.  We can visualize it graphically like this:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned                                    Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned                                    Last doc returned
  ↓                                                                   ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
@@ -202,12 +186,12 @@
 </ul>
 
 <p>These parameters are simply passed as the first argument to <code>allDocs()</code>, e.g.</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc05&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc06&#39;</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc05&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc06&#39;</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// handle err or response</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>Here&#39;s the response:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[</span>
@@ -229,17 +213,17 @@
 <h3>startkey and endkey</h3>
 
 <p><code>startkey</code> simply tells PouchDB where you&#39;d like to start in the stream.  For instance, the options <code>{startkey : &#39;doc5&#39;}</code> would return these docs:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">      First doc returned                              Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">      First doc returned                              Last doc returned
              ↓                                                       ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
 <p>Similarly, <code>endkey</code> tells PouchDB where to stop reading.  <code>{endkey : &#39;doc15&#39;}</code> would give us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned                         Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned                         Last doc returned
  ↓                                               ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
 <p>These two options can be used together!  <code>{startkey : &#39;doc5&#39;, endkey: &#39;doc15&#39;}</code> gives us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">      First doc returned                   Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">      First doc returned                   Last doc returned
              ↓                                   ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
@@ -250,17 +234,17 @@
 <h3>skip and limit</h3>
 
 <p><code>skip</code> tells PouchDB how many documents to skip from its normal starting point.  E.g. <code>{skip : 5}</code> gives us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">      First doc returned                              Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">      First doc returned                              Last doc returned
              ↓                                                       ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
 <p>Whereas <code>limit</code> does the opposite: it cuts off documents from the end. <code>{limit : 15}</code> only gives us the first 15 docs:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned                         Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned                         Last doc returned
  ↓                                               ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
 <p>When <code>skip</code> and <code>limit</code> are used together, <code>limit</code> applies after <code>skip</code>.  So e.g. <code>{skip : 5, limit : 10}</code> would slice your documents like this:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">         First doc returned                Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">         First doc returned                Last doc returned
                 ↓                                ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
@@ -269,7 +253,7 @@
 <p>If you come from a SQL background, you might recognize <code>skip</code> and <code>limit</code> as our old friends from SQL: <code>OFFSET</code> and <code>LIMIT</code>. You might also imagine that these parameters are the only ones you need for proper pagination.  But this is a trap!</p>
 
 <h4>Dumb method (do not use!)</h4>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">pageSize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">pageSize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">fetchNextPage</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">limit</span> <span class="o">:</span> <span class="nx">pageSize</span><span class="p">,</span> <span class="nx">skip</span> <span class="o">:</span> <span class="nx">offset</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -283,7 +267,7 @@
 <p>Just repeat to yourself: <code>skip</code> really means &quot;skip&quot;!</p>
 
 <h4>Smart method (please use!)</h4>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span><span class="nx">limit</span> <span class="o">:</span> <span class="mi">5</span><span class="p">};</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span><span class="nx">limit</span> <span class="o">:</span> <span class="mi">5</span><span class="p">};</span>
 <span class="kd">function</span> <span class="nx">fetchNextPage</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">response</span> <span class="o">&amp;&amp;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">rows</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -321,56 +305,56 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <h2>Paginating in backwards land</h2>
 
 <p>When <code>descending</code> is set to <code>true</code>, the normal document order is reversed.  Simply passing <code>{descending : true}</code> would give us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned                                    Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned                                    Last doc returned
  ↓                                                                   ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
 <p>Additionally, all the other parameters suddenly work backwards from their normal behavior!  For instance, if we want to fetch the documents from <code>&#39;doc01&#39;</code> to <code>&#39;doc10&#39;</code>, we&#39;d normally do:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc01&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc01&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// handle err or response</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>This would give us 10 results, as expected:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned     Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned     Last doc returned
  ↓                           ↓ 
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 </code></pre></div>
 <p>If we set <code>descending</code> to <code>true</code>, though, we&#39;re in backwards land! So that same query will give us zero results:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">                                       Last doc???         First doc???
+<div class="highlight"><pre><code class="language-text" data-lang="text">                                       Last doc???         First doc???
                                           ↓                          ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
 <p>Here&#39;s the actual JavaScript <code>response</code> object:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[]</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Whenever <code>descending</code> is set to <code>true</code>, we need to switch the <code>startkey</code> and <code>endkey</code> to get the results we want:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc01&#39;</span><span class="p">,</span> <span class="nx">descending</span> <span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">pouch</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">,</span> <span class="nx">endkey</span> <span class="o">:</span> <span class="s1">&#39;doc01&#39;</span><span class="p">,</span> <span class="nx">descending</span> <span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// handle err or response</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>This gives us what we expect:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">                               First doc returned     Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">                               First doc returned     Last doc returned
                                           ↓                          ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
 <h3>Skip and limit in backwards land</h3>
 
 <p>Similarly, for <code>skip</code> and <code>limit</code>, the operations are performed on the reversed list.  Setting <code>skip</code> to <code>5</code> will skip the &quot;first&quot; 5 documents, so <code>{skip : 5, descending : true}</code> returns:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">               First doc returned                     Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">               First doc returned                     Last doc returned
                       ↓                                              ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
 <p>And setting <code>limit</code> to <code>15</code> will give us the &quot;first&quot; 15 documents, so <code>{limit : 15, descending : true}</code> gives us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">First doc returned                              Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">First doc returned                              Last doc returned
   ↓                                                   ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
 <p>Of course, you&#39;re free to go nuts and combine these parameters together. For example, the somewhat bloated options:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="nx">skip</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="nx">limit</span> <span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
   <span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;doc10&#39;</span><span class="p">,</span>
@@ -378,7 +362,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <span class="p">}</span>
 </code></pre></div>
 <p>would give us:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">                             First doc returned    Last doc returned
+<div class="highlight"><pre><code class="language-text" data-lang="text">                             First doc returned    Last doc returned
                                              ↓           ↓ 
 [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 </code></pre></div>
@@ -391,7 +375,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <h3>Example: sort by date</h3>
 
 <p>Let&#39;s imagine we want to sort our documents by date. For the doc IDs, we&#39;ll use timestamps in <a href="http://www.w3.org/TR/NOTE-datetime">standard ISO-8601 format</a>, given by <code>new Date().toJSON()</code>. This guarantees proper lexicographical ordering:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">partyLikeIts</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">915148800000</span><span class="p">);</span> <span class="c1">// 1999</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">partyLikeIts</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">915148800000</span><span class="p">);</span> <span class="c1">// 1999</span>
 <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1394841840000</span><span class="p">);</span>         <span class="c1">// 2014</span>
 
 <span class="nx">partyLikeIts</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()</span> <span class="c1">// &quot;1999-01-01T00:00:00.000Z&quot;</span>
@@ -413,13 +397,13 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <p></div></p>
 
 <p>Now we can fetch the 10 most recent docs:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="nx">limit</span> <span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
   <span class="nx">descending</span> <span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Or the first 10 docs published after January 1st, 2000:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="nx">limit</span> <span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
   <span class="nx">startkey</span> <span class="o">:</span> <span class="s1">&#39;2000-01-01T00:00:00.000Z&#39;</span>
 <span class="p">}</span>
@@ -429,7 +413,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <h2>total_rows is totally awesome</h2>
 
 <p>When we call <code>allDocs()</code>, a typical response object looks like this:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[</span><span class="cm">/* results go here */</span><span class="p">]</span>
@@ -438,7 +422,7 @@ traditional key-value stores, they don't have a good way to count offsets.  Also
 <p><code>offset</code> simply tells us how many documents were <code>skip</code>ped, but <code>total_rows</code> tells us the total number of docs in our database.  This can be very useful if you want to calculate how many documents are left to be read in, or if you just want to quickly fetch the database size.</p>
 
 <p>For instance, calling <code>allDocs()</code> with <code>{limit : 0}</code> will simply return an empty list:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[]</span>

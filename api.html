@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -110,10 +110,17 @@
 
 <p>Additionally, any method that only returns a single thing (e.g. <code>db.get</code>) also returns a <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">promise</a>. Promises come from the minimal library <a href="https://github.com/calvinmetcalf/lie">lie</a> in the browser, and the feature-rich <a href="https://github.com/petkaantonov/bluebird">Bluebird</a> in Node.</p>
 
-<div id='create_database'><a class='h2 anchor' href='#create_database' name='create_database'>Create a database</a></div>
+<div id='create_database'>
+  <a
+     class='h2 anchor'
+     href='#create_database'
+     name='create_database'
+  >
+    Create a database
+  </a>
+</div>
 
-<div class="highlight"><pre><code class="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">([</span><span class="nx">name</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">([</span><span class="nx">name</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span></code></pre></div>
 
 <p>This method creates a database or opens an existing one. If you use a URL like <code>&#39;http://domain.com/dbname&#39;</code> then PouchDB will work as a client to an online CouchDB instance.  Otherwise it will create a local database using whatever backend is present (i.e. IndexedDB, WebSQL, or LevelDB). </p>
 
@@ -141,25 +148,39 @@
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
 <span class="c1">// or</span>
-<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/dbname&#39;</span><span class="p">);</span>
-</code></pre></div>
+<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/dbname&#39;</span><span class="p">);</span></code></pre></div>
 
-<p>Create a WebSQL-only Pouch (e.g. when using the <a href="https://github.com/lite4cordova/Cordova-SQLitePlugin">SQLite Plugin</a> for Cordova/PhoneGap):</p>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span> <span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span>
-</code></pre></div>
+Create a WebSQL-only Pouch (e.g. when using the [SQLite Plugin][] for Cordova/PhoneGap):
 
-<p>Create an in-memory Pouch (in Node):</p>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span> <span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)});</span>
-</code></pre></div>
 
-<div id='delete_database'><a class='h2 anchor' href='#delete_database' name='delete_database'>Delete a database</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">destroy</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span> <span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span></code></pre></div>
+
+
+Create an in-memory Pouch (in Node):
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span> <span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)});</span></code></pre></div>
+
+
+
+  
+
+<div id='delete_database'>
+  <a
+     class='h2 anchor'
+     href='#delete_database'
+     name='delete_database'
+  >
+    Delete a database
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">destroy</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Delete database.</p>
 
@@ -167,20 +188,25 @@
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">destroy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">destroy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
 <p>You can also delete a database using just the name:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">destroy</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">destroy</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<div id='create_document'><a class='h2 anchor' href='#create_document' name='create_document'>Create / update a document</a></div>
+<div id='create_document'>
+  <a
+     class='h2 anchor'
+     href='#create_document'
+     name='create_document'
+  >
+    Create / update a document
+  </a>
+</div>
 
 <h3>Using db.put()</h3>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">docId</span><span class="p">],</span> <span class="p">[</span><span class="nx">docRev</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">docId</span><span class="p">],</span> <span class="p">[</span><span class="nx">docRev</span><span class="p">],</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Create a new document or update an existing document. If the document already exists, you must specify its revision <code>_rev</code>, otherwise a conflict will occur.</p>
 
@@ -190,31 +216,34 @@
 
 <p>Create a new doc with an <code>_id</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Heroes&#39;</span>
-<span class="p">},</span> <span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<p>Like all methods, you can also use a promise:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
+Like all methods, you can also use a promise:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Lady Stardust&#39;</span>
-<span class="p">},</span> <span class="s1">&#39;myOtherDoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="s1">&#39;myOtherDoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<p>Update an existing doc using <code>_rev</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;myOtherDoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">otherDoc</span><span class="p">)</span> <span class="p">{</span>
+Update an existing doc using `_rev`:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;myOtherDoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">otherDoc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
     <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Let&#39;s Dance&quot;</span>
   <span class="p">},</span> <span class="s1">&#39;myOtherDoc&#39;</span><span class="p">,</span> <span class="nx">otherDoc</span><span class="p">.</span><span class="nx">_rev</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<p>You can also include the <code>_id</code> and <code>_rev</code> directly in the document:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;myOtherDoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">otherDoc</span><span class="p">)</span> <span class="p">{</span>
+You can also include the `_id` and `_rev` directly in the document:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;myOtherDoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">otherDoc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
     <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;myOtherDoc&#39;</span><span class="p">,</span>
     <span class="nx">_rev</span><span class="o">:</span> <span class="nx">otherDoc</span><span class="p">.</span><span class="nx">_rev</span><span class="p">,</span>
@@ -226,47 +255,57 @@
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// on success</span>
   <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;mydoc&quot;</span><span class="p">,</span>
   <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-A6157A5EA545C99B00FF904EEF05FD9F&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<h3>Using db.post()</h3>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+### Using db.post()
 
-<p>Create a new document and let PouchDB generate an <code>_id</code> for it.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
-<h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">post</span><span class="p">({</span>
+Create a new document and let PouchDB generate an `_id` for it.
+
+#### Example Usage:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">post</span><span class="p">({</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Ziggy Stardust&#39;</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<h3>Example Response:</h3>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">&quot;id&quot;</span> <span class="o">:</span> <span class="s2">&quot;8A2C3761-FFD5-4770-9B8C-38C33CED300A&quot;</span><span class="p">,</span>
   <span class="s2">&quot;rev&quot;</span> <span class="o">:</span> <span class="s2">&quot;1-d3a8e0e5aa7c8fff0c376dac2d8a4007&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Put vs. post</strong>: The basic rule of thumb is: <code>put()</code> new documents with an <code>_id</code>, <code>post()</code> new documents without an <code>_id</code>.</p>
 
-<div id='fetch_document'><a class='h2 anchor' href='#fetch_document' name='fetch_document'>Fetch a document</a></div>
+**Put vs. post**: The basic rule of thumb is: `put()` new documents with an `_id`, `post()` new documents without an `_id`.
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='fetch_document'>
+  <a
+     class='h2 anchor'
+     href='#fetch_document'
+     name='fetch_document'
+  >
+    Fetch a document
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Retrieves a document, specified by <code>docId</code>.</p>
 
@@ -291,61 +330,79 @@
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
 <h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;Rock and Roll Heart&quot;</span><span class="p">,</span>
   <span class="s2">&quot;_id&quot;</span><span class="o">:</span> <span class="s2">&quot;mydoc&quot;</span><span class="p">,</span>
   <span class="s2">&quot;_rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-A6157A5EA545C99B00FF904EEF05FD9F&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='delete_document'><a class='h2 anchor' href='#delete_document' name='delete_document'>Delete a document</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='delete_document'>
+  <a
+     class='h2 anchor'
+     href='#delete_document'
+     name='delete_document'
+  >
+    Delete a document
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Or:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">docRev</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">docRev</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Deletes the document. <code>doc</code> is required to be a document with at least an <code>_id</code> and a <code>_rev</code> property. Sending the full document will work as well.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
   <span class="c1">// or:</span>
   <span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">_rev</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<h3>With Promises:</h3>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+### With Promises:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;mydoc&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>
 <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
   <span class="c1">//errors</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;mydoc&quot;</span><span class="p">,</span>
   <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;2-9AF304BE281790604D1D8A4B0F4C9ADB&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='batch_create'><a class='h2 anchor' href='#batch_create' name='batch_create'>Create/update a batch of documents</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">(</span><span class="nx">docs</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='batch_create'>
+  <a
+     class='h2 anchor'
+     href='#batch_create'
+     name='batch_create'
+  >
+    Create/update a batch of documents
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">(</span><span class="nx">docs</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Create, update or delete multiple documents. The <code>docs</code> argument is an array of documents.</p>
 
@@ -357,15 +414,15 @@
 
 <p>Post some new docs and auto-generate the <code>_id</code>s:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
   <span class="p">{</span><span class="nx">title</span> <span class="o">:</span> <span class="s1">&#39;Lisa Says&#39;</span><span class="p">},</span>
   <span class="p">{</span><span class="nx">title</span> <span class="o">:</span> <span class="s1">&#39;Space Oddity&#39;</span><span class="p">}</span>
-<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">[</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[</span>
     <span class="p">{</span>
         <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> 
         <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;06F1740A-8E8A-4645-A2E9-0D8A8C0C983A&quot;</span><span class="p">,</span> 
@@ -376,14 +433,15 @@
         <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;6244FB45-91DB-41E5-94FF-58C540E91844&quot;</span><span class="p">,</span> 
         <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-7b80fc50b6af7a905f368670429a757e&quot;</span>
     <span class="p">}</span>
-<span class="p">]</span>
-</code></pre></div>
+<span class="p">]</span></code></pre></div>
 
-<h4>Bulk update/delete:</h4>
 
-<p>Then you can update those same docs:</p>
+#### Bulk update/delete:
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
+Then you can update those same docs:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
   <span class="p">{</span>
     <span class="nx">title</span>  <span class="o">:</span> <span class="s1">&#39;Lisa Says&#39;</span><span class="p">,</span> 
     <span class="nx">artist</span> <span class="o">:</span> <span class="s1">&#39;Velvet Underground&#39;</span><span class="p">,</span>
@@ -396,12 +454,13 @@
     <span class="nx">_id</span>    <span class="o">:</span> <span class="s2">&quot;6244FB45-91DB-41E5-94FF-58C540E91844&quot;</span><span class="p">,</span> 
     <span class="nx">_rev</span>   <span class="o">:</span> <span class="s2">&quot;1-7b80fc50b6af7a905f368670429a757e&quot;</span>
   <span class="p">}</span>
-<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<p>Or delete them:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
+Or delete them:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">bulkDocs</span><span class="p">([</span>
   <span class="p">{</span>
     <span class="nx">title</span>    <span class="o">:</span> <span class="s1">&#39;Lisa Says&#39;</span><span class="p">,</span> 
     <span class="nx">_deleted</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -414,15 +473,25 @@
     <span class="nx">_id</span>      <span class="o">:</span> <span class="s2">&quot;6244FB45-91DB-41E5-94FF-58C540E91844&quot;</span><span class="p">,</span> 
     <span class="nx">_rev</span>     <span class="o">:</span> <span class="s2">&quot;1-7b80fc50b6af7a905f368670429a757e&quot;</span>
   <span class="p">}</span>
-<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<p><strong>Note:</strong> You can also specify a <code>new_edits</code> property on the options object that when set to <code>false</code> allows you to post and overwrite <a href="http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Posting_Existing_Revisions">existing documents</a>. Normally only the replication algorithm needs to do this.</p>
 
-<div id='batch_fetch'><a class='h2 anchor' href='#batch_fetch' name='batch_fetch'>Fetch a batch of documents</a></div>
+**Note:** You can also specify a `new_edits` property on the options object that when set to `false` allows you to post and overwrite [existing documents](http://wiki.apache.org/couchdb/HTTP_Bulk_Document_API#Posting_Existing_Revisions). Normally only the replication algorithm needs to do this.
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='batch_fetch'>
+  <a
+     class='h2 anchor'
+     href='#batch_fetch'
+     name='batch_fetch'
+  >
+    Fetch a batch of documents
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Fetch multiple documents.  Deleted documents are only included if <code>options.keys</code> is specified.</p>
 
@@ -458,12 +527,11 @@
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">include_docs</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">allDocs</span><span class="p">({</span><span class="nx">include_docs</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
 <h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[{</span>
@@ -478,13 +546,23 @@
     <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-5782E71F1E4BF698FA3793D9D5A96393&quot;</span>
    <span class="p">}</span>
  <span class="p">}]</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='changes'><a class='h2 anchor' href='#changes' name='changes'>Listen to database changes</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
-</code></pre></div>
+
+  
+
+<div id='changes'>
+  <a
+     class='h2 anchor'
+     href='#changes'
+     name='changes'
+  >
+    Listen to database changes
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span></code></pre></div>
 
 <p>A list of changes made to documents in the database, in the order they were made.
 It returns an object with the method <code>cancel()</code>, which you call if you don&#39;t want to listen to new changes anymore. </p>
@@ -515,17 +593,17 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">changes</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">changes</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">({</span>
   <span class="nx">since</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
   <span class="nx">live</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">change</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 
-<span class="nx">changes</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
-</code></pre></div>
+<span class="nx">changes</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="s2">&quot;somestuff&quot;</span><span class="p">,</span>
   <span class="s2">&quot;seq&quot;</span><span class="o">:</span><span class="mi">21</span><span class="p">,</span>
   <span class="s2">&quot;changes&quot;</span><span class="o">:</span><span class="p">[{</span>
@@ -536,19 +614,19 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
     <span class="s2">&quot;_id&quot;</span><span class="o">:</span><span class="s2">&quot;someDocId&quot;</span><span class="p">,</span>
     <span class="s2">&quot;_rev&quot;</span><span class="o">:</span><span class="s2">&quot;1-8e6e4c0beac3ec54b27d1df75c7183a8&quot;</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">()</span>
+#### Example Usage:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">changes</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{})</span>
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="p">{});</span>
-</code></pre></div>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="p">{});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;results&quot;</span><span class="o">:</span> <span class="p">[{</span>
     <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;0B3358C1-BA4B-4186-8795-9024203EB7DD&quot;</span><span class="p">,</span>
     <span class="s2">&quot;seq&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -574,21 +652,29 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
       <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;1-A8BC08745E62E58830CA066D99E5F457&quot;</span>
     <span class="p">}]</span>
   <span class="p">}]</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Note:</strong></p>
 
-<ul>
-<li>The <code>&#39;complete&#39;</code> event only fires when you aren&#39;t doing live changes. With live changes, use the <code>&#39;uptodate&#39;</code> event instead.</li>
-<li>The <code>changes()</code> method was not an event emitter before PouchDB 2.2.0, and instead of the <code>&#39;change&#39;</code> and <code>&#39;complete&#39;</code> events it took <code>complete</code> and <code>onChange</code> function options. This is deprecated and could be removed in PouchDB version 3.</li>
-<li>The <code>&#39;since&#39;</code>option formally took &#39;latest&#39; but has been changed to &#39;now&#39; to keep consistency with CouchDB, &#39;latest&#39; is deprecated but will still work to ensure backwards compatibility.</li>
-</ul>
+**Note:**
 
-<div id='replication'><a class='h2 anchor' href='#replication' name='replication'>Replicate a database</a></div>
+* The `'complete'` event only fires when you aren't doing live changes. With live changes, use the `'uptodate'` event instead.
+* The `changes()` method was not an event emitter before PouchDB 2.2.0, and instead of the `'change'` and `'complete'` events it took `complete` and `onChange` function options. This is deprecated and could be removed in PouchDB version 3.
+* The `'since'`option formally took 'latest' but has been changed to 'now' to keep consistency with CouchDB, 'latest' is deprecated but will still work to ensure backwards compatibility.
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='replication'>
+  <a
+     class='h2 anchor'
+     href='#replication'
+     name='replication'
+  >
+    Replicate a database
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span></code></pre></div>
 
 <p>Replicate data from <code>source</code> to <code>target</code>.  Both the <code>source</code> and <code>target</code> can be a PouchDB instance or a string representing a CouchDB database URL or the name of a local PouchDB database. If <code>options.live</code> is <code>true</code>, then this will track future changes and also replicate them automatically. This method returns an object with the method <code>cancel()</code>, which you call if you want to cancel live replication.</p>
 
@@ -611,7 +697,7 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">replication</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">replication</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle change</span>
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
@@ -622,28 +708,28 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
     <span class="c1">// handle error</span>
   <span class="p">});</span>
   
-<span class="nx">replication</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
-</code></pre></div>
+<span class="nx">replication</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span></code></pre></div>
 
-<p>There are also shorthands for replication given existing PouchDB objects. These behave the same as <code>PouchDB.replicate()</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
+There are also shorthands for replication given existing PouchDB objects. These behave the same as `PouchDB.replicate()`:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
 <span class="c1">// or</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
-</code></pre></div>
+<span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span></code></pre></div>
 
-<p><strong>Notes:</strong></p>
 
-<ul>
-<li>The <code>&#39;complete&#39;</code> event only fires when you aren&#39;t doing live replication, or when live replication fails.</li>
-<li>The <code>&#39;uptodate&#39;</code> event fires during live replication, when the target database is up-to-date and just idling, waiting for new changes.</li>
-</ul>
+**Notes:**
 
-<h4>Example Response:</h4>
+* The `'complete'` event only fires when you aren't doing live replication, or when live replication fails.
+* The `'uptodate'` event fires during live replication, when the target database is up-to-date and just idling, waiting for new changes.
 
-<p>Example response in the <code>&#39;change&#39;</code> listener:</p>
+#### Example Response:
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+Example response in the `'change'` listener:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;doc_write_failures&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
   <span class="s2">&quot;docs_read&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
   <span class="s2">&quot;docs_written&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
@@ -651,12 +737,13 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
   <span class="s2">&quot;last_seq&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> 
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> 
   <span class="s2">&quot;start_time&quot;</span><span class="o">:</span> <span class="s2">&quot;Fri May 16 2014 18:23:12 GMT-0700 (PDT)&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p>Example response in the <code>&#39;complete&#39;</code> listener:</p>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+Example response in the `'complete'` listener:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;doc_write_failures&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
   <span class="s2">&quot;docs_read&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
   <span class="s2">&quot;docs_written&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
@@ -666,42 +753,53 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> 
   <span class="s2">&quot;start_time&quot;</span><span class="o">:</span> <span class="s2">&quot;Fri May 16 2014 18:26:00 GMT-0700 (PDT)&quot;</span><span class="p">,</span> 
   <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="s2">&quot;complete&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Notes:</strong></p>
 
-<ul>
-<li>The response for server replications (via <code>options.server</code>) is slightly different. See the <a href="http://wiki.apache.org/couchdb/Replication">CouchDB replication documentation</a> for details.</li>
-<li>The <code>&#39;live&#39;</code> option was formerly called <code>&#39;continuous&#39;</code>. You can still use <code>&#39;continuous&#39;</code> if you can spell it.</li>
-<li>The replicate() method was not an event emitter before PouchDB 2.2.0, and instead of the <code>&#39;change&#39;</code> and <code>&#39;complete&#39;</code> events it took <code>complete</code> and <code>onChange</code> function options. This is deprecated and could be removed in PouchDB version 3.</li>
-</ul>
+**Notes:**
 
-<div id='sync'><a class='h2 anchor' href='#sync' name='sync'>Sync a database</a></div>
+* The response for server replications (via `options.server`) is slightly different. See the [CouchDB replication documentation](http://wiki.apache.org/couchdb/Replication) for details.
+* The `'live'` option was formerly called `'continuous'`. You can still use `'continuous'` if you can spell it.
+* The replicate() method was not an event emitter before PouchDB 2.2.0, and instead of the `'change'` and `'complete'` events it took `complete` and `onChange` function options. This is deprecated and could be removed in PouchDB version 3.
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='sync'>
+  <a
+     class='h2 anchor'
+     href='#sync'
+     name='sync'
+  >
+    Sync a database
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">])</span></code></pre></div>
 
 <p>Sync data from <code>src</code> to <code>target</code> and <code>target</code> to <code>src</code>. This is a convenience method for bidirectional data replication.</p>
 
 <p>In other words, this code:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span>
-<span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;mydb&#39;</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span>
+<span class="nx">PouchDB</span><span class="p">.</span><span class="nx">replicate</span><span class="p">(</span><span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;mydb&#39;</span><span class="p">);</span></code></pre></div>
 
-<p>is equivalent to this code:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span>
-</code></pre></div>
 
-<h3>Options</h3>
+is equivalent to this code:
 
-<p>Please refer to <a href="api.html#replication">Replication</a> for documentation on options, as <code>sync()</code> is just a convenience method that entails bidirectional replication.</p>
 
-<h4>Example Usage:</h4>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">);</span></code></pre></div>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+
+
+### Options
+
+Please refer to [Replication](api.html#replication) for documentation on options, as `sync()` is just a convenience method that entails bidirectional replication.
+
+#### Example Usage:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">sync</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost:5984/mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">live</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// handle change</span>
   <span class="p">}).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
@@ -712,50 +810,63 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
     <span class="c1">// handle error</span>
   <span class="p">});</span>
   
-<span class="nx">sync</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span>
-</code></pre></div>
+<span class="nx">sync</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span> <span class="c1">// whenever you want to cancel</span></code></pre></div>
 
-<p>There is also a shorthand for syncing given existing PouchDB objects. This behaves the same as <code>PouchDB.sync()</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
-</code></pre></div>
+There is also a shorthand for syncing given existing PouchDB objects. This behaves the same as `PouchDB.sync()`:
 
-<p>For any further details, please further to <a href="api.html#replication">Replication</a>.</p>
 
-<div id='save_attachment'><a class='h2 anchor' href='#save_attachment' name='save_attachment'>Save an attachment</a></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">sync</span><span class="p">(</span><span class="nx">remoteDB</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span></code></pre></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">putAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">]);</span>
-</code></pre></div>
+
+For any further details, please further to [Replication](api.html#replication).
+
+
+  
+
+<div id='save_attachment'>
+  <a
+     class='h2 anchor'
+     href='#save_attachment'
+     name='save_attachment'
+  >
+    Save an attachment
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">putAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">]);</span></code></pre></div>
 
 <p>Attaches a binary object to a document. Most of PouchDB&#39;s API deals with JSON, but if you&#39;re dealing with large binary data (such as PNGs), you may incur a performance or storage penalty if you simply include them as base64- or hex-encoded strings. In these cases, you can store the binary data as an attachment. For details, see the <a href="https://wiki.apache.org/couchdb/HTTP_Document_API#Attachments">CouchDB documentation on attachments</a>.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">]);</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">putAttachment</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{})</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blob</span><span class="p">([</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">]);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">putAttachment</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="nx">doc</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{})</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;otherdoc&quot;</span><span class="p">,</span>
   <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;2-068E73F5B44FEC987B51354DFC772891&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p>Within Node, you must use a <code>Buffer</code> instead of a <code>Blob</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">);</span>
-</code></pre></div>
+Within Node, you must use a `Buffer` instead of a `Blob`:
 
-<p>For details, see the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">Mozilla docs on <code>Blob</code></a> or the <a href="http://nodejs.org/api/buffer.html">Node docs on <code>Buffer</code></a>.  If you need a shim for older browsers that don&#39;t support the <code>Blob</code> constructor, you can use <a href="https://gist.github.com/nolanlawson/10340255">this one</a>.</p>
 
-<h3>Save an inline attachment</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="s2">&quot;It&#39;s a God awful small affair&quot;</span><span class="p">);</span></code></pre></div>
 
-<p>You can also inline attachments inside the document. In this case, the attachment data must be supplied as a base64-encoded string:</p>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+For details, see the [Mozilla docs on `Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob) or the [Node docs on `Buffer`](http://nodejs.org/api/buffer.html).  If you need a shim for older browsers that don't support the `Blob` constructor, you can use [this one](https://gist.github.com/nolanlawson/10340255).
+
+### Save an inline attachment
+
+You can also inline attachments inside the document. In this case, the attachment data must be supplied as a base64-encoded string:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s1">&#39;_id&#39;</span><span class="o">:</span> <span class="s1">&#39;otherdoc&#39;</span><span class="p">,</span>
   <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Legendary Hearts&#39;</span><span class="p">,</span>
   <span class="s1">&#39;_attachments&#39;</span><span class="o">:</span> <span class="p">{</span>
@@ -765,23 +876,32 @@ It returns an object with the method <code>cancel()</code>, which you call if yo
          <span class="s2">&quot;WFrZSBvdXIgZW1vdGlvbnMgYmxlZWQsIGNyeWluZyBvdXQgaW4gbmVlZA==&quot;</span>
     <span class="p">}</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p>See <a href="http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments">Inline Attachments</a>
-on the CouchDB wiki for details.</p>
 
-<div id='get_attachment'><a class='h2 anchor' href='#get_attachment' name='get_attachment'>Get an attachment</a></div>
+See [Inline Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments)
+on the CouchDB wiki for details.
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">getAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='get_attachment'>
+  <a
+     class='h2 anchor'
+     href='#get_attachment'
+     name='get_attachment'
+  >
+    Get an attachment
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">getAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Get attachment data.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">getAttachment</span><span class="p">(</span><span class="s1">&#39;otherdoc&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">getAttachment</span><span class="p">(</span><span class="s1">&#39;otherdoc&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
 <p>In Node you get <code>Buffer</code>s, and in the browser you get <code>Blob</code>s.</p>
 
@@ -789,33 +909,50 @@ on the CouchDB wiki for details.</p>
 
 <p>You can specify <code>attachments: true</code> to most read operations. The attachment data will then be included inlined in the resulting list of docs.</p>
 
-<div id='delete_attachment'><a class='h2 anchor' href='#delete_attachment' name='delete_attachment'>Delete an attachment</a></div>
+<div id='delete_attachment'>
+  <a
+     class='h2 anchor'
+     href='#delete_attachment'
+     name='delete_attachment'
+  >
+    Delete an attachment
+  </a>
+</div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">removeAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">removeAttachment</span><span class="p">(</span><span class="nx">docId</span><span class="p">,</span> <span class="nx">attachmentId</span><span class="p">,</span> <span class="nx">rev</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Delete an attachment from a doc.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">removeAttachment</span><span class="p">(</span><span class="s1">&#39;otherdoc&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">removeAttachment</span><span class="p">(</span><span class="s1">&#39;otherdoc&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;text&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;2-068E73F5B44FEC987B51354DFC772891&#39;</span><span class="p">,</span>
-                    <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+                    <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">&quot;rev&quot;</span><span class="o">:</span> <span class="s2">&quot;3-1F983211AB87EFCCC980974DFC27382F&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='query_database'><a class='h2 anchor' href='#query_database' name='query_database'>Query the database</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">fun</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='query_database'>
+  <a
+     class='h2 anchor'
+     href='#query_database'
+     name='query_database'
+  >
+    Query the database
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">fun</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Retrieves a view, which allows you to perform more complex queries on PouchDB. The <a href="http://docs.couchdb.org/en/latest/couchapp/views/intro.html">CouchDB documentation for map/reduce</a> applies to PouchDB.</p>
 
@@ -874,18 +1011,18 @@ on the CouchDB wiki for details.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">title</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span><span class="nx">map</span><span class="o">:</span> <span class="nx">map</span><span class="p">},</span> <span class="p">{</span><span class="nx">reduce</span><span class="o">:</span> <span class="kc">false</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span><span class="nx">map</span><span class="o">:</span> <span class="nx">map</span><span class="p">},</span> <span class="p">{</span><span class="nx">reduce</span><span class="o">:</span> <span class="kc">false</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;offset&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[{</span>
     <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;0B3358C1-BA4B-4186-8795-9024203EB7DD&quot;</span><span class="p">,</span>
@@ -905,25 +1042,26 @@ on the CouchDB wiki for details.</p>
     <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="kc">null</span>
   <span class="p">}],</span>
   <span class="s2">&quot;total_rows&quot;</span> <span class="o">:</span> <span class="mi">4</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Note:</strong> <code>total_rows</code> is the total number of possible results in the view.</p>
 
-<h4>Complex keys</h4>
+**Note:** `total_rows` is the total number of possible results in the view.
 
-<p>You can also use <a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Complex_Keys">complex keys</a> for fancy ordering:</p>
+#### Complex keys
 
-<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+You can also use [complex keys](https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Complex_Keys) for fancy ordering:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// sort by last name, first name, and age</span>
   <span class="nx">emit</span><span class="p">([</span><span class="nx">doc</span><span class="p">.</span><span class="nx">lastName</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">age</span><span class="p">]);</span>
 <span class="p">}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span>
-</code></pre></div>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[{</span>
       <span class="s2">&quot;id&quot;</span>  <span class="o">:</span> <span class="s2">&quot;bowie&quot;</span><span class="p">,</span>
@@ -942,32 +1080,32 @@ on the CouchDB wiki for details.</p>
       <span class="s2">&quot;key&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Williams&quot;</span><span class="p">,</span> <span class="s2">&quot;Hank&quot;</span><span class="p">,</span> <span class="mi">91</span><span class="p">]</span>
     <span class="p">}],</span>
   <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">5</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Tips:</strong> </p>
 
-<ul>
-<li>CouchDB sorts objects last, so <code>{startkey: [&#39;Williams&#39;], endkey: [&#39;Williams&#39;, {}]}</code> would return all people with the last name <code>&#39;Williams&#39;</code>.</li>
-<li><code>group_level</code> can be very helpful when working with complex keys.  In the example above, you can use <code>{group_level: 1}</code> to group by last name, or <code>{group_level: 2}</code> to group by last and first name.</li>
-</ul>
+**Tips:** 
 
-<h4>Linked documents</h4>
+* CouchDB sorts objects last, so `{startkey: ['Williams'], endkey: ['Williams', {}]}` would return all people with the last name `'Williams'`.
+* `group_level` can be very helpful when working with complex keys.  In the example above, you can use `{group_level: 1}` to group by last name, or `{group_level: 2}` to group by last and first name.
 
-<p>PouchDB fully supports <a href="https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Linked_documents">linked documents</a>. Use them to join two types of documents together, by simply adding an <code>_id</code> to the emitted value:</p>
+#### Linked documents
 
-<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+PouchDB fully supports [linked documents](https://wiki.apache.org/couchdb/Introduction_to_CouchDB_views#Linked_documents). Use them to join two types of documents together, by simply adding an `_id` to the emitted value:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// join artist data to albums</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;album&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span><span class="nx">_id</span> <span class="o">:</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">artistId</span><span class="p">,</span> <span class="nx">albumYear</span> <span class="o">:</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">year</span><span class="p">});</span>
   <span class="p">}</span>
 <span class="p">}</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="p">{</span><span class="nx">include_docs</span> <span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span>
-</code></pre></div>
+<span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">map</span><span class="p">,</span> <span class="p">{</span><span class="nx">include_docs</span> <span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{});</span></code></pre></div>
 
-<h4>Example response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example response:
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
     <span class="s2">&quot;offset&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;rows&quot;</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
@@ -1017,14 +1155,15 @@ on the CouchDB wiki for details.</p>
         <span class="p">}</span>
     <span class="p">],</span>
     <span class="s2">&quot;total_rows&quot;</span><span class="o">:</span> <span class="mi">3</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<h4>Closures</h4>
 
-<p>If you pass a function to <code>db.query</code> and give it the <code>emit</code> function as the second argument, then you can use a closure. (Otherwise we have to use <code>eval()</code> to bind <code>emit</code>.)</p>
+#### Closures
 
-<div class="highlight"><pre><code class="js"><span class="c1">// BAD! will throw error</span>
+If you pass a function to `db.query` and give it the `emit` function as the second argument, then you can use a closure. (Otherwise we have to use `eval()` to bind `emit`.)
+
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// BAD! will throw error</span>
 <span class="kd">var</span> <span class="nx">myId</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span> <span class="o">===</span> <span class="nx">myId</span><span class="p">)</span> <span class="p">{</span>
@@ -1038,25 +1177,35 @@ on the CouchDB wiki for details.</p>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span> <span class="o">===</span> <span class="nx">myId</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span></code></pre></div>
 
-<p>You don&#39;t actuallly have to call them by those names, though:</p>
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">myId</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+You don't actuallly have to call them by those names, though:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">myId</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">thisIs</span><span class="p">,</span> <span class="nx">awesome</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">thisIs</span><span class="p">.</span><span class="nx">_id</span> <span class="o">===</span> <span class="nx">myId</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">awesome</span><span class="p">(</span><span class="nx">thisIs</span><span class="p">);</span> 
   <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span></code></pre></div>
 
-<p>Note that closures are only supported by local databases with temporary views.</p>
 
-<div id='view_cleanup'><a class='h2 anchor' href='#view_cleanup' name='view_cleanup'>View cleanup</a></div>
+Note that closures are only supported by local databases with temporary views.
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='view_cleanup'>
+  <a
+     class='h2 anchor'
+     href='#view_cleanup'
+     name='view_cleanup'
+  >
+    View cleanup
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Cleans up any stale map/reduce indexes.</p>
 
@@ -1066,49 +1215,65 @@ on the CouchDB wiki for details.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">viewCleanup</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;ok&quot;</span> <span class="o">:</span> <span class="s2">&quot;true&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='database_information'><a class='h2 anchor' href='#database_information' name='database_information'>Get database information</a></div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span>
-</code></pre></div>
+
+  
+
+<div id='database_information'>
+  <a
+     class='h2 anchor'
+     href='#database_information'
+     name='database_information'
+  >
+    Get database information
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span></code></pre></div>
 
 <p>Get information about a database.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span></code></pre></div>
 
 <h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;db_name&quot;</span><span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
   <span class="s2">&quot;doc_count&quot;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
   <span class="s2">&quot;update_seq&quot;</span><span class="o">:</span> <span class="mi">5</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<p><strong>Response object:</strong></p>
 
-<ul>
-<li><code>db_name</code> is the name of the database you gave when you called <code>new PouchDB()</code>, and also the unique identifier for the database.</li>
-<li><code>doc_count</code> is the total number of non-deleted documents in the database.</li>
-<li><code>update_seq</code> is the sequence number of the database.  It starts at 0 and gets incremented every time a document is added or modified.</li>
-</ul>
+**Response object:**
 
-<div id='compaction'><a class='h2 anchor' href='#compaction' name='compaction'>Compact the database</a></div>
+* `db_name` is the name of the database you gave when you called `new PouchDB()`, and also the unique identifier for the database.
+* `doc_count` is the total number of non-deleted documents in the database.
+* `update_seq` is the sequence number of the database.  It starts at 0 and gets incremented every time a document is added or modified.
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">compact</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+
+  
+
+<div id='compaction'>
+  <a
+     class='h2 anchor'
+     href='#compaction'
+     name='compaction'
+  >
+    Compact the database
+  </a>
+</div>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">compact</span><span class="p">([</span><span class="nx">options</span><span class="p">],</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Triggers a compaction operation for <code>db</code> on the remote host. This reduces the database&#39;s size by removing unused and old data. If a <code>callback</code> function is specified, Pouch checks compaction status at regular intervals and fires the callback upon completion. Consult the <a href="http://couchdb.readthedocs.org/en/latest/maintenance/compaction.html">compaction section of CouchDB&#39;s maintenance documentation</a> for more detail about database compaction.</p>
 
@@ -1118,61 +1283,90 @@ on the CouchDB wiki for details.</p>
 <li><code>options.interval</code>: Number of milliseconds Pouch waits before asking again if compaction is already done. Defaults to 200.</li>
 </ul>
 
-<div id='revisions_diff'><a class='h2 anchor' href='#revisions_diff' name='revisions_diff'>Document revisions diff</a></div>
+<div id='revisions_diff'>
+  <a
+     class='h2 anchor'
+     href='#revisions_diff'
+     name='revisions_diff'
+  >
+    Document revisions diff
+  </a>
+</div>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">revsDiff</span><span class="p">(</span><span class="nx">diff</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">revsDiff</span><span class="p">(</span><span class="nx">diff</span><span class="p">,</span> <span class="p">[</span><span class="nx">callback</span><span class="p">])</span></code></pre></div>
 
 <p>Given a set of document/revision IDs, returns the subset of those that do not correspond
 to revisions stored in the database. Primarily used in replication.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">db</span><span class="p">.</span><span class="nx">revsDiff</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">db</span><span class="p">.</span><span class="nx">revsDiff</span><span class="p">({</span>
   <span class="nx">myDoc1</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">&quot;1-b2e54331db828310f3c772d6e042ac9c&quot;</span><span class="p">,</span>
     <span class="s2">&quot;2-3a24009a9525bde9e4bfa8a99046b00d&quot;</span>
   <span class="p">]</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">diffs</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</code></pre></div>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">diffs</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span></code></pre></div>
 
-<h4>Example Response:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="p">{</span>
+#### Example Response:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
   <span class="s2">&quot;myDoc1&quot;</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">&quot;missing&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;2-3a24009a9525bde9e4bfa8a99046b00d&quot;</span><span class="p">]</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
-<div id='events'><a class='h2 anchor' href='#events' name='events'>Events</a></div>
+
+
+  
+
+<div id='events'>
+  <a
+     class='h2 anchor'
+     href='#events'
+     name='events'
+  >
+    Events
+  </a>
+</div>
 
 <p>PouchDB is an <a href="http://nodejs.org/api/events.html#events_class_events_eventemitter">event emitter</a> and will emit a <code>&#39;created&#39;</code> event when a database is created. A <code>&#39;destroyed&#39;</code> event is emitted when a database is destroyed.</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">dbName</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">dbName</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// called whenver a db is created.</span>
 <span class="p">});</span>
 <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroyed&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">dbName</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// called whenver a db is destroyed.</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<div id='defaults'><a class='h2 anchor' href='#defaults' name='defaults'>Default settings</a></div>
+
+
+  
+
+<div id='defaults'>
+  <a
+     class='h2 anchor'
+     href='#defaults'
+     name='defaults'
+  >
+    Default settings
+  </a>
+</div>
 
 <p>If you find yourself using the same constructor options repeatedly,
 you can simplify your code with <code>PouchDB.defaults()</code>:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
   <span class="nx">option1</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span>
   <span class="nx">option2</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-<p>The returned object is a constructor function that works the same as <code>PouchDB</code>, except that whenever you invoke it (e.g. with <code>new</code>), the given options will be passed in by default.</p>
 
-<h4>Example Usage:</h4>
+The returned object is a constructor function that works the same as `PouchDB`, except that whenever you invoke it (e.g. with `new`), the given options will be passed in by default.
 
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">MyMemPouch</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
+#### Example Usage:
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">MyMemPouch</span> <span class="o">=</span> <span class="nx">PouchDB</span><span class="p">.</span><span class="nx">defaults</span><span class="p">({</span>
   <span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)</span>
 <span class="p">});</span>
 <span class="c1">// MemDOWN-backed Pouch (in Node)</span>
@@ -1182,22 +1376,32 @@ you can simplify your code with <code>PouchDB.defaults()</code>:</p>
   <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;/path/to/my/db/&#39;</span>
 <span class="p">});</span>
 <span class="c1">// db will be named &#39;/path/to/my/db/dbname&#39;, useful for LevelDB</span>
-<span class="kd">var</span> <span class="nx">myPrefixedPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPrefixedPouch</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
-</code></pre></div>
+<span class="kd">var</span> <span class="nx">myPrefixedPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPrefixedPouch</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span></code></pre></div>
 
-<p>Note the special constructor option <code>prefix</code>, which appends a prefix to the database name
-and can be helpful for URL-based or file-based LevelDOWN path names.</p>
 
-<p>All <a href="#create_database">constructor options</a> are supported. Default options can still be overriden individually.</p>
+Note the special constructor option `prefix`, which appends a prefix to the database name
+and can be helpful for URL-based or file-based LevelDOWN path names.
 
-<div id='plugins'><a class='h2 anchor' href='#plugins' name='plugins'>Plugins</a></div>
+All [constructor options](#create_database) are supported. Default options can still be overriden individually.
+
+
+  
+
+<div id='plugins'>
+  <a
+     class='h2 anchor'
+     href='#plugins'
+     name='plugins'
+  >
+    Plugins
+  </a>
+</div>
 
 <p>Writing a plugin is easy! The API is:</p>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">plugin</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">plugin</span><span class="p">({</span>
   <span class="nx">methodName</span><span class="o">:</span> <span class="nx">myFunction</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
 <p>This will add the function as a method of all databases with the given method name.  It will always be called in context, so that <code>this</code> always refers to the database object.</p>
 
@@ -1205,15 +1409,14 @@ and can be helpful for URL-based or file-based LevelDOWN path names.</p>
 
 <h4>Example Usage:</h4>
 
-<div class="highlight"><pre><code class="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">plugin</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">PouchDB</span><span class="p">.</span><span class="nx">plugin</span><span class="p">({</span>
   <span class="nx">sayMyName</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">info</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span>   <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;My name is &#39;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">db_name</span><span class="p">);</span>
     <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
   <span class="p">}</span>
 <span class="p">});</span>
-<span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">).</span><span class="nx">sayMyName</span><span class="p">();</span> <span class="c1">// prints &quot;My name is foobar&quot;</span>
-</code></pre></div>
+<span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">).</span><span class="nx">sayMyName</span><span class="p">();</span> <span class="c1">// prints &quot;My name is foobar&quot;</span></code></pre></div>
 
         <div>
 

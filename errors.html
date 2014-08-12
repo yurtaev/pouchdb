@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -92,7 +92,15 @@
         </div>
 
         <div class="col-sm-9">
-          <h3>No &#39;Access-Control-Allow-Origin&#39; header</h3>
+          <div id='no_access_control_allow_origin_header'>
+  <a
+     class='h3 anchor'
+     href='#no_access_control_allow_origin_header'
+     name='no_access_control_allow_origin_header'
+  >
+    No 'Access-Control-Allow-Origin' header
+  </a>
+</div>
 
 <p>If you see the error:</p>
 
@@ -105,15 +113,23 @@ Origin [...] is therefore not allowed access.</p>
 <p>it&#39;s because you need to enable <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> on CouchDB/IrisCouch/whatever you&#39;re using. Otherwise, your scripts can only access the server database if they&#39;re served from the same domain.</p>
 
 <p>To enable CORS, just run the following commands on a command prompt (Mac/Linux) and substitute your user name, password, and the URL of your database:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">HOST=http://adminname:password@localhost:5984 # or whatever you got
+<div class="highlight"><pre><code class="language-text" data-lang="text">HOST=http://adminname:password@localhost:5984 # or whatever you got
 
 curl -X POST $HOST/_config/httpd/enable_cors -d &#39;&quot;true&quot;&#39;
 curl -X PUT $HOST/_config/cors/origins -d &#39;&quot;*&quot;&#39;
 curl -X PUT $HOST/_config/cors/credentials -d &#39;&quot;true&quot;&#39;
 curl -X PUT $HOST/_config/cors/methods -d &#39;&quot;GET, PUT, POST, HEAD, DELETE&quot;&#39;
-curl -X PUT $HOST/_config/cors/headers -d &#39;&quot;accept, content-type, origin&quot;&#39;
+curl -X PUT $HOST/_config/cors/headers -d &#39;&quot;accept, content-type, origin, referer&quot;&#39;
 </code></pre></div>
-<h3>iOS/Safari: &quot;there was not enough remaining storage space&quot;</h3>
+<div id='not_enough_space'>
+  <a
+     class='h3 anchor'
+     href='#not_enough_space'
+     name='not_enough_space'
+  >
+    iOS/Safari: "there was not enough remaining storage space"
+  </a>
+</div>
 
 <p>On iOS and Safari, if you expect your app to use more than 5MB of space, you will need to request the space up-front from the user.  In certain versions, notably Safari/iOS 7, you can never request more than what the user originally grants you.</p>
 
@@ -122,48 +138,132 @@ curl -X PUT $HOST/_config/cors/headers -d &#39;&quot;accept, content-type, origi
 <p>To get around this, when you create your PouchDB, use the <code>opts.size</code> option for the expected <em>maximum</em> size of the database in MB.  Valid increments are 10, 50, 100, 500, and 1000.  For instance, if you request 50, then Safari will show a popup saying &quot;allow 50MB?&quot; but if you request 51, then Safari will show a popup saying &quot;allow 100MB?&quot;.</p>
 
 <p>If you don&#39;t use the <code>size</code> option, then you&#39;ll be able to use up to 5MB without any popup, but then once you use more, there will be a popup asking for 10.</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">size</span><span class="o">:</span> <span class="mi">10</span><span class="p">});</span> <span class="c1">// request 10 MB with a popup</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">size</span><span class="o">:</span> <span class="mi">10</span><span class="p">});</span> <span class="c1">// request 10 MB with a popup</span>
 <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">size</span><span class="o">:</span> <span class="mi">50</span><span class="p">});</span> <span class="c1">// request 50 MB with a popup</span>
 <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">);</span> <span class="c1">// implicitly request 5 MB, no popup until you exceed 5MB</span>
 </code></pre></div>
-<p>This does not affect any backend other than Web SQL. Chrome, Android, and Opera do not show the popup. On PhoneGap/Cordova apps, you can also use the <a href="https://github.com/lite4cordova/Cordova-SQLitePlugin">SQLite plugin</a> to get around this problem. Here&#39;s <a href="http://www.html5rocks.com/en/tutorials/offline/quota-research">more information about storage quotas</a> and <a href="https://github.com/pouchdb/pouchdb/issues/2347">details on the Safari/iOS 7 bug</a>.</p>
+<p>This does not affect any backend other than Web SQL. Chrome, Android, and Opera do not show the popup. On PhoneGap/Cordova apps, you can also use the <a href="https://github.com/brodysoft/Cordova-SQLitePlugin">SQLite plugin</a> to get around this problem. Here&#39;s <a href="http://www.html5rocks.com/en/tutorials/offline/quota-research">more information about storage quotas</a> and <a href="https://github.com/pouchdb/pouchdb/issues/2347">details on the Safari/iOS 7 bug</a>.</p>
 
-<h3>PouchDB throws 404 (Object Not Found) for &#39;_local&#39; document</h3>
+<div id='404__local_document'>
+  <a
+     class='h3 anchor'
+     href='#404__local_document'
+     name='404__local_document'
+  >
+    PouchDB throws 404 (Object Not Found) for '_local' document
+  </a>
+</div>
 
 <p>Don&#39;t worry, nothing is amiss, this is expected behaviour:
 During PouchDB&#39;s initial replication PouchDB will check for a checkpoint, if it doesn&#39;t exist a 404 will be returned and a checkpoint will subsequently be written.</p>
 
-<h3>PouchDB is throwing <code>InvalidStateError</code></h3>
+<div id='throwing_invalidstateerror'>
+  <a
+     class='h3 anchor'
+     href='#throwing_invalidstateerror'
+     name='throwing_invalidstateerror'
+  >
+    PouchDB is throwing `InvalidStateError`
+  </a>
+</div>
 
 <p>Are you in private browsing mode? IndexedDB is <a href="https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB">disabled in private browsing mode</a> in Firefox.</p>
 
-<h3>Can&#39;t open second database on Android WebView with Cordova/Phone Gap</h3>
+<div id='phonegap_cordova_second_database'>
+  <a
+     class='h3 anchor'
+     href='#phonegap_cordova_second_database'
+     name='phonegap_cordova_second_database'
+  >
+    Can't open second database on Android WebView with Cordova/Phone Gap
+  </a>
+</div>
 
-<p>There is a limit of one database per app in some versions of the Android WebView. Install the <a href="https://github.com/lite4cordova/Cordova-SQLitePlugin">SQLite plugin</a>, then PouchDB will use that if it is available.</p>
+<p>There is a limit of one database per app in some versions of the Android WebView. Install the <a href="https://github.com/brodysoft/Cordova-SQLitePlugin">SQLite plugin</a>, then PouchDB will use that if it is available.</p>
 
-<h3>Database size limitation of ~5MB on iOS with Cordova/Phone Gap</h3>
+<div id='size_limitation_5mb'>
+  <a
+     class='h3 anchor'
+     href='#size_limitation_5mb'
+     name='size_limitation_5mb'
+  >
+    Database size limitation of ~5MB on iOS with Cordova/Phone Gap
+  </a>
+</div>
 
-<p>If you&#39;re storing large amounts of data, such as PNG attachments, the <a href="https://github.com/lite4cordova/Cordova-SQLitePlugin">SQLite plugin</a> is again your friend. (See <a href="https://github.com/daleharvey/pouchdb/issues/1260">issue #1260</a> for details.)</p>
+<p>If you&#39;re storing large amounts of data, such as PNG attachments, the <a href="https://github.com/brodysoft/Cordova-SQLitePlugin">SQLite plugin</a> is again your friend. (See <a href="https://github.com/daleharvey/pouchdb/issues/1260">issue #1260</a> for details.)</p>
 
-<h3>CouchDB returns a 404 for GETs from a CouchApp</h3>
+<div id='404_get_couchapp'>
+  <a
+     class='h3 anchor'
+     href='#404_get_couchapp'
+     name='404_get_couchapp'
+  >
+    CouchDB returns a 404 for GETs from a CouchApp
+  </a>
+</div>
 
 <p>Certain URL rewrites are broken by PouchDB&#39;s cache-busting; try adding <code>{cache : false}</code> to the PouchDB constructor. (See <a href="https://github.com/daleharvey/pouchdb/issues/1233">issue #1233</a> for details.)</p>
 
-<h3>Uncaught TypeError: object is not a function</h3>
+<div id='typeerror_object_is_not_a_function'>
+  <a
+     class='h3 anchor'
+     href='#typeerror_object_is_not_a_function'
+     name='typeerror_object_is_not_a_function'
+  >
+    Uncaught TypeError: object is not a function
+  </a>
+</div>
 
 <p>Did you include the <a href="https://github.com/jakearchibald/es6-promise">es6-promise shim library</a>?  Not every browser implements ES6 Promises correctly. (See <a href="https://github.com/daleharvey/pouchdb/issues/1747">issue #1747</a> for details.)</p>
 
-<h3>SyntaxError: Parse error (Cordova on Android)</h3>
+<div id='undefined_is_not_a_function'>
+  <a
+     class='h3 anchor'
+     href='#undefined_is_not_a_function'
+     name='undefined_is_not_a_function'
+  >
+    Uncaught TypeError: 'undefined' is not a function
+  </a>
+</div>
+
+<p>Did you include the <a href="https://github.com/es-shims/es5-shim">es5-shim library</a>? In particular this shows up in PhantomJS because of <a href="https://github.com/ariya/phantomjs/issues/10522">this bug</a>.</p>
+
+<div id='cordova_android_parse_error'>
+  <a
+     class='h3 anchor'
+     href='#cordova_android_parse_error'
+     name='cordova_android_parse_error'
+  >
+    SyntaxError: Parse error (Cordova on Android)
+  </a>
+</div>
 
 <p>Did you include the <a href="https://github.com/es-shims/es5-shim">es5-shim library</a>?  PouchDB is written in ES5, which is supported by modern browsers, but requires shims for older browsers (e.g. IE 9, Android 2.1 WebView).</p>
 
 <p>In Android, if you&#39;re loading PouchDB directly via <code>webView.loadUrl(&#39;javascript://&#39; + js&#39;)</code>, you should prefer the minified PouchDB javascript file to the unminified one, since code comments can also cause parse errors.</p>
 
-<h3>PouchDB object fails silently (Safari)</h3>
+<div id='safari_object_silent_fail'>
+  <a
+     class='h3 anchor'
+     href='#safari_object_silent_fail'
+     name='safari_object_silent_fail'
+  >
+    PouchDB object fails silently (Safari)
+  </a>
+</div>
 
 <p>Safari requires users to confirm that they want to allow an app to store data locally (&quot;Allow this website to use space on your disk?&quot;).  If PouchDB is loaded in an <code>iframe</code> or some other unusual way, the dialog might not be shown, and the database will silently fail.</p>
 
-<h3>window.localStorage is not available (Chrome apps)</h3>
+<div id='window_localstorage_chrome_apps'>
+  <a
+     class='h3 anchor'
+     href='#window_localstorage_chrome_apps'
+     name='window_localstorage_chrome_apps'
+  >
+    window.localStorage is not available (Chrome apps)
+  </a>
+</div>
 
 <p>In Chrome apps, you&#39;ll see the warning &quot;window.localStorage is not available in packaged apps. Use chrome.storage.local instead.&quot;  This is harmless; since PouchDB doesn&#39;t use localStorage if it&#39;s not available.</p>
 

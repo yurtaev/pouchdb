@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-sm-9">
-          <p>PouchDB is not a self-contained database; it is a unified abstraction layer over other databases. By default, PouchDB ships with <a href="http://www.w3.org/TR/IndexedDB/">IndexedDB</a> and <a href="http://www.w3.org/TR/webdatabase/">WebSQL</a> adapters in the browser, and a <a href="https://code.google.com/p/leveldb/">LevelDB</a> adapter in Node.js.</p>
+          <p>PouchDB is not a self-contained database; it is a CouchDB-style abstraction layer over other databases. By default, PouchDB ships with <a href="http://www.w3.org/TR/IndexedDB/">IndexedDB</a> and <a href="http://www.w3.org/TR/webdatabase/">WebSQL</a> adapters in the browser, and a <a href="https://code.google.com/p/leveldb/">LevelDB</a> adapter in Node.js.</p>
 
 <p>PouchDB attempts to provide a consistent API that &quot;just works&quot; across every browser and JavaScript environment, and in most cases, you can just use the defaults. However, if you&#39;re trying to reach the widest possible audience, or if you want the best performance, then you will sometimes want to tinker with the adapter settings.</p>
 
@@ -105,7 +105,15 @@
 <li><a href="#more_resources">More resources</a></li>
 </ul>
 
-<div id='pouchdb_in_the_browser'><a class='h2 anchor' href='#pouchdb_in_the_browser' name='pouchdb_in_the_browser'>PouchDB in the browser</a></div>
+<div id='pouchdb_in_the_browser'>
+  <a
+     class='h2 anchor'
+     href='#pouchdb_in_the_browser'
+     name='pouchdb_in_the_browser'
+  >
+    PouchDB in the browser
+  </a>
+</div>
 
 <p>In the browser, PouchDB prefers IndexedDB, and falls back to WebSQL if IndexedDB is not available.  As of 2014, the browser support looks like this:</p>
 
@@ -200,7 +208,7 @@
 </div>
 
 <p>If you&#39;re ever curious which adapter is being used in a particular browser, you can use the following method:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pouch</span><span class="p">.</span><span class="nx">adapter</span><span class="p">);</span> <span class="c1">// prints either &#39;idb&#39; or &#39;websql&#39;</span>
 </code></pre></div>
 <h3>SQLite plugin for Cordova/PhoneGap</h3>
@@ -210,17 +218,9 @@
 <p>Luckily, there is a <a href="https://github.com/brodysoft/Cordova-SQLitePlugin">SQLite Plugin</a> that accomplishes exactly this.  If you include this plugin in your project, then PouchDB will automatically pick it up based on the <code>window.sqlitePlugin</code> object.</p>
 
 <p>However, this only occurs if the adapter is <code>&#39;websql&#39;</code>, not <code>&#39;idb&#39;</code> (e.g. on Android 4.4+).  To force PouchDB to use the WebSQL adapter, you can do:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">websqlPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">websqlPouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;websql&#39;</span><span class="p">});</span>
 </code></pre></div>
-<div class="alert alert-warning">
-
-
-<div class="alert-text">
-
-The SQLite plugin does not yet pass our test suite with 100% success.  However, it should work for most basic use cases.  We will update this page when support reaches 100%.
-</div>
-
-<p></div></p>
+<p>The SQLite plugin is known to pass the PouchDB test suite on both iOS and Android. You may run into issues on Windows Phone 8.</p>
 
 <h3>Experimental adapter plugins</h3>
 
@@ -229,15 +229,15 @@ The SQLite plugin does not yet pass our test suite with 100% success.  However, 
 <p><strong>Downloads:</strong></p>
 
 <ul>
-<li><a href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb.localstorage.js">pouchdb.localstorage.js</a></li>
-<li><a href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb.memory.js">pouchdb.memory.js</a></li>
-<li><a href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb.idb-alt.js">pouchdb.idb-alt.js</a></li>
+<li><a href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb.localstorage.js">pouchdb.localstorage.js</a></li>
+<li><a href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb.memory.js">pouchdb.memory.js</a></li>
+<li><a href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb.idb-alt.js">pouchdb.idb-alt.js</a></li>
 </ul>
 
 <h4>LocalStorage plugin</h4>
 
 <p>If you need to support even older browsers, such as IE &le; 9.0 and Opera Mini, you can use the <code>pouchdb.localstorage.js</code> plugin, which allows PouchDB to fall back to <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage">LocalStorage</a> on browsers that don&#39;t support either IndexedDB or WebSQL.  The <a href="https://github.com/es-shims/es5-shim">es5-shims</a> will also be necessary.</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.localstorage.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
   <span class="c1">// this pouch is backed by LocalStorage</span>
@@ -257,7 +257,7 @@ The LocalStorage plugin should be considered highly experimental, and the underl
 <h4>Memory plugin</h4>
 
 <p>If you want a quick database for your unit tests, you can use the <code>pouchdb.memory.js</code> plugin, which offers a pure in-memory PouchDB:</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.memory.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
   <span class="c1">// this pouch is ephemeral; it only exists in memory</span>
@@ -265,7 +265,7 @@ The LocalStorage plugin should be considered highly experimental, and the underl
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
 <p>This pouch will act exactly like a normal one &ndash; replicating, storing attachments, pagination, etc. &ndash; but it will be deleted as soon as the user closes their browser. However, multiple <code>PouchDB</code> objects with the same database name will share the same data:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="c1">// pouch1 and pouch2 will share the same data</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// pouch1 and pouch2 will share the same data</span>
 <span class="kd">var</span> <span class="nx">pouch1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;memory&#39;</span><span class="p">});</span>
 <span class="kd">var</span> <span class="nx">pouch2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">adapter</span><span class="o">:</span> <span class="s1">&#39;memory&#39;</span><span class="p">});</span>
 
@@ -275,7 +275,7 @@ The LocalStorage plugin should be considered highly experimental, and the underl
 <h4>Alternative IndexedDB adapter</h4>
 
 <p>We are currently experimenting with a <a href="https://github.com/rvagg/node-leveldown">LevelDown</a>-based IndexedDB adapter (using <a href="https://github.com/maxogden/level.js">level-js</a>) which may eventually replace the current IndexedDB adapter.  If you would like to experiment with this, you may use the <code>pouchdb.idb-alt.js</code> plugin:</p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;pouchdb.idb-alt.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
   <span class="c1">// this pouch is backed by IndexedDB but uses</span>
@@ -285,10 +285,18 @@ The LocalStorage plugin should be considered highly experimental, and the underl
 </code></pre></div>
 <p>This adapter does not currently offer any advantages over the <code>&#39;idb&#39;</code> adapter, but PouchDB developers will be interested in testing it.</p>
 
-<div id='pouchdb_in_node_js'><a class='h2 anchor' href='#pouchdb_in_node_js' name='pouchdb_in_node_js'>PouchDB in Node.js</a></div>
+<div id='pouchdb_in_node_js'>
+  <a
+     class='h2 anchor'
+     href='#pouchdb_in_node_js'
+     name='pouchdb_in_node_js'
+  >
+    PouchDB in Node.js
+  </a>
+</div>
 
 <p>In Node.js, the adapter situation is much simpler than in browsers.  By default, if you create a PouchDB like this one:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;./path/to/db&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;./path/to/db&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>then a LevelDB-based database will be created in the directory <code>./path/to/db</code>.</p>
 
@@ -297,20 +305,20 @@ The LocalStorage plugin should be considered highly experimental, and the underl
 <h4>In-memory</h4>
 
 <p>Just as in the browser, you can create a pure in-memory pouch based on <a href="https://github.com/rvagg/memdown">MemDOWN</a>:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ npm install memdown
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ npm install memdown
 </code></pre></div>
 <p>then:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;myDB&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;memdown&#39;</span><span class="p">)});</span>
 </code></pre></div>
 <p>Notice that in Node.js, we use the key <code>&#39;db&#39;</code> instead of <code>&#39;adapter&#39;</code>.  In Node.js the adapter is always called <code>&#39;leveldb&#39;</code> for historical reasons.</p>
 
 <h4>Riak-based adapter</h4>
 
 <p>This pouch is backed by <a href="https://github.com/nlf/riakdown">RiakDOWN</a>:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">$ npm install riakdown
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ npm install riakdown
 </code></pre></div>
 <p>then:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;riak://localhost:8087/somebucket&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;riakdown&#39;</span><span class="p">)});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;riak://localhost:8087/somebucket&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">db</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;riakdown&#39;</span><span class="p">)});</span>
 </code></pre></div>
 <h4>More LevelDOWN adapters</h4>
 
@@ -326,10 +334,18 @@ We do not currently test against any LevelDOWN adapters other than LevelDB, so t
 
 <p></div></p>
 
-<div id='pouchdb_over_http'><a class='h2 anchor' href='#pouchdb_over_http' name='pouchdb_over_http'>PouchDB over HTTP</a></div>
+<div id='pouchdb_over_http'>
+  <a
+     class='h2 anchor'
+     href='#pouchdb_over_http'
+     name='pouchdb_over_http'
+  >
+    PouchDB over HTTP
+  </a>
+</div>
 
 <p>In both the browser and in Node.js, PouchDB can also function as a straightforward API on top of any <a href="https://couchdb.apache.org/">CouchDB</a>-compliant database, such as <a href="http://www.iriscouch.com/">IrisCouch</a>, <a href="https://cloudant.com/">Cloudant</a>, and <a href="http://docs.couchbase.com/sync-gateway/">Couchbase Sync Gateway</a>:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;http://my-site.com:5984/my-db&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;http://my-site.com:5984/my-db&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">securePouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;https://my-secure-site.com:5984/my-secure-db&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>However, we do not currently claim to support any database at 100% fidelity except for CouchDB, so your mileage may vary when syncing with the others.  We will add databases to our supported list as we increase our test coverage.</p>
@@ -344,7 +360,15 @@ We do not currently test against any LevelDOWN adapters other than LevelDB, so t
 
 <p>The underlying module for PouchDB Server, <a href="https://github.com/pouchdb/express-pouchdb">Express PouchDB</a> is an Express submodule that mimics most of the CouchDB API within your Express application.</p>
 
-<div id='more_resources'><a class='h2 anchor' href='#more_resources' name='more_resources'>More resources</a></div>
+<div id='more_resources'>
+  <a
+     class='h2 anchor'
+     href='#more_resources'
+     name='more_resources'
+  >
+    More resources
+  </a>
+</div>
 
 <p>The best place to look for information on which browsers support which databases is <a href="http://caniuse.com">caniuse.com</a>.  You can consult their tables on browser support for various backends:</p>
 

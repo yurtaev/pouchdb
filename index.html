@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -84,7 +84,7 @@
       <div class='col-sm-6'>
 
   
-<div class="highlight"><pre><code class="js">  <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;dbname&#39;</span><span class="p">);</span>
 
   <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
    <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;dave@gmail.com&#39;</span><span class="p">,</span>
@@ -96,9 +96,7 @@
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ch-Ch-Changes&#39;</span><span class="p">);</span>
   <span class="p">});</span>
 
-  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span>
-  
-</code></pre></div>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">replicate</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="s1">&#39;http://example.com/mydb&#39;</span><span class="p">);</span></code></pre></div>
 
 
       </div>
@@ -171,6 +169,57 @@
 <div class="col-md-6">
 
 
+  <p><a class='h4' href='/2014/08/12/pouchdb-3.0.0.html'>PouchDB 3.0.0</a></p>
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+    
+      
+    
+  
+
+
+
+
+<div class="post">
+  <div class="media">
+    <a class="pull-left" href="#">
+    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/e8153037a068f1c32e546f82729a64a5' alt='Calvin Metcalf'>
+    </a>
+    <div class="media-body">
+    <p>
+      <strong>By:</strong> <a href="https://twitter.com/CWMma">Calvin Metcalf</a><br>
+      <strong>Published:</strong> 12 August 2014<br>
+      
+        PouchDB 3.0.0 is finally released! It&#39;s faster, it&#39;s more stable, it&#39;s easier to debug, it doesn&#39;t freeze the DOM and it spontaneously generates kittens.
+
+        <a href='/2014/08/12/pouchdb-3.0.0.html'>[...]</a>
+      
+    </p>
+    </div>
+  </div>
+</div>
+
+<p></div></p>
+
+<div class="col-md-6">
+
+
   <p><a class='h4' href='/2014/07/25/pouchdb-levels-up.html'>PouchDB levels up</a></p>
 
 
@@ -208,60 +257,8 @@
       <strong>By:</strong> <a href="https://twitter.com/nolanlawson">Nolan Lawson</a><br>
       <strong>Published:</strong> 25 July 2014<br>
       
-        <p>You might not have noticed it, but PouchDB underwent a quiet revolution over the past few months. The catalyzing moment was <a href="https://github.com/pouchdb/pouchdb/issues/1250">the LevelUP proposal</a> posted by Nick Thompson back in January 2014, which slowly led to a rewrite of the PouchDB adapter for LevelDB to support arbitrary LevelUP backends.  If that looks like word soup, let me explain why this is such a big deal.</p>
-
+        You might not have noticed it, but PouchDB underwent a quiet revolution over the past few months. The catalyzing moment was the LevelUP proposal posted by Nick Thompson back in
         <a href='/2014/07/25/pouchdb-levels-up.html'>[...]</a>
-      
-    </p>
-    </div>
-  </div>
-</div>
-
-<p></div></p>
-
-<div class="col-md-6">
-
-
-  <p><a class='h4' href='/2014/06/17/12-pro-tips-for-better-code-with-pouchdb.html'>12 pro tips for better code with PouchDB</a></p>
-
-
-
-
-
-
-
-
-  
-
-  
-    
-      
-    
-    
-      
-    
-  
-
-  
-
-  
-
-
-
-
-<div class="post">
-  <div class="media">
-    <a class="pull-left" href="#">
-    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/c436dec61b906e27c963518d0ef1d972' alt='Nolan Lawson'>
-    </a>
-    <div class="media-body">
-    <p>
-      <strong>By:</strong> <a href="https://twitter.com/nolanlawson">Nolan Lawson</a><br>
-      <strong>Published:</strong> 17 June 2014<br>
-      
-        <p>This is not a blog post per se, but more of a list of tips and tricks to get the most out of your PouchDB experience.</p>
-
-        <a href='/2014/06/17/12-pro-tips-for-better-code-with-pouchdb.html'>[...]</a>
       
     </p>
     </div>

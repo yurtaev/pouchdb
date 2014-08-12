@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PouchDB 2.1.0</title>
+    <title>PouchDB 3.0.0</title>
     <link rel="stylesheet" href="/static/css/pouchdb.css" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -64,7 +64,7 @@
 
         <div class="container">
 
-          <h1>PouchDB 2.1.0</h1>
+          <h1>PouchDB 3.0.0</h1>
           
 
         </div>
@@ -90,14 +90,14 @@
   
 
   
-    
-      
-    
-    
-      
-    
-  
 
+  
+    
+      
+    
+    
+      
+    
   
 
 
@@ -106,12 +106,12 @@
 <div class="post">
   <div class="media">
     <a class="pull-left" href="#">
-    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/030451d8cfc268d666bae9a7fe8d10ec' alt='Dale Harvey'>
+    <img class="media-object img-circle img-responsive" src='https://gravatar.com/avatar/e8153037a068f1c32e546f82729a64a5' alt='Calvin Metcalf'>
     </a>
     <div class="media-body">
     <p>
-      <strong>By:</strong> <a href="https://twitter.com/daleharvey">Dale Harvey</a><br>
-      <strong>Published:</strong> 01 April 2014<br>
+      <strong>By:</strong> <a href="https://twitter.com/CWMma">Calvin Metcalf</a><br>
+      <strong>Published:</strong> 12 August 2014<br>
       
     </p>
     </div>
@@ -119,36 +119,42 @@
 </div>
 
 
-      <p><a href="https://github.com/daleharvey/pouchdb/releases/tag/2.1.0">PouchDB 2.1.0</a> is now released! Please <a href="https://github.com/daleharvey/pouchdb/issues">file issues</a> or <a href="https://github.com/daleharvey/pouchdb/blob/master/CONTRIBUTING.md#get-in-touch">tell us what you think</a>. We would also like to give a huge thanks to our <a href="https://github.com/daleharvey/pouchdb/graphs/contributors?from=2014-03-01&amp;to=2014-04-01">new and existing contributors</a>.</p>
+      <p><a href="https://github.com/pouchdb/pouchdb/releases/tag/3.0.0">PouchDB 3.0.0</a> is finally released! It&#39;s faster, it&#39;s more stable, it&#39;s easier to debug, it doesn&#39;t freeze the DOM and it spontaneously generates kittens.</p>
 
-<div class="alert alert-warning">
+<p>Please <a href="https://github.com/pouchdb/pouchdb/issues">file issues</a> or <a href="https://github.com/pouchdb/pouchdb/blob/master/CONTRIBUTING.md#get-in-touch">tell us what you think</a>. We would also like to give a huge thanks to our <a href="https://github.com/pouchdb/pouchdb/graphs/contributors?from=2014-06-01&amp;to=2014-08-12">new and existing contributors</a>.</p>
 
+<h3>Breaking Changes:</h3>
 
-<div class="alert-text">
-
-This release contains a database migration, which means that once you upgrade you will no longer be able to use previous versions of PouchDB on the same databases.
-</div>
-
-<p></div></p>
+<ul>
+<li>The browser build <code>pouchdb-nightly.js</code> has been renamed to <code>pouchdb.js</code>. It was never really a nightly anyway. (<a href="https://github.com/pouchdb/pouchdb/issues/2146">#2146</a>) </li>
+<li><code>opts.server</code> has been deprecated from the <code>replicate()</code> and <code>sync()</code> APIs. You can still replicate from one HTTP server to another, but the data will flow through PouchDB rather than being server-initiated. (<a href="https://github.com/pouchdb/pouchdb/issues/2313">#2313</a>)</li>
+<li>You can no longer rely on errors to have an identifying name. Instead, rely on CouchDB-centric errors to have a status (i.e. <code>err.status</code> instead of <code>err.name</code>).  There are some that still have an identifying name, but <strong>these could be removed at any time</strong>. The upside of this is that stack traces should be more consistently helpful. (<a href="https://github.com/pouchdb/pouchdb/issues/2545">#2545</a>)</li>
+</ul>
 
 <h3>Major Changes:</h3>
 
 <ul>
-<li>Website redesign and a new blog (<a href="http://github.com/daleharvey/pouchdb/issues/1539">#1539</a>, <a href="https://github.com/daleharvey/pouchdb/issues/893">#893</a>)</li>
-<li>Support optional LevelDOWN builds (<a href="http://github.com/daleharvey/pouchdb/issues/44">#44</a>)</li>
-<li>Replication performance improvements (<a href="http://github.com/daleharvey/pouchdb/issues/1732">#1732</a>)</li>
-<li>Performance improvements for skip / limit (<a href="http://github.com/daleharvey/pouchdb/issues/1649">#1649</a>)</li>
-<li>Cache WebSQL databases, fully passing tests in Safari (<a href="http://github.com/daleharvey/pouchdb/issues/1068">#1068</a>)</li>
-<li>Fix support for unicode in doc ids (WebSQL) (<a href="http://github.com/daleharvey/pouchdb/issues/1733">#1733</a>)</li>
-<li>Fix for localStorage detection in Chrome Apps (<a href="http://github.com/daleharvey/pouchdb/issues/1727">#1727</a>)</li>
-<li>Allow overriding of http functions (<a href="http://github.com/daleharvey/pouchdb/issues/1602">#1602</a>)</li>
-<li>Improve error reporting from replicator (<a href="http://github.com/daleharvey/pouchdb/issues/1714">#1714</a>)</li>
-<li>Switch to readAsArrayBuffer for IE binary support (<a href="http://github.com/daleharvey/pouchdb/issues/1667">#1667</a>)</li>
-<li>Add <code>npm run shell</code> for quick shell experimenting (<a href="http://github.com/daleharvey/pouchdb/issues/1610">#1610</a>)</li>
-<li>Ensure we dont lose data when browsers upgrade from WebSQL to IDB (<a href="http://github.com/daleharvey/pouchdb/issues/1289">#1289</a>)</li>
+<li> Local documents are now unversioned for better map/reduce performance and to better align the <code>update_seq</code> with CouchDB (<a href="https://github.com/pouchdb/pouchdb/issues/2023">#2023</a>). Also fixes an issue with replication and <code>changes()</code>. (<a href="https://github.com/pouchdb/pouchdb/issues/2342">#2342</a>)</li>
+<li>Constructor option <code>opts.size</code> to work around Safari/iOS storage quotas (#2347)</li>
+<li><code>PouchDB.defaults()</code> for default constructor options, which permits many new features in pouchdb-server. (<a href="https://github.com/pouchdb/pouchdb/issues/2054">#2054</a>)</li>
+<li>Performance improvements. (<a href="https://github.com/pouchdb/pouchdb/issues/2391">#2391</a>, <a href="https://github.com/pouchdb/pouchdb/issues/2392">#2392</a>, <a href="https://github.com/pouchdb/pouchdb/issues/2393">#2393</a>)</li>
+<li>MD5 hashes are now calculated incrementally in a way that won&#39;t freeze the DOM. (<a href="https://github.com/pouchdb/pouchdb/issues/445">#445</a>, <a href="https://github.com/pouchdb/pouchdb/issues/2497">#2497</a>)</li>
+<li>More efficient replication. (<a href="https://github.com/pouchdb/pouchdb/issues/2466">#2466</a>, <a href="https://github.com/pouchdb/pouchdb/issues/2475">#2475</a>)</li>
 </ul>
 
-<h6><a href="https://github.com/daleharvey/pouchdb/compare/2.0.1...2.1.0">Complete list of changes</a></h6>
+<h3>Bugfixes:</h3>
+
+<ul>
+<li>Fix for replication of multiple attachments. (<a href="https://github.com/pouchdb/pouchdb/issues/2358">#2358</a>)</li>
+<li>Fix for <code>bulkDocs()</code> in Cloudant. (<a href="https://github.com/pouchdb/pouchdb/issues/2365">#2365</a>)</li>
+<li>Fix read-only replication for CORS/40*. (<a href="https://github.com/pouchdb/pouchdb/issues/2484">#2484</a>)</li>
+<li>Fix for reserved words in docs. (<a href="https://github.com/pouchdb/pouchdb/issues/2477">#2477</a>)</li>
+<li>Fixes for <code>change</code> events in <code>.sync()</code>. (<a href="https://github.com/pouchdb/pouchdb/issues/2555">#2555</a>)</li>
+<li>Fixes for race condition in bulk docs with <code>new_edits=false</code> in LevelDB. (<a href="https://github.com/pouchdb/pouchdb/issues/2574">#2574</a>)</li>
+<li>Fixes for <code>opts.stale</code> in <code>query()</code>. (<a href="https://github.com/pouchdb/mapreduce/issues/196">pouchdb/mapreduce#196</a>, <a href="https://github.com/pouchdb/mapreduce/issues/198">pouchdb/mapreduce#198</a>)</li>
+</ul>
+
+<h6><a href="https://github.com/pouchdb/pouchdb/compare/2.2.3...3.0.0">Complete list of changes</a></h6>
 
         </div>
   </div>

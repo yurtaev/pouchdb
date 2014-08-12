@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -130,7 +130,7 @@
 <h2>Show me the code!</h2>
 
 <p>Here&#39;s the old way to query:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pouch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PouchDB</span><span class="p">(</span><span class="s1">&#39;mydb&#39;</span><span class="p">);</span>
 
 <span class="c1">// temporary view, each doc is processed in-memory (slow)</span>
 <span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
@@ -152,7 +152,7 @@ The <code>emit</code> pattern is part of the standard <a href='http://couchdb.re
 <p></div></p>
 
 <p>And here&#39;s the new way:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="c1">// document that tells PouchDB/CouchDB</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// document that tells PouchDB/CouchDB</span>
 <span class="c1">// to build up an index on doc.name</span>
 <span class="kd">var</span> <span class="nx">myIndex</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;_design/my_index&#39;</span><span class="p">,</span>
@@ -180,10 +180,10 @@ The <code>emit</code> pattern is part of the standard <a href='http://couchdb.re
 <h4>Indexes in SQL databases</h4>
 
 <p>Quick refresher on how indexes work: in relational databases like MySQL and PostgreSQL, you can usually query whatever field you want:</p>
-<div class="highlight"><pre><code class="sql language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pokemon</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Pikachu&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pokemon</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Pikachu&#39;</span><span class="p">;</span>
 </code></pre></div>
 <p>But if you don&#39;t want your performance to be terrible, you first add an index:</p>
-<div class="highlight"><pre><code class="sql language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">pokemon</span> <span class="k">ADD</span> <span class="k">INDEX</span> <span class="n">myIndex</span> <span class="k">ON</span> <span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">pokemon</span> <span class="k">ADD</span> <span class="k">INDEX</span> <span class="n">myIndex</span> <span class="k">ON</span> <span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </code></pre></div>
 <p>The job of the index is to ensure the field is stored in a B-tree within the database, so your queries run in <em>O(log(n))</em> time instead of <em>O(n)</em> time.</p>
 
@@ -196,14 +196,14 @@ The <code>emit</code> pattern is part of the standard <a href='http://couchdb.re
 <h4>Map functions</h4>
 
 <p>It may sound daunting at first, but in the simplest (and most common) case, you only need the <em>map</em> function.  A basic map function might look like this:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="nx">myMapFunction</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">myMapFunction</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>This is functionally equivalent to the SQL index given above.  What it essentially says is: &quot;for each document in the database, emit its name as a key.&quot;</p>
 
 <p>And since it&#39;s just JavaScript, you&#39;re allowed to get as fancy as you want here:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="nx">myMapFunction</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">myMapFunction</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;pokemon&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;Pikachu&#39;</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;Pika pi!&#39;</span><span class="p">);</span>
@@ -214,7 +214,7 @@ The <code>emit</code> pattern is part of the standard <a href='http://couchdb.re
 <span class="p">}</span>
 </code></pre></div>
 <p>Then you can query it:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="c1">// find pokemon with name === &#39;Pika pi!&#39;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// find pokemon with name === &#39;Pika pi!&#39;</span>
 <span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">myMapFunction</span><span class="p">,</span> <span class="p">{</span><span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;Pika pi!&#39;</span><span class="p">,</span> <span class="nx">include_docs</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// handle result</span>
 <span class="p">});</span>
@@ -241,7 +241,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 <h4>Reduce functions</h4>
 
 <p>As for <em>reduce</em> functions, there are a few handy built-ins that do aggregate operations (<code>&#39;_sum&#39;</code>, <code>&#39;_count&#39;</code>, and <code>&#39;_stats&#39;</code>), and you can typically steer clear of trying to write your own:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="c1">// emit the first letter of each pokemon&#39;s name</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// emit the first letter of each pokemon&#39;s name</span>
 <span class="kd">var</span> <span class="nx">myMapReduceFun</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">map</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
@@ -297,7 +297,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 <h4>Writing your first view</h4>
 
 <p>A design document with a view looks just like a regular document.  The simplest one might look like this:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">designDoc</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">designDoc</span> <span class="o">=</span> <span class="p">{</span>
   <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;_design/my_index&#39;</span><span class="p">,</span>
   <span class="nx">views</span><span class="o">:</span> <span class="p">{</span>
     <span class="s1">&#39;my_index&#39;</span><span class="o">:</span> <span class="p">{</span>
@@ -309,7 +309,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 <span class="p">};</span>
 </code></pre></div>
 <p>All you need to do is <code>put()</code> this document into your database:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">designDoc</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">designDoc</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
  <span class="c1">// design doc created</span>
 <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// if err.name === &#39;conflict&#39;, then</span>
@@ -317,7 +317,7 @@ The pagination options for <code>query()</code> &ndash; i.e., <code>startkey</co
 <span class="p">});</span>
 </code></pre></div>
 <p>&hellip; and then it will be available for querying using the name <code>&#39;my_index&#39;</code>:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;my_index&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">&#39;my_index&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
  <span class="c1">// do something with result</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -336,7 +336,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <p></div></p>
 
 <p>Since there&#39;s a lot of boilerplate involved in creating views, you can use the following helper function to create a simple design doc based on a name and a map function:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">mapFunction</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">mapFunction</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">ddoc</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;_design/&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">,</span>
     <span class="nx">views</span><span class="o">:</span> <span class="p">{</span>
@@ -347,7 +347,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <span class="p">}</span>
 </code></pre></div>
 <p>Then you just need to <code>put()</code> it:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">designDoc</span> <span class="o">=</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="s1">&#39;my_index&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">designDoc</span> <span class="o">=</span> <span class="nx">createDesignDoc</span><span class="p">(</span><span class="s1">&#39;my_index&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="nx">pouch</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">designDoc</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
@@ -400,7 +400,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <h4>Use and abuse your doc IDs</h4>
 
 <p>For a more elaborate example, let&#39;s imagine you&#39;re writing a music app.  Your database might contain artists:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="p">[</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;artist_bowie&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;artist_bowie&#39;</span><span class="p">,</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;artist&#39;</span><span class="p">,</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;David Bowie&#39;</span><span class="p">,</span>
     <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span> <span class="p">},</span>
@@ -414,7 +414,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
     <span class="nx">age</span><span class="o">:</span> <span class="mi">70</span> <span class="p">}</span> <span class="p">]</span>
 </code></pre></div>
 <p>&hellip; as well as albums:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="p">[</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;album_bowie_1971_hunky_dory&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="s1">&#39;album_bowie_1971_hunky_dory&#39;</span><span class="p">,</span>
     <span class="nx">artist</span><span class="o">:</span> <span class="s1">&#39;artist_bowie&#39;</span><span class="p">,</span>
     <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Hunky Dory&#39;</span><span class="p">,</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;album&#39;</span><span class="p">,</span>
@@ -448,16 +448,16 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <p>See what I did there? Artist-type documents are prefixed with <code>&#39;artist_&#39;</code>, and album-type documents are prefixed with <code>&#39;album_&#39;</code>.  This naming scheme is clever enough that we can already do lots of complex queries using <code>allDocs()</code>, even though we&#39;re storing two different types of documents.</p>
 
 <p>Want to find all artists?  It&#39;s just:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;artist_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;artist__&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;artist_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;artist__&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>Want to list all the albums?  Try:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album__&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album__&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>How about all albums by David Bowie?  Wham bam, thank you ma&#39;am:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie__&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album_bowie__&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>Let&#39;s go even fancier. Can we find all of Bob Dylan&#39;s albums released between 1964 and 1965, in reverse order? Gather &#39;round people, and try this:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_dylan_1965_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album_dylan_1964__&#39;</span><span class="p">,</span> <span class="nx">descending</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">allDocs</span><span class="p">({</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;album_dylan_1965_&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;album_dylan_1964__&#39;</span><span class="p">,</span> <span class="nx">descending</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
 </code></pre></div>
 <p>In this example, you&#39;re getting all those &quot;indexes&quot; for free, each time a document is added to the database.  It doesn&#39;t take up any additional space on disk compared to the randomly-generated UUIDs, and you don&#39;t have to wait for a view to get built up, nor do you have to understand the map/reduce API at all.</p>
 
@@ -482,7 +482,7 @@ Technically, a design doc can contain multiple views, but there's really no adva
 <p><strong>1. Don&#39;t index it if you don&#39;t need it</strong></p>
 
 <p>If your database has several document types, but only the &quot;person&quot; type has a <code>lastName</code> field, do this:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">lastName</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">lastName</span><span class="p">);</span>
   <span class="p">}</span>
@@ -505,14 +505,14 @@ If the <code>null</code> field is meaningful for some reason, though, you can em
 <p><strong>2. Move logic to the query params</strong></p>
 
 <p>Don&#39;t do:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">highScore</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">highScore</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Instead, do:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">emit</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">highScore</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -521,17 +521,17 @@ If the <code>null</code> field is meaningful for some reason, though, you can em
 <p><strong>3. Use high characters for prefix search</strong></p>
 
 <p>To find every <code>lastName</code> that starts with an <code>&#39;L&#39;</code>, you can use the high Unicode character <code>&#39;\uffff&#39;</code>:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;L\uffff&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;L\uffff&#39;</span><span class="p">});</span>
 </code></pre></div>
 <p>Or you can set <code>inclusive_end</code> to <code>false</code>:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="nx">inclusive_end</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="nx">endkey</span><span class="o">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="nx">inclusive_end</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
 </code></pre></div>
 <p>Both queries will do the same thing.</p>
 
 <p><strong>4. Use {} for complex key ranges</strong></p>
 
 <p>If your keys are <code>[lastName, firstName]</code>, and you need to find everybody with the last name <code>&#39;Harvey&#39;</code>, you can do:</p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Harvey&#39;</span><span class="p">],</span> <span class="nx">endkey</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Harvey&#39;</span><span class="p">,</span> <span class="p">{}]});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">pouch</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">viewName</span><span class="p">,</span> <span class="p">{</span><span class="nx">startkey</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Harvey&#39;</span><span class="p">],</span> <span class="nx">endkey</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Harvey&#39;</span><span class="p">,</span> <span class="p">{}]});</span>
 </code></pre></div>
 <p>In <a href="http://couchdb.readthedocs.org/en/latest/couchapp/views/collation.html">CouchDB collation ordering</a>, <code>{}</code> is higher than everything except other objects.</p>
 

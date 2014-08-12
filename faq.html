@@ -49,9 +49,9 @@
           <li>
             <a
                 class='btn btn-primary btn-lg'
-                href="https://github.com/daleharvey/pouchdb/releases/download/2.2.3/pouchdb-2.2.3.min.js"
+                href="https://github.com/daleharvey/pouchdb/releases/download/3.0.0/pouchdb-3.0.0.min.js"
             >
-                Download <strong>v2.2.3</strong>
+                Download <strong>v3.0.0</strong>
             </a>
           </li>
         </ul>
@@ -92,11 +92,27 @@
         </div>
 
         <div class="col-sm-9">
-          <h3>Can PouchDB sync with MongoDB/MySQL/my current non-CouchDB database?</h3>
+          <div id='sync_non_couchdb'>
+  <a
+     class='h3 anchor'
+     href='#sync_non_couchdb'
+     name='sync_non_couchdb'
+  >
+    Can PouchDB sync with MongoDB/MySQL/my current non-CouchDB database?
+  </a>
+</div>
 
 <p>No, your backend needs to speak the <a href="http://couchdb.readthedocs.org/en/latest/replication/protocol.html">CouchDB replication protocol</a>. The magic of PouchDB &lt;&ndash;&gt; CouchDB sync comes from this design, which in particular requires all documents to be versioned with the <code>_rev</code> marker. This allows PouchDB and CouchDB to <a href="http://writing.jan.io/2013/12/19/understanding-couchdb-conflicts.html">elegantly handle conflicts</a>, among other benefits.</p>
 
-<h3>What can PouchDB sync with?</h3>
+<div id='what_can_pouchdb_sync_with'>
+  <a
+     class='h3 anchor'
+     href='#what_can_pouchdb_sync_with'
+     name='what_can_pouchdb_sync_with'
+  >
+    What can PouchDB sync with?
+  </a>
+</div>
 
 <p>There are a number of databases that implement a CouchDB-like protocol, and PouchDB should be able to replicate with them. They include:</p>
 
@@ -108,7 +124,15 @@
 <li><a href="https://github.com/pouchdb/pouchdb-server">PouchDB Server</a> &ndash; An HTTP API written on top of PouchDB. Additionally, it supports alternate backends like in-memory, Redis, Riak and MySQL via <a href="https://github.com/rvagg/node-levelup/wiki/Modules#storage">the LevelUP ecosystem</a>. Note that your application must use the PouchDB API rather than directly modifying the database, however.</li>
 </ul>
 
-<h3>The web is nice, but I want to build a native app?</h3>
+<div id='native_support'>
+  <a
+     class='h3 anchor'
+     href='#native_support'
+     name='native_support'
+  >
+    The web is nice, but I want to build a native app?
+  </a>
+</div>
 
 <p>PouchDB is one of multiple projects that implement the CouchDB protocol, and these can all be used to sync the same set of data.</p>
 
@@ -130,7 +154,15 @@
 <li><a href="https://github.com/cloudant/sync-android">Cloudant Sync for Android</a></li>
 </ul>
 
-<h3>How much data can PouchDB store?</h3>
+<div id='data_limits'>
+  <a
+     class='h3 anchor'
+     href='#data_limits'
+     name='data_limits'
+  >
+    How much data can PouchDB store?
+  </a>
+</div>
 
 <p>In <strong>Firefox</strong>, PouchDB uses IndexedDB, which will ask the user if data can be stored the first time it is attempted, then every 50MB after. The amount that can be stored is unlimited.</p>
 
@@ -148,7 +180,31 @@
 
 <p>For more information, see <a href="http://www.html5rocks.com/en/tutorials/offline/quota-research/">Working with quota on mobile browsers</a>.</p>
 
-<h3>How is PouchDB different from CouchDB?</h3>
+<div id='safe_to_upgrade'>
+  <a
+     class='h3 anchor'
+     href='#safe_to_upgrade'
+     name='safe_to_upgrade'
+  >
+    Is it safe to upgrade PouchDB?
+  </a>
+</div>
+
+<p>Since v1.0.0, PouchDB has supported automatic schema migrations. This means that if you open a database that was built with an older version of PouchDB, the newer version will run all the steps necessary to get the old database up to date. We have extensive tests in place to guarantee that this feature works correctly.</p>
+
+<p>Even in the case of a major version release, PouchDB still performs the schema migrations. So for instance, you can create a database with PouchDB 1.0.0 and it will still work after you open it in 3.0.0.</p>
+
+<p>Once a database is migrated, however, you can no longer open it with an older version of PouchDB. So if an update contains a migration, it will be clearly marked in the release notes.</p>
+
+<div id='couchdb_differences'>
+  <a
+     class='h3 anchor'
+     href='#couchdb_differences'
+     name='couchdb_differences'
+  >
+    How is PouchDB different from CouchDB?
+  </a>
+</div>
 
 <p>PouchDB is also a CouchDB client, and you should be able to switch between a local database or an online CouchDB instance without changing any of your application&#39;s code.</p>
 
