@@ -1129,6 +1129,142 @@ adapters.forEach(function (adapter) {
       });
     });
 
+    it('#3089 Many orphaned atts w/ parallel compaction', function () {
+      // now that we've established md5sum collisions,
+      // we can use that to detect true attachment replacement
+      var db = new PouchDB(dbs.name, {auto_compaction: false});
+      var docs = [
+        {
+          _id: 'doc1',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att2.txt': {
+              data: PouchDB.utils.btoa('2'),
+              content_type: 'text/plain'
+            },
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc2',
+          _attachments: {
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc3',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            },
+            'att7.txt': {
+              data: PouchDB.utils.btoa('7'),
+              content_type: 'text/plain'
+            }
+          }
+        }
+      ];
+
+      var digestsToForget;
+      var digestsToRemember;
+      return db.bulkDocs(docs).then(function () {
+        return db.allDocs({include_docs: true});
+      }).then(function (res) {
+        var allAtts = {};
+        res.rows.forEach(function (row) {
+          Object.keys(row.doc._attachments).forEach(function (attName) {
+            var att = row.doc._attachments[attName];
+            allAtts[attName] = att.digest;
+          });
+        });
+        digestsToForget = [
+          allAtts['att2.txt'],
+          allAtts['att3.txt'],
+          allAtts['att4.txt'],
+          allAtts['att5.txt']
+        ];
+        digestsToRemember = [
+          allAtts['att1.txt'],
+          allAtts['att6.txt'],
+          allAtts['att7.txt']
+        ];
+        return db.allDocs({keys: ['doc1', 'doc2']});
+      }).then(function (res) {
+        var docs = res.rows.map(function (row) {
+          return {
+            _deleted: true,
+            _id: row.id,
+            _rev: row.value.rev
+          };
+        });
+        return db.bulkDocs(docs);
+      }).then(function () {
+        return db.compact();
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToRemember.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            });
+          }));
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToForget.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            }).then(function () {
+              throw new Error('shouldn\'t have gotten here');
+            }, function (err) {
+              err.status.should.equal(412);
+            });
+          }));
+      });
+    });
+
     //
     // AUTO-COMPACTION TESTS FOLLOW
     // http adapters need not apply!
@@ -1164,6 +1300,383 @@ adapters.forEach(function (adapter) {
             });
           });
         });
+      });
+    });
+
+    it('#3089 Many orphaned attachments w/ auto-compaction', function () {
+      // now that we've established md5sum collisions,
+      // we can use that to detect true attachment replacement
+      var db = new PouchDB(dbs.name, {auto_compaction: true});
+      var docs = [
+        {
+          _id: 'doc1',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att2.txt': {
+              data: PouchDB.utils.btoa('2'),
+              content_type: 'text/plain'
+            },
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc2',
+          _attachments: {
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc3',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            },
+            'att7.txt': {
+              data: PouchDB.utils.btoa('7'),
+              content_type: 'text/plain'
+            }
+          }
+        }
+      ];
+
+      var digestsToForget;
+      var digestsToRemember;
+      return db.bulkDocs(docs).then(function () {
+        return db.allDocs({include_docs: true});
+      }).then(function (res) {
+        var allAtts = {};
+        res.rows.forEach(function (row) {
+          Object.keys(row.doc._attachments).forEach(function (attName) {
+            var att = row.doc._attachments[attName];
+            allAtts[attName] = att.digest;
+          });
+        });
+        digestsToForget = [
+          allAtts['att2.txt'],
+          allAtts['att3.txt'],
+          allAtts['att4.txt'],
+          allAtts['att5.txt']
+        ];
+        digestsToRemember = [
+          allAtts['att1.txt'],
+          allAtts['att6.txt'],
+          allAtts['att7.txt']
+        ];
+        return db.get('doc1');
+      }).then(function (doc1) {
+        return db.remove(doc1);
+      }).then(function () {
+        return db.get('doc2');
+      }).then(function (doc2) {
+        return db.remove(doc2);
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToRemember.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            });
+          }));
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToForget.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            }).then(function () {
+              throw new Error('shouldn\'t have gotten here');
+            }, function (err) {
+              err.status.should.equal(412);
+            });
+          }));
+      });
+    });
+
+    it('#3089 Many orphaned atts w/ parallel auto-compaction', function () {
+      // now that we've established md5sum collisions,
+      // we can use that to detect true attachment replacement
+      var db = new PouchDB(dbs.name, {auto_compaction: true});
+      var docs = [
+        {
+          _id: 'doc1',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att2.txt': {
+              data: PouchDB.utils.btoa('2'),
+              content_type: 'text/plain'
+            },
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc2',
+          _attachments: {
+            'att3.txt': {
+              data: PouchDB.utils.btoa('3'),
+              content_type: 'text/plain'
+            },
+            'att4.txt': {
+              data: PouchDB.utils.btoa('4'),
+              content_type: 'text/plain'
+            },
+            'att5.txt': {
+              data: PouchDB.utils.btoa('5'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            }
+          }
+        }, {
+          _id: 'doc3',
+          _attachments: {
+            'att1.txt': {
+              data: PouchDB.utils.btoa('1'),
+              content_type: 'text/plain'
+            },
+            'att6.txt': {
+              data: PouchDB.utils.btoa('6'),
+              content_type: 'text/plain'
+            },
+            'att7.txt': {
+              data: PouchDB.utils.btoa('7'),
+              content_type: 'text/plain'
+            }
+          }
+        }
+      ];
+
+      var digestsToForget;
+      var digestsToRemember;
+      return db.bulkDocs(docs).then(function () {
+        return db.allDocs({include_docs: true});
+      }).then(function (res) {
+        var allAtts = {};
+        res.rows.forEach(function (row) {
+          Object.keys(row.doc._attachments).forEach(function (attName) {
+            var att = row.doc._attachments[attName];
+            allAtts[attName] = att.digest;
+          });
+        });
+        digestsToForget = [
+          allAtts['att2.txt'],
+          allAtts['att3.txt'],
+          allAtts['att4.txt'],
+          allAtts['att5.txt']
+        ];
+        digestsToRemember = [
+          allAtts['att1.txt'],
+          allAtts['att6.txt'],
+          allAtts['att7.txt']
+        ];
+        return db.allDocs({keys: ['doc1', 'doc2']});
+      }).then(function (res) {
+        var docs = res.rows.map(function (row) {
+          return {
+            _deleted: true,
+            _id: row.id,
+            _rev: row.value.rev
+          };
+        });
+        return db.bulkDocs(docs);
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToRemember.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            });
+          }));
+      }).then(function () {
+        return PouchDB.utils.Promise.all(
+          digestsToForget.map(function (digest) {
+            return db.post({
+              _attachments: {
+                'baz.txt' : {
+                  stub: true,
+                  digest: digest,
+                  content_type: 'text/plain'
+                }
+              }
+            }).then(function () {
+              throw new Error('shouldn\'t have gotten here');
+            }, function (err) {
+              err.status.should.equal(412);
+            });
+          }));
+      });
+    });
+
+    it('#3089 Auto-compaction retains atts if unorphaned', function () {
+      var db = new PouchDB(dbs.name, {auto_compaction: true});
+      var doc = {
+        _id: 'doc1',
+        _attachments: {
+          'deleteme.txt': {
+            data: 'Zm9vYmFy', // 'foobar'
+            content_type: 'text/plain'
+          }
+        }
+      };
+      var digest;
+      return db.put(doc).then(function () {
+        return db.get('doc1');
+      }).then(function (doc) {
+        digest = doc._attachments['deleteme.txt'].digest;
+        delete doc._attachments['deleteme.txt'];
+        doc._attachments['retainme.txt'] = {
+          data: 'dG90bw==', // 'toto'
+          content_type: 'text/plain'
+        };
+        return db.put(doc);
+      }).then(function () {
+        return db.put({
+          _id: 'doc2',
+          _attachments: {
+            'nodontdeleteme.txt': {
+              data: 'Zm9vYmFy', // 'foobar'
+              content_type: 'text/plain'
+            }
+          }
+        });
+      }).then(function () {
+        return db.get('doc1');
+      }).then(function (doc) {
+        doc._attachments['newatt.txt'] = {
+          content_type: "text/plain",
+          digest: digest,
+          stub: true
+        };
+        return db.put(doc);
+      }).then(function () {
+        return db.allDocs();
+      }).then(function (res) {
+        // ok, now let's really delete them
+        var docs = [
+          {
+            _id: 'doc1',
+            _rev: res.rows[0].value.rev
+          },
+          {
+            _id: 'doc2',
+            _rev: res.rows[1].value.rev
+          }
+        ];
+        return db.bulkDocs(docs);
+      }).then(function () {
+        var doc = {
+          _attachments: {
+            'foo.txt': {
+              content_type: "text/plain",
+              digest: digest,
+              stub: true
+            }
+          }
+        };
+        return db.post(doc).then(function () {
+          throw new Error('shouldn\'t have gotten here');
+        }, function (err) {
+          err.status.should.equal(412);
+        });
+      });
+    });
+
+    it('#2818 successive new_edits okay with attachments', function () {
+      var db = new PouchDB(dbs.name);
+      var docs = [{
+        '_id': 'foo',
+        '_rev': '1-x',
+        '_revisions': {
+          'start': 1,
+          'ids': ['x']
+        },
+        _attachments: {
+          'att.txt': {
+            data: 'Zm9vYmFy', // 'foobar'
+            content_type: 'text/plain'
+          }
+        }
+      }];
+      var digest;
+      return db.bulkDocs({docs: docs, new_edits: false}).then(function () {
+        return db.bulkDocs({docs: docs, new_edits: false});
+      }).then(function () {
+        return db.get('foo', {attachments: true});
+      }).then(function (doc) {
+        doc._rev.should.equal('1-x');
+        digest = doc._attachments['att.txt'].digest;
+      }).then(function () {
+        var doc = {
+          _attachments: {
+            'foo.txt': {
+              content_type: "text/plain",
+              digest: digest,
+              stub: true
+            }
+          }
+        };
+        return db.post(doc);
       });
     });
 
